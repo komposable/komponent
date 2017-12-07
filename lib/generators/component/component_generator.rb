@@ -2,6 +2,7 @@ class ComponentGenerator < Rails::Generators::Base
   source_root File.expand_path('../templates', __FILE__)
 
   argument :component, required: true, desc: "Component name, e.g: button"
+  class_option :locale, type: :boolean, default: false
 
   def create_view_file
     template "view.html.slim.erb", component_path + "_#{component}.html.slim"
@@ -19,6 +20,15 @@ class ComponentGenerator < Rails::Generators::Base
     template "rb.erb", component_path + "#{component}_component.rb"
   end
 
+  def create_locale_files
+    return unless locale?
+
+    I18n.available_locales.each do |locale|
+      @locale = locale
+      template "locale.erb", component_path + "#{component}.#{locale}.yml"
+    end
+  end
+
   def append_frontend_packs
     append_to_file "frontend/components/index.js" do
       "import \"components/#{component}/#{component}\";"
@@ -33,5 +43,9 @@ class ComponentGenerator < Rails::Generators::Base
 
   def module_name
     "#{component}_component".camelize
+  end
+
+  def locale?
+    options[:locale]
   end
 end
