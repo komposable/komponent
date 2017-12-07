@@ -1,38 +1,64 @@
 # Komponent
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/komponent`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
 ## Installation
-
-Add this line to your application's Gemfile:
 
 ```ruby
 gem 'komponent'
 ```
 
-And then execute:
+Modify your webpacker config to:
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install komponent
+```
+# config/webpacker.yml
+source_path: frontend
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+Generate new component with `component` generator:
 
-## Development
+`rails generate component button`
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+And use it in your views with helper. You can pass `locals`, or `block` to component helper.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+`= component('button')`
+
+Locals passed in to component are accessible as instance variables.
+
+```
+= component('button', color: :red)
+
+.button
+  = @color
+```
+
+You can define custom helpers in `ButtonComponent`:
+
+```
+class ButtonComponent
+  def bar
+    "foo"
+  end
+end
+
+.button
+  = bar
+```
+
+You can set properties in `ButtonComponent` too:
+
+```
+class ButtonComponent
+  property :foo, default: "bar", required: true
+end
+
+.button
+  = @foo
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/komponent.
+Bug reports and pull requests are welcome on GitHub at https://github.com/ouvrages/komponent.
 
 ## License
 
