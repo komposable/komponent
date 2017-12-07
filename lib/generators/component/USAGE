@@ -1,0 +1,12 @@
+Description:
+  Generates all files needed for a component
+
+Example:
+    rails generate component button
+
+    This will create:
+      frontend/components/button
+      frontend/components/button/_button.html.slim
+      frontend/components/button/button.js
+      frontend/components/button/button.css
+      frontend/components/button/button_component.rb
