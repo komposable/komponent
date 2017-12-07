@@ -6,5 +6,9 @@ module Komponent
     initializer "komponent.helper" do |app|
       ActionView::Base.send :include, KomponentHelper
     end
+
+    initializer 'komponent.autoload', before: :set_autoload_paths do |app|
+      app.config.autoload_paths << "#{app.config.root}/frontend"
+    end
   end
 end
