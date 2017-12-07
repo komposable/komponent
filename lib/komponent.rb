@@ -1,5 +1,5 @@
 require "komponent/version"
 
 module Komponent
-  # Your code goes here...
+  require 'komponent/railtie' if defined?(Rails)
 end
