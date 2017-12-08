@@ -73,7 +73,7 @@ The component also accepts a `block`. To render the block, just use the standard
 
 Each component comes with a Ruby `module`. You can use it to set properties:
 
-```
+```ruby
 # frontend/components/button/button_component.rb
 module ButtonComponent
   property :href, required: true
@@ -90,7 +90,7 @@ a.button(href=@href)
 
 If your partial becomes a too complex and you want to remove logic from it, you may want to define custom helpers in the `ButtonComponent` module:
 
-```rb
+```ruby
 # frontend/components/button/button_component.rb
 
 module ButtonComponent
