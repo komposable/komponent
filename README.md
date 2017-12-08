@@ -16,11 +16,10 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
 gem "komponent"
 ```
 
-Modify your webpacker config to:
+Run the following command to set up your project instantly.
 
-```yml
-# config/webpacker.yml
-source_path: frontend
+```sh
+rails generate komponent:install
 ```
 
 ## Usage
