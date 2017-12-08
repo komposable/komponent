@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Ouvrages"]
   spec.email         = ["contact@ouvrages-web.fr"]
 
-  spec.summary       = ""
-  spec.description   = ""
+  spec.summary       = "An opinionated way of organizing front-end code in Ruby on Rails, based on components"
+  spec.description   = "An opinionated way of organizing front-end code in Ruby on Rails, based on components"
   spec.homepage      = ""
   spec.license       = "MIT"
 
