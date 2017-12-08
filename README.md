@@ -1,59 +1,126 @@
 # Komponent
 
-## Installation
+**Komponent** implements an opinionated way of organizing front-end code in Ruby on Rails, based on _components_.
+
+Each component has its own folder, containing a Ruby module, a slim partial, a PostCSS stylesheet and a JavaScript file.
+
+Komponent relies heavily on webpacker to manage dependencies and generate the production JS and CSS files.
+
+This gem has been inspired by our Rails development practices at [Ouvrages](https://ouvrages-web.fr) and [Etamin Studio](https://etaminstudio.com), and the (excellent) [_Modern Front-end in Rails_](https://evilmartians.com/chronicles/evil-front-part-1) article from Evil Martians.
+
+
+## Getting started
 
 ```ruby
-gem 'komponent'
+# Gemfile
+gem "komponent"
 ```
 
-Modify your webpacker config to:
+Run the following command to set up your project instantly:
 
+```sh
+rails generate komponent:install
 ```
-# config/webpacker.yml
-source_path: frontend
-```
+
+This command will:
+
+* check that the dependencies (currently, webpacker) are installed
+* rename the `app/javascript` folder to `frontend` and modify webpacker config accordingly
+* create the `frontend/components` folder where you will put your component
+* create the `frontend/components/index.js` file that will list your components and `import` it in `frontend/packs/application.js`
 
 ## Usage
 
-Generate new component with `component` generator:
+Generate a new component with the `component` generator:
 
-`rails generate component button`
-
-And use it in your views with helper. You can pass `locals`, or `block` to component helper.
-
-`= component('button')`
-
-Locals passed in to component are accessible as instance variables.
-
+```sh
+rails generate component button
 ```
-= component('button', color: :red)
+
+Then, render it in your views with the `component` helper (or its alias `c`).
+
+```slim
+/ app/views/pages/home.html.slim
+
+= component "button"
+= c "button"
+```
+
+You can pass `locals` to the helper. They are accessible within the component partial, as instance variables.
+
+```slim
+/ app/views/pages/home.html.slim
+
+= component "button", text: "My button"
+```
+
+```slim
+/ frontend/components/button/_button.html.slim
 
 .button
-  = @color
+  = @text
 ```
 
-You can define custom helpers in `ButtonComponent`:
+The component also accepts a `block`. To render the block, just use the standard `yield`.
 
+```slim
+/ app/views/pages/home.html.slim
+
+= component "button"
+  span= "My button"
 ```
-class ButtonComponent
-  def bar
-    "foo"
+
+```slim
+/ frontend/components/button/_button.html.slim
+
+.button
+  = yield
+```
+
+Each component comes with a Ruby `module`. You can use it to set properties:
+
+```ruby
+# frontend/components/button/button_component.rb
+module ButtonComponent
+  property :href, required: true
+  property :text, default: "My button"
+end
+```
+
+```slim
+/ frontend/components/button/_button.html.slim
+
+a.button(href=@href)
+  = @text
+```
+
+If your partial becomes a too complex and you want to remove logic from it, you may want to define custom helpers in the `ButtonComponent` module:
+
+```ruby
+# frontend/components/button/button_component.rb
+
+module ButtonComponent
+  property :href, required: true
+  property :text, default: "My button"
+
+  def external_link?
+    @href.starts_with? "http"
   end
 end
-
-.button
-  = bar
 ```
 
-You can set properties in `ButtonComponent` too:
+```slim
+/ frontend/components/button/_button.html.slim
 
+a.button(href=@href)
+  = @text
+  = " (external link)" if external_link?
 ```
-class ButtonComponent
-  property :foo, default: "bar", required: true
-end
 
-.button
-  = @foo
+```slim
+/ app/views/pages/home.html.slim
+
+= component "button", text: "My button", href: "http://github.com"
 ```
 
 ## Contributing
