@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "An opinionated way of organizing front-end code in Ruby on Rails, based on components"
   spec.description   = "An opinionated way of organizing front-end code in Ruby on Rails, based on components"
-  spec.homepage      = ""
+  spec.homepage      = "http://komponent.io"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
