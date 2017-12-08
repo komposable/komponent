@@ -16,11 +16,18 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
 gem "komponent"
 ```
 
-Run the following command to set up your project instantly.
+Run the following command to set up your project instantly:
 
 ```sh
 rails generate komponent:install
 ```
+
+This command will:
+
+* check that the dependencies (currently, webpacker) are installed
+* rename the `app/javascript` folder to `frontend` and modify webpacker config accordingly
+* create the `frontend/components` folder where you will put your component
+* create the `frontend/components/index.js` file that will list your components and `import` it in `frontend/packs/application.js`
 
 ## Usage
 
