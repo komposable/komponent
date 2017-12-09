@@ -1,4 +1,4 @@
-# Komponent
+# Komponent [![Build Status](https://travis-ci.org/ouvrages/komponent.svg?branch=master)](https://travis-ci.org/ouvrages/komponent)
 
 **Komponent** implements an opinionated way of organizing front-end code in Ruby on Rails, based on _components_.
 
