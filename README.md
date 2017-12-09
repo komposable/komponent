@@ -13,6 +13,7 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
 
 ```ruby
 # Gemfile
+
 gem "komponent"
 ```
 
@@ -81,6 +82,7 @@ Each component comes with a Ruby `module`. You can use it to set properties:
 
 ```ruby
 # frontend/components/button/button_component.rb
+
 module ButtonComponent
   property :href, required: true
   property :text, default: "My button"
