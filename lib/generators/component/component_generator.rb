@@ -5,7 +5,7 @@ class ComponentGenerator < Rails::Generators::Base
   class_option :locale, type: :boolean, default: false
 
   def create_view_file
-    template "view.html.slim.erb", component_path + "_#{component_name}.html.slim"
+    template "view.html.#{template_engine}.erb", component_path + "_#{component_name}.html.#{template_engine}"
   end
 
   def create_css_file
@@ -47,6 +47,10 @@ class ComponentGenerator < Rails::Generators::Base
   
   def component_name
     component.underscore
+  end
+
+  def template_engine
+    Rails.application.config.app_generators.rails[:template_engine] || :erb
   end
 
   def locale?
