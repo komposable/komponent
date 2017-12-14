@@ -1,4 +1,4 @@
-# ![Komponent](https://raw.github.com/ouvrages/komponent/master/logo.svg)
+# ![Komponent](https://raw.github.com/ouvrages/komponent/master/logo.svg?sanitize=true)
 
 **Komponent** implements an opinionated way of organizing front-end code in Ruby on Rails, based on _components_.
 
