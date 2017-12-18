@@ -30,37 +30,28 @@ class ComponentGenerator < Rails::Generators::NamedBase
 
   def append_frontend_packs
     append_to_file "frontend/components/index.js" do
-      "import \"components/#{namespace.join("/")}/#{component_name}\";\n"
+      "import \"components/#{split_name.join("/")}/#{component_name}\";\n"
     end
   end
 
   protected
 
-  def namespaced?
-    namespace.size > 1
-  end
-
-  def namespace
+  def split_name
     name.split(/[:,::,\/]/).reject(&:blank?)
   end
 
   def component_path
-    if namespaced?
-      path_parts = ["frontend", "components", *namespace]
-    else
-      path_parts = ["frontend", "components", component_name]
-    end
+    path_parts = ["frontend", "components", *split_name]
 
     Pathname.new(path_parts.join("/"))
   end
 
   def module_name
-    "#{namespace.join("_")}_component".camelize
+    "#{split_name.join("_")}_component".camelize
   end
   
   def component_name
-    return name.underscore unless namespaced?
-    namespace.last.underscore
+    split_name.last.underscore
   end
 
   def template_engine
