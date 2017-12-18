@@ -47,6 +47,8 @@ Then, render it in your views with the `component` helper (or its alias `c`).
 = c "button"
 ```
 
+### Passing variables
+
 You can pass `locals` to the helper. They are accessible within the component partial, as instance variables.
 
 ```slim
@@ -61,6 +63,8 @@ You can pass `locals` to the helper. They are accessible within the component pa
 .button
   = @text
 ```
+
+### Passing a block
 
 The component also accepts a `block`. To render the block, just use the standard `yield`.
 
@@ -77,6 +81,8 @@ The component also accepts a `block`. To render the block, just use the standard
 .button
   = yield
 ```
+
+### Properties
 
 Each component comes with a Ruby `module`. You can use it to set properties:
 
@@ -95,6 +101,8 @@ end
 a.button(href=@href)
   = @text
 ```
+
+### Helpers
 
 If your partial becomes a too complex and you want to remove logic from it, you may want to define custom helpers in the `ButtonComponent` module:
 
@@ -124,6 +132,17 @@ a.button(href=@href)
 
 = component "button", text: "My button", href: "http://github.com"
 ```
+
+### Namespacing components
+
+To organize different types of components, you can group them in namespaces when you use the generator:
+
+```sh
+rails generate component admin/header
+```
+
+This will create the component in an `admin` folder, and name its Ruby module `AdminHeaderComponent`.
+
 
 ## Contributing
 
