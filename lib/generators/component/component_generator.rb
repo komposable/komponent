@@ -61,7 +61,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
   protected
 
   def split_name
-    name.split(/[:,::,\/]/).reject(&:blank?)
+    name.split(/[:,::,\/]/).reject(&:blank?).map(&:underscore)
   end
 
   def name_with_namespace
