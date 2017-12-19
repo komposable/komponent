@@ -1,5 +1,5 @@
 # <img alt="Komponent" src="https://raw.github.com/ouvrages/komponent/master/logo.svg?sanitize=true" width="200" height="40" />
-[![Build Status](https://travis-ci.org/ouvrages/komponent.svg?branch=master)](https://travis-ci.org/ouvrages/komponent)
+[![Build Status](https://travis-ci.org/ouvrages/komponent.svg?branch=master)](https://travis-ci.org/komposable/komponent)
 =======
 
 **Komponent** implements an opinionated way of organizing front-end code in Ruby on Rails, based on _components_.
