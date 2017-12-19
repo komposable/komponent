@@ -28,10 +28,34 @@ class ComponentGenerator < Rails::Generators::NamedBase
     end
   end
 
-  def append_frontend_packs
-    append_to_file "frontend/components/index.js" do
-      "import \"components/#{split_name.join("/")}/#{component_name}\";\n"
+  def import_to_packs
+    root_path = Pathname.new("frontend")
+    base_path = root_path + "components"
+
+    imports = []
+
+    split_name[0..-2].each do |split|
+      base_path += split
+      file_path = base_path + "index.js"
+      create_file(file_path) unless File.exists?(file_path)
+      imports << base_path.relative_path_from(root_path)
     end
+
+    root_path_dup = root_path.dup
+
+    [Pathname.new("components"), *split_name[0..-2]].each do |split|
+      root_path_dup += split
+      import = imports.shift
+      if import
+        append_to_file(root_path_dup + "index.js") do
+          "import \"#{import}\";\n"
+        end
+      end
+    end
+
+    append_to_file(base_path + "index.js") do
+      "import \"#{base_path.relative_path_from(root_path)}/#{component_name}/#{component_name}\";\n"
+    end 
   end
 
   protected
