@@ -40,6 +40,10 @@ class ComponentGenerator < Rails::Generators::NamedBase
     name.split(/[:,::,\/]/).reject(&:blank?)
   end
 
+  def name_with_namespace
+    split_name.join("_")
+  end
+
   def component_path
     path_parts = ["frontend", "components", *split_name]
 
@@ -47,7 +51,11 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   def module_name
-    "#{split_name.join("_")}_component".camelize
+    "#{name_with_namespace}_component".camelize
+  end
+
+  def component_class_name
+    name_with_namespace.dasherize
   end
   
   def component_name
