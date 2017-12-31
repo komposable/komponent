@@ -135,6 +135,24 @@ a.button(href=@href)
 = component "button", text: "My button", href: "http://github.com"
 ```
 
+You can split your component with partials if component has too much complexity, and use `render_partial` helper to render partial from inside the component directory. It is a simple shorthand of default `render` helper from Ruby on Rails. 
+
+```slim
+/ frontend/components/button/_button.html.slim
+
+= a.button(href=@href)
+  = @text
+  /= render("components/button/external_link", show: external_link?)
+  = render_partial("external_link", show: external_link?)
+```
+
+```slim
+/ frontend/components/button/_external_link.html.slim
+
+- if show
+  = " (external link)"
+```
+
 ### Namespacing components
 
 To organize different types of components, you can group them in namespaces when you use the generator:
