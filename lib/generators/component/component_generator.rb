@@ -1,7 +1,6 @@
-class ComponentGenerator < Rails::Generators::Base
+class ComponentGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
 
-  argument :component, required: true, desc: "Component name, e.g: button"
   class_option :locale, type: :boolean, default: false
 
   def create_view_file
@@ -17,7 +16,7 @@ class ComponentGenerator < Rails::Generators::Base
   end
 
   def create_rb_file
-    template "rb.erb", component_path + "#{component_name}_component.rb"
+    template "rb.erb", component_path + "#{module_name.underscore}.rb"
   end
 
   def create_locale_files
@@ -29,24 +28,62 @@ class ComponentGenerator < Rails::Generators::Base
     end
   end
 
-  def append_frontend_packs
-    append_to_file "frontend/components/index.js" do
-      "import \"components/#{component_name}/#{component_name}\";"
+  def import_to_packs
+    root_path = Pathname.new("frontend")
+    base_path = root_path + "components"
+
+    imports = []
+
+    split_name[0..-2].each do |split|
+      base_path += split
+      file_path = base_path + "index.js"
+      create_file(file_path) unless File.exists?(file_path)
+      imports << base_path.relative_path_from(root_path)
     end
+
+    root_path_dup = root_path.dup
+
+    [Pathname.new("components"), *split_name[0..-2]].each do |split|
+      root_path_dup += split
+      import = imports.shift
+      if import
+        append_to_file(root_path_dup + "index.js") do
+          "import \"#{import}\";\n"
+        end
+      end
+    end
+
+    append_to_file(base_path + "index.js") do
+      "import \"#{base_path.relative_path_from(root_path)}/#{component_name}/#{component_name}\";\n"
+    end 
   end
 
   protected
 
+  def split_name
+    name.split(/[:,::,\/]/).reject(&:blank?).map(&:underscore)
+  end
+
+  def name_with_namespace
+    split_name.join("_")
+  end
+
   def component_path
-    "frontend/components/#{component_name}/"
+    path_parts = ["frontend", "components", *split_name]
+
+    Pathname.new(path_parts.join("/"))
   end
 
   def module_name
-    "#{component_name}_component".camelize
+    "#{name_with_namespace}_component".camelize
+  end
+
+  def component_class_name
+    name_with_namespace.dasherize
   end
   
   def component_name
-    component.underscore
+    split_name.last.underscore
   end
 
   def template_engine
