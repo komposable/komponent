@@ -106,7 +106,7 @@ a.button(href=@href)
 
 ### Helpers
 
-If your partial becomes a too complex and you want to remove logic from it, you may want to define custom helpers in the `ButtonComponent` module:
+If your partial becomes too complex and you want to extract logic from it, you may want to define custom helpers in the `ButtonComponent` module:
 
 ```ruby
 # frontend/components/button/button_component.rb
@@ -135,22 +135,23 @@ a.button(href=@href)
 = component "button", text: "My button", href: "http://github.com"
 ```
 
-You can split your component with partials if component has too much complexity, and use `render_partial` helper to render partial from inside the component directory. It is a simple shorthand of default `render` helper from Ruby on Rails. 
+### Component partials
+
+You can also choose to split your component into partials. In this case, use the `render_partial` helper to render a partial, stored inside the component directory. It's a simple shorthand of the default `render` helper from Rails. 
 
 ```slim
 / frontend/components/button/_button.html.slim
 
 = a.button(href=@href)
   = @text
-  /= render("components/button/external_link", show: external_link?)
-  = render_partial("external_link", show: external_link?)
+  / The line below is similar to: render("components/button/suffix", text: "external link") if external_link?
+  = render_partial("suffix", text: "external link") if external_link?
 ```
 
 ```slim
 / frontend/components/button/_external_link.html.slim
 
-- if show
-  = " (external link)"
+= " (#{@suffix})"
 ```
 
 ### Namespacing components
