@@ -149,7 +149,7 @@ You can also choose to split your component into partials. In this case, use the
 ```
 
 ```slim
-/ frontend/components/button/_external_link.html.slim
+/ frontend/components/button/_suffix.html.slim
 
 = " (#{text})"
 ```
