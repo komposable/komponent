@@ -36,7 +36,7 @@ module KomponentHelper
     if context.respond_to?(custom_method)
       context.public_send(custom_method, locals, &capture_block)
     else
-      context.render("components/#{component}/#{parts.last}", &capture_block)
+      context.render("components/#{component}/#{parts.join('_')}", &capture_block)
     end
   end
 
@@ -55,7 +55,7 @@ module KomponentHelper
       context.lookup_context.prefixes.prepend current_dir
       context.lookup_context.view_paths.unshift components_path
 
-      rendered_partial = capture do 
+      rendered_partial = capture do
         context.render partial_name, locals, &capture_block
       end
 

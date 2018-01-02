@@ -17,7 +17,7 @@ module Komponent
 
     initializer "komponent.i18n" do |app|
       ActiveSupport.on_load :i18n do
-        I18n.load_path.concat(Dir["#{app.config.root}/frontend/components/*/*.yml"])
+        I18n.load_path.concat(Dir["#{app.config.root}/frontend/components/**/*.yml"])
       end
     end
 

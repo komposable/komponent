@@ -15,12 +15,8 @@ Feature: Generating component
     Then the following files should exist:
       | awesome_button/_awesome_button.html.erb    |
       | awesome_button/awesome_button.css          |
-      | awesome_button/awesome_button.js           |
+      | awesome_button/awesome_button_controller.js|
       | awesome_button/awesome_button_component.rb |
-    And the file named "index.js" should contain:
-    """
-    import "components/awesome_button/awesome_button";
-    """
 
   Scenario: Component with namespaces
     Given I run `rails new my_app --skip-spring`
@@ -36,24 +32,10 @@ Feature: Generating component
     And I run `rails generate component admin/sub_admin/AwesomeButton`
     And I cd to "frontend/components"
     Then the following files should exist:
-      | admin/index.js                                             |
-      | admin/sub_admin/index.js                                   |
-      | admin/sub_admin/awesome_button/_awesome_button.html.erb    |
-      | admin/sub_admin/awesome_button/awesome_button.css          |
-      | admin/sub_admin/awesome_button/awesome_button.js           |
+      | admin/sub_admin/awesome_button/_admin_sub_admin_awesome_button.html.erb    |
+      | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button.css          |
+      | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button_controller.js|
       | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button_component.rb |
-    And the file named "index.js" should contain:
-    """
-    import "components/admin";
-    """
-    And the file named "admin/index.js" should contain:
-    """
-    import "components/admin/sub_admin";
-    """
-    And the file named "admin/sub_admin/index.js" should contain:
-    """
-    import "components/admin/sub_admin/awesome_button/awesome_button";
-    """
 
   Scenario: Component with `--locale` option
     Given I run `rails new my_app --skip-spring`

@@ -21,7 +21,16 @@ module Komponent
 
       def create_komponent_default_structure
         empty_directory(components_directory)
-        create_file(components_directory.join("index.js"))
+        create_file(components_directory.join("index.js")) do
+          <<-eos
+import { Application } from "stimulus";
+import { autoload } from "stimulus/webpack-helpers";
+
+const application = Application.start();
+const context = require.context('./', true, /_controller\.js$/);
+autoload(context, application);
+eos
+        end
       end
 
       def append_to_application_pack

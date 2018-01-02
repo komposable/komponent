@@ -4,15 +4,15 @@ class ComponentGenerator < Rails::Generators::NamedBase
   class_option :locale, type: :boolean, default: false
 
   def create_view_file
-    template "view.html.#{template_engine}.erb", component_path + "_#{component_name}.html.#{template_engine}"
+    template "view.html.#{template_engine}.erb", component_path + "_#{name_with_namespace.underscore}.html.#{template_engine}"
   end
 
   def create_css_file
-    template "css.erb", component_path + "#{component_name}.css"
+    template "css.erb", component_path + "#{name_with_namespace}.css"
   end
 
   def create_js_file
-    template "js.erb", component_path + "#{component_name}.js"
+    template "js.erb", component_path + "#{name_with_namespace}_controller.js"
   end
 
   def create_rb_file
@@ -24,38 +24,8 @@ class ComponentGenerator < Rails::Generators::NamedBase
 
     I18n.available_locales.each do |locale|
       @locale = locale
-      template "locale.erb", component_path + "#{component_name}.#{locale}.yml"
+      template "locale.erb", component_path + "#{name_with_namespace}.#{locale}.yml"
     end
-  end
-
-  def import_to_packs
-    root_path = Pathname.new("frontend")
-    base_path = root_path + "components"
-
-    imports = []
-
-    split_name[0..-2].each do |split|
-      base_path += split
-      file_path = base_path + "index.js"
-      create_file(file_path) unless File.exists?(file_path)
-      imports << base_path.relative_path_from(root_path)
-    end
-
-    root_path_dup = root_path.dup
-
-    [Pathname.new("components"), *split_name[0..-2]].each do |split|
-      root_path_dup += split
-      import = imports.shift
-      if import
-        append_to_file(root_path_dup + "index.js") do
-          "import \"#{import}\";\n"
-        end
-      end
-    end
-
-    append_to_file(base_path + "index.js") do
-      "import \"#{base_path.relative_path_from(root_path)}/#{component_name}/#{component_name}\";\n"
-    end 
   end
 
   protected
@@ -81,7 +51,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
   def component_class_name
     name_with_namespace.dasherize
   end
-  
+
   def component_name
     split_name.last.underscore
   end
