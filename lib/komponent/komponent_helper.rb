@@ -9,7 +9,11 @@ module KomponentHelper
     require_dependency(component_path)
 
     component_module = "#{component_name}_component".camelize.constantize
-    context = controller.view_context.dup
+    context = self.dup
+    view_paths = ActionView::PathSet.new([components_path + component_name, *context.lookup_context.view_paths])
+    lookup_context = ActionView::LookupContext.new(view_paths)
+    context.view_renderer.lookup_context = lookup_context
+
     context.class_eval { prepend component_module }
     capture_block = proc { capture(&block) } if block
 
