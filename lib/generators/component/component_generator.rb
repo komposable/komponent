@@ -97,7 +97,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   def locale?
-    options[:locale]
+    options[:locale] || configuration[:locale]
   end
 
   def stimulus?
