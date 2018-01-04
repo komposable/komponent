@@ -51,6 +51,8 @@ Feature: Generating component
     And I run `rails generate component admin/sub_admin/AwesomeButton`
     And I cd to "frontend/components"
     Then the following files should exist:
+      | admin/index.js                                                             |
+      | admin/sub_admin/index.js                                                   |
       | admin/sub_admin/awesome_button/_admin_sub_admin_awesome_button.html.erb    |
       | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button.css          |
       | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button.js           |
