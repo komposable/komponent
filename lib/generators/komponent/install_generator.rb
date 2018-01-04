@@ -1,7 +1,6 @@
 module Komponent
   module Generators
     class InstallGenerator < Rails::Generators::Base
-      class_option :with_stimulus, type: :boolean, default: false
       class_option :stimulus, type: :boolean, default: false
 
       def check_webpacker_dependency
@@ -24,17 +23,15 @@ module Komponent
 
       def create_komponent_default_structure
         empty_directory(components_directory)
-        create_file(components_directory.join("index.js")) do
-          template = <<-eos
+        template = <<-eos
 import { Application } from "stimulus";
 import { autoload } from "stimulus/webpack-helpers";
 
 const application = Application.start();
 const context = require.context('./', true, /_controller\.js$/);
 autoload(context, application);
-eos
-          return template if stimulus?
-        end
+        eos
+        create_file(components_directory.join("index.js"), stimulus? ? template : "")
       end
 
       def append_to_application_pack
