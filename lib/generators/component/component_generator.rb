@@ -14,9 +14,9 @@ class ComponentGenerator < Rails::Generators::NamedBase
 
   def create_js_file
     if stimulus?
-      template "js.erb", component_path + "#{name_with_namespace}_controller.js"
+      template "stimulus.js.erb", component_path + "#{name_with_namespace}_controller.js"
     else
-      template "stimulus.js.erb", component_path + "#{name_with_namespace}.js"
+      template "js.erb", component_path + "#{name_with_namespace}.js"
     end
   end
 
@@ -105,6 +105,6 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   def configuration
-    {stimulus: false}.merge Rails.application.config.app_generators.komponent
+    {stimulus: false, locale: false}.merge Rails.application.config.app_generators.komponent
   end
 end
