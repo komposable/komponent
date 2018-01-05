@@ -51,26 +51,26 @@ module KomponentHelper
   alias :c :component
 
   def render_partial(partial_name, locals = {}, &block)
-    benchmark("Rendered partial #{partial_name}") do
-      context = controller.view_context
-      view_paths = context.lookup_context.view_paths.dup
-      components_path = Rails.root.join "frontend/components"
+    warn "[DEPRECATION] `render_partial` is deprecated. Please use default `render` instead."
 
-      capture_block = proc { capture(&block) } if block
+    context = controller.view_context
+    view_paths = context.lookup_context.view_paths.dup
+    components_path = Rails.root.join "frontend/components"
 
-      current_dir = Pathname.new(@virtual_path).dirname
+    capture_block = proc { capture(&block) } if block
 
-      context.lookup_context.prefixes.prepend current_dir
-      context.lookup_context.view_paths.unshift components_path
+    current_dir = Pathname.new(@virtual_path).dirname
 
-      rendered_partial = capture do 
-        context.render partial_name, locals, &capture_block
-      end
+    context.lookup_context.prefixes.prepend current_dir
+    context.lookup_context.view_paths.unshift components_path
 
-      context.lookup_context.prefixes.delete current_dir
-      context.lookup_context.view_paths = view_paths
-
-      rendered_partial
+    rendered_partial = capture do 
+      context.render partial_name, locals, &capture_block
     end
+
+    context.lookup_context.prefixes.delete current_dir
+    context.lookup_context.view_paths = view_paths
+
+    rendered_partial
   end
 end
