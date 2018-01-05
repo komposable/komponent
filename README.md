@@ -137,15 +137,14 @@ a.button(href=@href)
 
 ### Component partials
 
-You can also choose to split your component into partials. In this case, use the `render_partial` helper to render a partial, stored inside the component directory. It's a simple shorthand of the default `render` helper from Rails. 
+You can also choose to split your component into partials. In this case, we can use the default `render` helper to render a partial, stored inside the component directory.
 
 ```slim
 / frontend/components/button/_button.html.slim
 
 = a.button(href=@href)
   = @text
-  / The line below is similar to: render("components/button/suffix", text: "external link") if external_link?
-  = render_partial("suffix", text: "external link") if external_link?
+  = render("suffix", text: "external link") if external_link?
 ```
 
 ```slim
