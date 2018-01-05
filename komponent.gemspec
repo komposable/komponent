@@ -27,4 +27,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "cucumber"
   spec.add_development_dependency "aruba"
   spec.add_development_dependency "rails", ">= 5.0"
+
+  spec.add_runtime_dependency "webpacker", ">= 3.0.0"
 end

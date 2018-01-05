@@ -4,7 +4,6 @@ Feature: Generating component
     And I cd to "my_app"
     And I append to "Gemfile" with:
     """
-    gem 'webpacker', '~> 3.0'
     gem 'komponent', path: '../../..'
     """
     When I run `bundle install`
@@ -27,7 +26,6 @@ Feature: Generating component
     And I cd to "my_app"
     And I append to "Gemfile" with:
     """
-    gem 'webpacker', '~> 3.0'
     gem 'komponent', path: '../../..'
     """
     When I run `bundle install`
@@ -60,7 +58,6 @@ Feature: Generating component
     And I cd to "my_app"
     And I append to "Gemfile" with:
     """
-    gem 'webpacker', '~> 3.0'
     gem 'komponent', path: '../../..'
     """
     When I run `bundle install`
@@ -77,7 +74,6 @@ Feature: Generating component
     And I append to "Gemfile" with:
     """
     gem 'slim-rails'
-    gem 'webpacker', '~> 3.0'
     gem 'komponent', path: '../../..'
     """
     When I run `bundle install`
@@ -94,7 +90,6 @@ Feature: Generating component
     And I append to "Gemfile" with:
     """
     gem 'haml-rails'
-    gem 'webpacker', '~> 3.0'
     gem 'komponent', path: '../../..'
     """
     When I run `bundle install`

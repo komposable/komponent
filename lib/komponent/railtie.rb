@@ -1,3 +1,4 @@
+require 'webpacker'
 require 'komponent/core/component_helper'
 
 module Komponent
