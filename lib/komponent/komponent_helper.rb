@@ -10,6 +10,7 @@ module KomponentHelper
 
     component_module = "#{component_name}_component".camelize.constantize
     context = controller.view_context.dup
+    context.view_flow = view_flow
     context.class_eval { prepend component_module }
     capture_block = proc { capture(&block) } if block
 
