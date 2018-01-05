@@ -10,8 +10,15 @@ module KomponentHelper
 
     component_module = "#{component_name}_component".camelize.constantize
     context = controller.view_context.dup
+
     context.view_flow = view_flow
+
+    view_renderer = context.view_renderer = context.view_renderer.dup
+    lookup_context = view_renderer.lookup_context = view_renderer.lookup_context.dup
+    lookup_context.prefixes = ["components/#{component}"]
+
     context.class_eval { prepend component_module }
+
     capture_block = proc { capture(&block) } if block
 
     context.instance_eval do
