@@ -8,7 +8,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   def create_css_file
-    template "css.erb", component_path + "#{component_name}.css"
+    template "#{stylesheet_engine}.erb", component_path + "#{component_name}.#{stylesheet_engine}"
   end
 
   def create_js_file
@@ -88,6 +88,10 @@ class ComponentGenerator < Rails::Generators::NamedBase
 
   def template_engine
     Rails.application.config.app_generators.rails[:template_engine] || :erb
+ end
+
+  def stylesheet_engine
+    Rails.application.config.app_generators.rails[:stylesheet_engine] || :css
   end
 
   def locale?
