@@ -87,14 +87,28 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   def template_engine
-    Rails.application.config.app_generators.rails[:template_engine] || :erb
+    app_generators.rails[:template_engine] || :erb
  end
 
   def stylesheet_engine
-    Rails.application.config.app_generators.rails[:stylesheet_engine] || :css
+    if sass = rails_configuration.try(:sass)
+      sass[:preferred_syntax]
+    else
+      :css
+    end
   end
 
   def locale?
     options[:locale]
+  end
+
+  private
+
+  def rails_configuration
+    Rails.application.config
+  end
+
+  def app_generators
+    rails_configuration.app_generators
   end
 end
