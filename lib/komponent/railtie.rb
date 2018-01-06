@@ -1,4 +1,5 @@
 require 'komponent/core/component_helper'
+require 'komponent/core/translation'
 
 module Komponent
   class Railtie < Rails::Railtie
