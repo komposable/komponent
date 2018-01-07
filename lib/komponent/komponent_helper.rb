@@ -1,9 +1,8 @@
 module KomponentHelper
   def component(component, locals = {}, &block)
-    components_path = Rails.root.join("frontend", "components")
+    component_path = Komponent::ComponentPathResolver.new(component).path
 
     parts = component.split("/")
-    component_path = components_path.join(*parts)
     component_name = parts.join("_")
     component_path = component_path.join("#{component_name}_component")
     require_dependency(component_path)
@@ -64,7 +63,7 @@ module KomponentHelper
     context.lookup_context.prefixes.prepend current_dir
     context.lookup_context.view_paths.unshift components_path
 
-    rendered_partial = capture do 
+    rendered_partial = capture do
       context.render partial_name, locals, &capture_block
     end
 

@@ -1,7 +1,16 @@
 require 'komponent/core/component_helper'
+require 'komponent/core/component_path_resolver'
 
 module Komponent
   class Railtie < Rails::Railtie
+    config.komponent = ActiveSupport::OrderedOptions.new
+    config.komponent.component_paths = []
+
+    config.before_configuration do |app|
+      app.config.komponent = config.komponent
+      app.config.komponent.component_paths.append(app.config.root.join("frontend/components"))
+    end
+
     initializer "komponent.action_view" do |app|
       ActiveSupport.on_load :action_view do
         require 'komponent/komponent_helper'
