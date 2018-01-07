@@ -18,6 +18,7 @@ module KomponentHelper
     lookup_context.prefixes = ["components/#{component}"]
 
     context.class_eval { prepend component_module }
+    context.class_eval { prepend Komponent::Translation }
 
     capture_block = proc { capture(&block) } if block
 
@@ -47,7 +48,6 @@ module KomponentHelper
       context.render("components/#{component}/#{parts.last}", &capture_block)
     end
   end
-
   alias :c :component
 
   def render_partial(partial_name, locals = {}, &block)
