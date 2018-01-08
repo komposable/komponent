@@ -207,6 +207,17 @@ fr:
     hello: "Bonjour"
 ```
 
+### Configuration
+
+You can define generator configuration in `application.rb` or an initializer to prevent you to miss to add both `--locale` and `--stimulus` flags if you want it by default when you generate fresh component.
+
+```rb
+config.generators do |g|
+  g.komponent stimulus: true, locale: true # by default both are false
+end
+```
+
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/komposable/komponent.
