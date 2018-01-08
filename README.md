@@ -185,6 +185,28 @@ rails generate component button --stimulus
 
 This will create a component with an additional `button_controller.js` file, and define a `data-controller` in the generated view.
 
+### Internationalization
+
+Component generator has an option `--locale` to generate localization files
+in yours components directories. It uses `I18n.available_locales` to determine which locales you have in your project.
+
+```sh
+rails generate component button --locale
+```
+
+This will create a `button.en.yml` file. You can use the same ["lazy" lookup](http://edgeguides.rubyonrails.org/i18n.html#lazy-lookup) than RoR.
+
+```slim
+/ _button.html.erb
+<%= t(".hello") %>
+```
+
+```yml
+fr:
+  button_component:
+    hello: "Bonjour"
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/komposable/komponent.
