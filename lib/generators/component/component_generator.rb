@@ -2,17 +2,21 @@ class ComponentGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
 
   class_option :locale, type: :boolean, default: false
+  class_option :stimulus, type: :boolean, default: false
 
   def create_view_file
-    template "view.html.#{template_engine}.erb", component_path + "_#{component_name}.html.#{template_engine}"
+    template "#{template_prefix}view.html.#{template_engine}.erb", component_path + "_#{name_with_namespace.underscore}.html.#{template_engine}"
   end
 
   def create_css_file
-    template "#{stylesheet_engine}.erb", component_path + "#{component_name}.#{stylesheet_engine}"
+    template "#{stylesheet_engine}.erb", component_path + "#{name_with_namespace}.#{stylesheet_engine}"
   end
 
   def create_js_file
-    template "js.erb", component_path + "#{component_name}.js"
+    template "js.erb", component_path + "#{name_with_namespace}.js"
+    if stimulus?
+      template "stimulus_controller_js.erb", component_path + "#{name_with_namespace}_controller.js"
+    end
   end
 
   def create_rb_file
@@ -24,7 +28,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
 
     I18n.available_locales.each do |locale|
       @locale = locale
-      template "locale.erb", component_path + "#{component_name}.#{locale}.yml"
+      template "locale.erb", component_path + "#{name_with_namespace}.#{locale}.yml"
     end
   end
 
@@ -54,11 +58,15 @@ class ComponentGenerator < Rails::Generators::NamedBase
     end
 
     append_to_file(base_path + "index.js") do
-      "import \"#{base_path.relative_path_from(root_path)}/#{component_name}/#{component_name}\";\n"
-    end 
+      "import \"#{base_path.relative_path_from(root_path)}/#{component_name}/#{name_with_namespace.underscore}\";\n"
+    end
   end
 
   protected
+
+  def template_prefix
+    stimulus? ? "stimulus_" : ""
+  end
 
   def split_name
     name.split(/[:,::,\/]/).reject(&:blank?).map(&:underscore)
@@ -81,7 +89,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
   def component_class_name
     name_with_namespace.dasherize
   end
-  
+
   def component_name
     split_name.last.underscore
   end
@@ -99,10 +107,20 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   def locale?
-    options[:locale]
+    return options[:locale] if options[:locale]
+    komponent_configuration[:locale]
+  end
+
+  def stimulus?
+    return options[:stimulus] if options[:stimulus]
+    komponent_configuration[:stimulus]
   end
 
   private
+
+  def komponent_configuration
+    {stimulus: nil, locale: nil}.merge app_generators.komponent
+  end
 
   def rails_configuration
     Rails.application.config

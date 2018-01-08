@@ -1,0 +1,9 @@
+import { Controller } from "stimulus";
+import "./<%= name_with_namespace %>.css";
+
+export default class extends Controller {
+  connect() {
+    console.log("Hello, Stimulus!", this.element);
+  }
+}
+

@@ -169,9 +169,58 @@ rails generate component admin/header
 This will create the component in an `admin` folder, and name its Ruby module `AdminHeaderComponent`.
 
 
+### Stimulus integration
+
+You can pass `--stimulus` to both generators to use [stimulus](https://github.com/stimulusjs/stimulus) in your components.
+
+```sh
+rails generate komponent:install --stimulus
+```
+
+This will yarn `stimulus` package, and create a `stimulus_application.js` in the `frontend` folder.
+
+```sh
+rails generate component button --stimulus
+```
+
+This will create a component with an additional `button_controller.js` file, and define a `data-controller` in the generated view.
+
+### Internationalization
+
+Component generator has an option `--locale` to generate localization files
+in yours components directories. It uses `I18n.available_locales` to determine which locales you have in your project.
+
+```sh
+rails generate component button --locale
+```
+
+This will create a `button.en.yml` file. You can use the same ["lazy" lookup](http://edgeguides.rubyonrails.org/i18n.html#lazy-lookup) than RoR.
+
+```slim
+/ _button.html.erb
+<%= t(".hello") %>
+```
+
+```yml
+fr:
+  button_component:
+    hello: "Bonjour"
+```
+
+### Configuration
+
+You can define generator configuration in `application.rb` or an initializer to prevent you to miss to add both `--locale` and `--stimulus` flags if you want it by default when you generate fresh component.
+
+```rb
+config.generators do |g|
+  g.komponent stimulus: true, locale: true # by default both are false
+end
+```
+
+
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/ouvrages/komponent.
+Bug reports and pull requests are welcome on GitHub at https://github.com/komposable/komponent.
 
 ## License
 

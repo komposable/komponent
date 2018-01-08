@@ -1,3 +1,7 @@
 <div class="<%= component_class_name %>">
-  <%= component_name %>
+  <%- if locale? -%>
+  <%%= t "<%= module_name.underscore %>.component_name" %>
+  <%- else -%>
+  <%= module_name.underscore %>
+  <%- end -%>
 </div>

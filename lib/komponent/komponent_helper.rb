@@ -44,13 +44,18 @@ module KomponentHelper
     if context.respond_to?(custom_method)
       context.public_send(custom_method, locals, &capture_block)
     else
-      context.render("components/#{component}/#{parts.last}", &capture_block)
+      begin
+        context.render("components/#{component}/#{parts.join('_')}", &capture_block)
+      rescue ActionView::MissingTemplate
+        warn "[DEPRECATION WARNING] `#{parts.last}` filename in namespace is deprecated in favor of `#{parts.join('_')}`."
+        context.render("components/#{component}/#{parts.last}", &capture_block)
+      end
     end
   end
   alias :c :component
 
   def render_partial(partial_name, locals = {}, &block)
-    warn "[DEPRECATION] `render_partial` is deprecated. Please use default `render` instead."
+    warn "[DEPRECATION WARNING] `render_partial` is deprecated. Please use default `render` instead."
 
     context = controller.view_context
     view_paths = context.lookup_context.view_paths.dup

@@ -1,6 +1,8 @@
 module Komponent
   module Generators
     class InstallGenerator < Rails::Generators::Base
+      class_option :stimulus, type: :boolean, default: false
+
       def check_webpacker_dependency
         unless File.exists?(webpacker_configuration_file) and File.directory?(webpacker_default_structure)
           raise Thor::Error, dependencies_not_met_error_message
@@ -24,11 +26,32 @@ module Komponent
         create_file(components_directory.join("index.js"))
       end
 
+      def create_stimulus_file
+        template = <<-eos
+import { Application } from "stimulus";
+const application = Application.start();
+export default application;
+        eos
+        create_file(stimulus_application_path, stimulus? ? template : "")
+      end
+
       def append_to_application_pack
         append_to_file(application_pack_path, "import 'components';")
       end
 
+      def install_stimulus
+        if stimulus?
+          in_root do
+            run("yarn add stimulus")
+          end
+        end
+      end
+
       private
+
+      def stimulus_application_path
+        komponent_root_directory.join("stimulus_application.js")
+      end
 
       def application_pack_path
         komponent_root_directory.join("packs", "application.js")
@@ -52,6 +75,25 @@ module Komponent
 
       def dependencies_not_met_error_message
         "Seems you don't have webpacker installed in your project. Please install webpacker, and follow instructions at https://github.com/rails/webpacker"
+      end
+
+      def stimulus?
+        return options[:stimulus] if options[:stimulus]
+        komponent_configuration[:stimulus]
+      end
+
+      private
+
+      def komponent_configuration
+        {stimulus: nil, locale: nil}.merge app_generators.komponent
+      end
+
+      def rails_configuration
+        Rails.application.config
+      end
+
+      def app_generators
+        rails_configuration.app_generators
       end
     end
   end
