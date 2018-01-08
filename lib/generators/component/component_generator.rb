@@ -108,17 +108,17 @@ class ComponentGenerator < Rails::Generators::NamedBase
 
   def locale?
     return options[:locale] if options[:locale]
-    stimulus_configuration[:locale]
+    komponent_configuration[:locale]
   end
 
   def stimulus?
     return options[:stimulus] if options[:stimulus]
-    stimulus_configuration[:stimulus]
+    komponent_configuration[:stimulus]
   end
 
   private
 
-  def stimulus_configuration
+  def komponent_configuration
     {stimulus: nil, locale: nil}.merge app_generators.komponent
   end
 
