@@ -169,6 +169,22 @@ rails generate component admin/header
 This will create the component in an `admin` folder, and name its Ruby module `AdminHeaderComponent`.
 
 
+### Stimulus integration
+
+You can pass `--stimulus` to both generators to use [stimulus](https://github.com/stimulusjs/stimulus) in your components.
+
+```sh
+rails generate komponent:install --stimulus
+```
+
+This will yarn `stimulus` package, and create a `stimulus_application.js` in the `frontend` folder.
+
+```sh
+rails generate component button --stimulus
+```
+
+This will create a component with an additional `button_controller.js` file, and define a `data-controller` in the generated view.
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/ouvrages/komponent.
