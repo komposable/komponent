@@ -45,7 +45,12 @@ module KomponentHelper
     if context.respond_to?(custom_method)
       context.public_send(custom_method, locals, &capture_block)
     else
-      context.render("components/#{component}/#{parts.join('_')}", &capture_block)
+      begin
+        context.render("components/#{component}/#{parts.join('_')}", &capture_block)
+      rescue ActionView::MissingTemplate
+        warn "[DEPRECATION WARNING] `#{parts.last}` filename in namespace is deprecated in favor of `#{parts.join('_')}`."
+        context.render("components/#{component}/#{parts.last}", &capture_block)
+      end
     end
   end
   alias :c :component
