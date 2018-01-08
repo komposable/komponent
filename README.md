@@ -187,7 +187,7 @@ This will create a component with an additional `button_controller.js` file, and
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/ouvrages/komponent.
+Bug reports and pull requests are welcome on GitHub at https://github.com/komposable/komponent.
 
 ## License
 
