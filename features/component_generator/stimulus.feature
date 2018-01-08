@@ -4,9 +4,8 @@ Feature: Component generator - Stimulus
     And I cd to "my_app"
     And I append to "Gemfile" with:
     """
-        gem 'webpacker', '~> 3.0'
-        gem 'komponent', path: '../../..'
-        """
+    gem 'komponent', path: '../../..'
+    """
     When I run `bundle install`
     And I run `rails webpacker:install`
     And I run `rails generate komponent:install --stimulus`
@@ -27,9 +26,8 @@ Feature: Component generator - Stimulus
     And I cd to "my_app"
     And I append to "Gemfile" with:
     """
-        gem 'webpacker', '~> 3.0'
-        gem 'komponent', path: '../../..'
-        """
+    gem 'komponent', path: '../../..'
+    """
     When I run `bundle install`
     And I run `rails webpacker:install`
     And I run `rails generate komponent:install --stimulus`
