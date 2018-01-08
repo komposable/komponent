@@ -51,7 +51,7 @@ module KomponentHelper
   alias :c :component
 
   def render_partial(partial_name, locals = {}, &block)
-    warn "[DEPRECATION] `render_partial` is deprecated. Please use default `render` instead."
+    warn "[DEPRECATION WARNING] `render_partial` is deprecated. Please use default `render` instead."
 
     context = controller.view_context
     view_paths = context.lookup_context.view_paths.dup
