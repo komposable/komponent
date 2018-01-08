@@ -38,6 +38,14 @@ autoload(context, application);
         append_to_file(application_pack_path, "import 'components';")
       end
 
+      def install_stimulus
+        if stimulus?
+          in_root do
+            run("yarn add stimulus")
+          end
+        end
+      end
+
       private
 
       def application_pack_path
@@ -64,8 +72,13 @@ autoload(context, application);
         "Seems you don't have webpacker installed in your project. Please install webpacker, and follow instructions at https://github.com/rails/webpacker"
       end
 
+      def configuration
+        {stimulus: nil, locale: nil}.merge Rails.application.config.app_generators.komponent
+      end
+
       def stimulus?
-        options[:stimulus]
+        return options[:stimulus] if options[:stimulus]
+        configuration[:stimulus]
       end
     end
   end

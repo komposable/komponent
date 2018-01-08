@@ -5,7 +5,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
   class_option :stimulus, type: :boolean, default: false
 
   def create_view_file
-    template "view.html.#{template_engine}.erb", component_path + "_#{name_with_namespace.underscore}.html.#{template_engine}"
+    template "#{template_prefix}view.html.#{template_engine}.erb", component_path + "_#{name_with_namespace.underscore}.html.#{template_engine}"
   end
 
   def create_css_file
@@ -13,11 +13,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   def create_js_file
-    if stimulus?
-      template "stimulus.js.erb", component_path + "#{name_with_namespace}_controller.js"
-    else
-      template "js.erb", component_path + "#{name_with_namespace}.js"
-    end
+    template "#{template_prefix}js.erb", component_path + "#{name_with_namespace}#{javascript_suffix}.js"
   end
 
   def create_rb_file
@@ -33,8 +29,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
     end
   end
 
-  def import_to_packs
-    return if stimulus?
+  def import_to_packsq
     root_path = Pathname.new("frontend")
     base_path = root_path + "components"
 
@@ -60,11 +55,19 @@ class ComponentGenerator < Rails::Generators::NamedBase
     end
 
     append_to_file(base_path + "index.js") do
-      "import \"#{base_path.relative_path_from(root_path)}/#{component_name}/#{component_name}\";\n"
+      "import \"#{base_path.relative_path_from(root_path)}/#{component_name}/#{name_with_namespace.underscore}\";\n"
     end
   end
 
   protected
+
+  def javascript_suffix
+    stimulus? ? "_controller" : ""
+  end
+
+  def template_prefix
+    stimulus? ? "stimulus_" : ""
+  end
 
   def split_name
     name.split(/[:,::,\/]/).reject(&:blank?).map(&:underscore)
@@ -96,15 +99,17 @@ class ComponentGenerator < Rails::Generators::NamedBase
     Rails.application.config.app_generators.rails[:template_engine] || :erb
   end
 
+  def configuration
+    {stimulus: nil, locale: nil}.merge Rails.application.config.app_generators.komponent
+  end
+
   def locale?
-    options[:locale] || configuration[:locale]
+    return options[:locale] if options[:locale]
+    configuration[:locale]
   end
 
   def stimulus?
-    options[:stimulus] || configuration[:stimulus]
-  end
-
-  def configuration
-    {stimulus: false, locale: false}.merge Rails.application.config.app_generators.komponent
+    return options[:stimulus] if options[:stimulus]
+    configuration[:stimulus]
   end
 end
