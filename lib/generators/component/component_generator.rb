@@ -9,7 +9,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   def create_css_file
-    template "css.erb", component_path + "#{name_with_namespace}.css"
+    template "#{stylesheet_engine}.erb", component_path + "#{name_with_namespace}.#{stylesheet_engine}"
   end
 
   def create_js_file
@@ -96,20 +96,38 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   def template_engine
-    Rails.application.config.app_generators.rails[:template_engine] || :erb
-  end
+    app_generators.rails[:template_engine] || :erb
+ end
 
-  def configuration
-    {stimulus: nil, locale: nil}.merge Rails.application.config.app_generators.komponent
+  def stylesheet_engine
+    if sass = rails_configuration.try(:sass)
+      sass[:preferred_syntax]
+    else
+      :css
+    end
   end
 
   def locale?
     return options[:locale] if options[:locale]
-    configuration[:locale]
+    stimulus_configuration[:locale]
   end
 
   def stimulus?
     return options[:stimulus] if options[:stimulus]
-    configuration[:stimulus]
+    stimulus_configuration[:stimulus]
+  end
+
+  private
+
+  def stimulus_configuration
+    {stimulus: nil, locale: nil}.merge app_generators.komponent
+  end
+
+  def rails_configuration
+    Rails.application.config
+  end
+
+  def app_generators
+    rails_configuration.app_generators
   end
 end

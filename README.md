@@ -4,9 +4,14 @@
 
 **Komponent** implements an opinionated way of organizing front-end code in Ruby on Rails, based on _components_.
 
-Each component has its own folder, containing a Ruby module, a slim partial, a PostCSS stylesheet and a JavaScript file.
+Each component has its own folder, containing a Ruby module, a partial, a stylesheet and a JavaScript file.
 
 Komponent relies heavily on webpacker to manage dependencies and generate the production JS and CSS files.
+
+This README examples are written in Slim, but Komponent is compatible with:
+
+- your preferred templating language (Slim, Haml, erb)
+- your stylesheet language of choice (Sass, SCSS, CSS, PostCSS)
 
 This gem has been inspired by our Rails development practices at [Ouvrages](https://ouvrages-web.fr) and [Etamin Studio](https://etaminstudio.com), and the (excellent) [_Modern Front-end in Rails_](https://evilmartians.com/chronicles/evil-front-part-1) article from Evil Martians.
 
@@ -137,15 +142,14 @@ a.button(href=@href)
 
 ### Component partials
 
-You can also choose to split your component into partials. In this case, use the `render_partial` helper to render a partial, stored inside the component directory. It's a simple shorthand of the default `render` helper from Rails. 
+You can also choose to split your component into partials. In this case, we can use the default `render` helper to render a partial, stored inside the component directory.
 
 ```slim
 / frontend/components/button/_button.html.slim
 
 = a.button(href=@href)
   = @text
-  / The line below is similar to: render("components/button/suffix", text: "external link") if external_link?
-  = render_partial("suffix", text: "external link") if external_link?
+  = render("suffix", text: "external link") if external_link?
 ```
 
 ```slim

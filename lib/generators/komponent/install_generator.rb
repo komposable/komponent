@@ -72,13 +72,23 @@ autoload(context, application);
         "Seems you don't have webpacker installed in your project. Please install webpacker, and follow instructions at https://github.com/rails/webpacker"
       end
 
-      def configuration
-        {stimulus: nil, locale: nil}.merge Rails.application.config.app_generators.komponent
-      end
-
       def stimulus?
         return options[:stimulus] if options[:stimulus]
-        configuration[:stimulus]
+        stimulus_configuration[:stimulus]
+      end
+
+      private
+
+      def stimulus_configuration
+        {stimulus: nil, locale: nil}.merge app_generators.komponent
+      end
+
+      def rails_configuration
+        Rails.application.config
+      end
+
+      def app_generators
+        rails_configuration.app_generators
       end
     end
   end
