@@ -32,7 +32,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
     end
   end
 
-  def import_to_packsq
+  def import_to_packs
     root_path = Pathname.new("frontend")
     base_path = root_path + "components"
 
