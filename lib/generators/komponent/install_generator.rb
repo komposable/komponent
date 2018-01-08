@@ -30,7 +30,7 @@ module Komponent
         template = <<-eos
 import { Application } from "stimulus";
 const application = Application.start();
-export {application as default};
+export default application;
         eos
         create_file(stimulus_application_path, stimulus? ? template : "")
       end
