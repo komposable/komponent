@@ -23,15 +23,16 @@ module Komponent
 
       def create_komponent_default_structure
         empty_directory(components_directory)
+        create_file(components_directory.join("index.js"))
+      end
+
+      def create_stimulus_file
         template = <<-eos
 import { Application } from "stimulus";
-import { autoload } from "stimulus/webpack-helpers";
-
 const application = Application.start();
-const context = require.context("./", true, /_controller\.js$/);
-autoload(context, application);
+export {application as default};
         eos
-        create_file(components_directory.join("index.js"), stimulus? ? template : "")
+        create_file(stimulus_application_path, stimulus? ? template : "")
       end
 
       def append_to_application_pack
@@ -47,6 +48,10 @@ autoload(context, application);
       end
 
       private
+
+      def stimulus_application_path
+        komponent_root_directory.join("stimulus_application.js")
+      end
 
       def application_pack_path
         komponent_root_directory.join("packs", "application.js")

@@ -13,7 +13,10 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   def create_js_file
-    template "#{template_prefix}js.erb", component_path + "#{name_with_namespace}#{javascript_suffix}.js"
+    template "js.erb", component_path + "#{name_with_namespace}.js"
+    if stimulus?
+      template "stimulus_controller_js.erb", component_path + "#{name_with_namespace}_controller.js"
+    end
   end
 
   def create_rb_file
@@ -60,10 +63,6 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   protected
-
-  def javascript_suffix
-    stimulus? ? "_controller" : ""
-  end
 
   def template_prefix
     stimulus? ? "stimulus_" : ""
