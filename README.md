@@ -188,33 +188,42 @@ This will create a component with an additional `button_controller.js` file, and
 
 ### Internationalization
 
-Component generator has an option `--locale` to generate localization files
-in yours components directories. It uses `I18n.available_locales` to determine which locales you have in your project.
+In case your component will contain text strings you want to localize, you can pass the `--locale` option to generate localization files in your component directory.
 
 ```sh
 rails generate component button --locale
 ```
 
-This will create a `button.en.yml` file. You can use the same ["lazy" lookup](http://edgeguides.rubyonrails.org/i18n.html#lazy-lookup) than RoR.
+This will create a `yml` file for each locale (using `I18n.available_locales`). In your component, the `t` helper will use the same ["lazy" lookup](http://guides.rubyonrails.org/i18n.html#lazy-lookup) as Rails.
 
 ```slim
-/ _button.html.erb
-<%= t(".hello") %>
+/ frontend/components/button/_button.html.slim
+= a.button(href=@href)
+  = @text
+  = render("suffix", text: t(".external_link")) if external_link?
 ```
 
 ```yml
+/ frontend/components/button/button.en.yml
+en:
+  button_component:
+    external_link: "external link"
+```
+
+```yml
+/ frontend/components/button/button.fr.yml
 fr:
   button_component:
-    hello: "Bonjour"
+    external_link: "lien externe"
 ```
 
 ### Configuration
 
-You can define generator configuration in `application.rb` or an initializer to prevent you to miss to add both `--locale` and `--stimulus` flags if you want it by default when you generate fresh component.
+You can configure the generators in an initializer or in `application.rb`, so you don't have to add `--locale` and/or `--stimulus` flags every time you generate a fresh component.
 
 ```rb
 config.generators do |g|
-  g.komponent stimulus: true, locale: true # by default both are false
+  g.komponent stimulus: true, locale: true # both are false by default
 end
 ```
 
