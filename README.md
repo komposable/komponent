@@ -218,6 +218,8 @@ fr:
 
 ### Configuration
 
+#### Default options for the generators
+
 You can configure the generators in an initializer or in `application.rb`, so you don't have to add `--locale` and/or `--stimulus` flags every time you generate a fresh component.
 
 ```rb
@@ -225,6 +227,53 @@ config.generators do |g|
   g.komponent stimulus: true, locale: true # both are false by default
 end
 ```
+
+#### Additional paths
+
+You may want to use components in a gem, or a Rails engine, and expose them to the main app. In order to do that, you just have to configure the paths where Komponent will look for components.
+
+From a gem:
+
+```rb
+module MyGem
+  class Railtie < Rails::Railtie
+    config.after_initialize do |app|
+      app.config.komponent.component_paths.append(self.root.join("frontend/components"))
+    end
+
+    initializer 'komposable.autoload', before: :set_autoload_paths do |app|
+      app.config.autoload_paths << self.root.join("frontend")
+    end
+
+    private
+
+    def self.root
+      File.dirname __dir__
+    end
+  end
+end
+```
+
+or from an engine:
+
+
+```rb
+module MyEngine
+  class Engine < Rails::Engine
+    isolate_namespace MyEngine
+
+    config.after_initialize do |app|
+      app.config.komponent.component_paths.append(MyEngine::Engine.root.join("frontend/components"))
+    end
+
+    initializer 'komposable.autoload', before: :set_autoload_paths do |app|
+      app.config.autoload_paths << MyEngine::Engine.root.join("frontend")
+    end
+  end
+end
+```
+
+Make sure you add `komponent` to the runtime dependencies in your `gemspec`.
 
 
 ## Contributing
