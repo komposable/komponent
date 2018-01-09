@@ -1,4 +1,6 @@
 language: ruby
 rvm:
   - 2.4
-script: bundle exec cucumber
+script:
+  - bundle exec rubocop
+  - bundle exec cucumber

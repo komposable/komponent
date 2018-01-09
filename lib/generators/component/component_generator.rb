@@ -41,7 +41,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
     split_name[0..-2].each do |split|
       base_path += split
       file_path = base_path + "index.js"
-      create_file(file_path) unless File.exists?(file_path)
+      create_file(file_path) unless File.exist?(file_path)
       imports << base_path.relative_path_from(root_path)
     end
 
@@ -96,7 +96,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
 
   def template_engine
     app_generators.rails[:template_engine] || :erb
- end
+  end
 
   def stylesheet_engine
     if sass = rails_configuration.try(:sass)
@@ -119,7 +119,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
   private
 
   def komponent_configuration
-    {stimulus: nil, locale: nil}.merge app_generators.komponent
+    { stimulus: nil, locale: nil }.merge app_generators.komponent
   end
 
   def rails_configuration

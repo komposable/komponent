@@ -4,7 +4,7 @@ module Komponent
       class_option :stimulus, type: :boolean, default: false
 
       def check_webpacker_dependency
-        unless File.exists?(webpacker_configuration_file) and File.directory?(webpacker_default_structure)
+        unless File.exist?(webpacker_configuration_file) and File.directory?(webpacker_default_structure)
           raise Thor::Error, dependencies_not_met_error_message
         end
       end
@@ -85,7 +85,7 @@ export default application;
       private
 
       def komponent_configuration
-        {stimulus: nil, locale: nil}.merge app_generators.komponent
+        { stimulus: nil, locale: nil }.merge app_generators.komponent
       end
 
       def rails_configuration
