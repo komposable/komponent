@@ -241,7 +241,7 @@ module MyGem
       app.config.komponent.component_paths.append(self.root.join("frontend/components"))
     end
 
-    initializer 'komposable.autoload', before: :set_autoload_paths do |app|
+    initializer 'my_gem.autoload', before: :set_autoload_paths do |app|
       app.config.autoload_paths << self.root.join("frontend")
     end
 
@@ -266,7 +266,7 @@ module MyEngine
       app.config.komponent.component_paths.append(MyEngine::Engine.root.join("frontend/components"))
     end
 
-    initializer 'komposable.autoload', before: :set_autoload_paths do |app|
+    initializer 'my_engine.autoload', before: :set_autoload_paths do |app|
       app.config.autoload_paths << MyEngine::Engine.root.join("frontend")
     end
   end
