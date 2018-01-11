@@ -242,6 +242,12 @@ module MyGem
       app.config.komponent.component_paths.append(self.root.join("frontend/components"))
     end
 
+    initializer "my_gem.action_dispatch" do |app|
+      ActiveSupport.on_load :action_controller do
+        ActionController::Base.prepend_view_path self.root.join("frontend")
+      end
+    end
+
     initializer 'my_gem.autoload', before: :set_autoload_paths do |app|
       app.config.autoload_paths << self.root.join("frontend")
     end
@@ -265,6 +271,12 @@ module MyEngine
 
     config.after_initialize do |app|
       app.config.komponent.component_paths.append(MyEngine::Engine.root.join("frontend/components"))
+    end
+
+    initializer "my_engine.action_dispatch" do |app|
+      ActiveSupport.on_load :action_controller do
+        ActionController::Base.prepend_view_path MyEngine::Engine.root.join("frontend")
+      end
     end
 
     initializer 'my_engine.autoload', before: :set_autoload_paths do |app|
