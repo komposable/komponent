@@ -5,6 +5,7 @@
 **Enhancements:**
 - [stimulus](https://github.com/stimulusjs/stimulus) integration
 - Component generator supports `css`, `scss`, `sass` stylesheet engine
+- Add a component path resolver
 
 **Bug fixes**
 - Make `content_for` work in component
