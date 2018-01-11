@@ -288,6 +288,22 @@ end
 
 Make sure you add `komponent` to the runtime dependencies in your `gemspec`.
 
+In order to compile packs from engine, and to use `javascript_pack_tag 'engine'`, you need to:
+
+- Create a pack file in main app
+
+```js
+// frontend/packs/engine.js
+
+import 'packs/engine';
+```
+
+- Append engine frontend folder to `resolved_paths` in `config/webpacker.yml` from your main app
+
+```yml
+resolved_paths:
+  - engine/frontend
+```
 
 ## Contributing
 
