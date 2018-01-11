@@ -1,44 +1,38 @@
 module Komponent
   class ComponentPathResolver
-    attr_accessor :path
+    def resolve(component_name)
+      root_path = component_paths.find do |path|
+        path_has_component?(path, component_name)
+      end
 
-    def initialize(component)
-      @component = component
-      resolve
+      if root_path.nil?
+        raise ComponentPathResolver::MissingComponentError.new(
+          component_name,
+          component_paths,
+        )
+      end
+
+      root_path.join(*component_name)
     end
 
     protected
 
-    def resolve
-      component_found = nil
-
-      component_paths.each do |component_path|
-        component_found = find_component(component_path)
-        break if component_found
-      end
-
-      raise ComponentPathResolver::MissingComponentError.new(component_paths) unless component_found
-
-      component_parts.each do |part|
-        component_found += part
-      end
-
-      @path = Pathname.new(component_found)
-    end
-
-    def find_component(component_path)
-      pattern = /#{component_parts.join("_")}_component.rb/
-      Find.find(component_path.to_s) do |path|
-        return Pathname.new(component_path) if path =~ pattern
-      end
-    end
-
-    def component_parts
-      @component.split("/")
+    def path_has_component?(path, component_name)
+      file_name = path.join(*[
+        component_name,
+        "#{component_name.split("/").join("_")}_component.rb",
+      ])
+      File.exist?(file_name)
     end
 
     def component_paths
-      app_configuration.komponent.component_paths
+      komponent_configuration.component_paths.map do |path|
+        Pathname.new(path)
+      end
+    end
+
+    def komponent_configuration
+      app_configuration.komponent
     end
 
     def app_configuration
@@ -46,20 +40,12 @@ module Komponent
     end
 
     class MissingComponentError < StandardError
-      def initialize(paths)
-        @paths = paths
-
-        super(message)
-      end
-
-      private
-
-      def message
-        message = "Component not found in:\n"
-        @paths.each do |path|
+      def initialize(component_name, paths)
+        message = "Component `#{component_name}` not found in:\n"
+        paths.each do |path|
           message += "  * #{path}\n"
         end
-        message
+        super(message)
       end
     end
   end
