@@ -1,11 +1,11 @@
 module KomponentHelper
   def component(component, locals = {}, &block)
-    components_path = Rails.root.join("frontend", "components")
+    component_path = Komponent::ComponentPathResolver.new.resolve(component)
 
     parts = component.split("/")
-    component_path = components_path.join(*parts)
     component_name = parts.join("_")
     component_path = component_path.join("#{component_name}_component")
+
     require_dependency(component_path)
 
     component_module = "#{component_name}_component".camelize.constantize
