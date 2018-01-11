@@ -249,7 +249,7 @@ module MyGem
     private
 
     def self.root
-      File.dirname __dir__
+      Pathname.new(File.dirname(__dir__))
     end
   end
 end
