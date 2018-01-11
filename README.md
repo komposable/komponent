@@ -1,7 +1,6 @@
 # <img alt="Komponent" src="https://raw.github.com/ouvrages/komponent/master/logo.svg?sanitize=true" width="200" height="40" />
 [![Build Status](https://travis-ci.org/komposable/komponent.svg?branch=master)](https://travis-ci.org/komposable/komponent)
 [![Gem](https://img.shields.io/gem/v/komponent.svg)](https://github.com/komposable/komponent)
-=======
 
 **Komponent** implements an opinionated way of organizing front-end code in Ruby on Rails, based on _components_.
 
@@ -16,6 +15,23 @@ This README examples are written in Slim, but Komponent is compatible with:
 
 This gem has been inspired by our Rails development practices at [Ouvrages](https://ouvrages-web.fr) and [Etamin Studio](https://etaminstudio.com), and the (excellent) [_Modern Front-end in Rails_](https://evilmartians.com/chronicles/evil-front-part-1) article from Evil Martians.
 
+## Table of contents
+
+- [Getting started](#getting-started)
+- [Usage](#usage)
+  - [Passing variables](#passing-variables)
+  - [Passing a block](#passing-a-block)
+  - [Properties](#properties)
+  - [Helpers](#helpers)
+  - [Component partials](#component-partials)
+  - [Namespacing components](#namespacing-components)
+  - [Stimulus integration](#stimulus-integration)
+  - [Internationalization](#internationalization)
+  - [Configuration](#configuration)
+    - [Default options for the generators](#default-options-for-the-generators)
+    - [Additional paths](#additional-paths)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Getting started
 
