@@ -1,5 +1,5 @@
 Feature: Component generator - Stimulus
-  Scenario: Component with namespaces and stimulus
+  Scenario: Component with stimulus
     Given I run `rails new my_app --skip-spring`
     And I cd to "my_app"
     And I append to "Gemfile" with:
@@ -20,6 +20,10 @@ Feature: Component generator - Stimulus
       | awesome_button/awesome_button.js            |
       | awesome_button/awesome_button_controller.js |
       | awesome_button/awesome_button_component.rb  |
+    And the file named "awesome_button/awesome_button_controller.js" should contain:
+    """
+    import "./awesome_button.scss";
+    """
 
   Scenario: Component with namespaces and stimulus
     Given I run `rails new my_app --skip-spring`
@@ -42,3 +46,7 @@ Feature: Component generator - Stimulus
       | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button.js            |
       | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button_controller.js |
       | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button_component.rb  |
+    And the file named "admin/sub_admin/awesome_button/admin_sub_admin_awesome_button_controller.js" should contain:
+    """
+    import "./admin_sub_admin_awesome_button.scss";
+    """
