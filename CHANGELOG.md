@@ -2,6 +2,8 @@
 
 ## Upcoming release
 
+## v1.1.0 (2018-01-12)
+
 **Enhancements:**
 - [stimulus](https://github.com/stimulusjs/stimulus) integration
 - Component generator supports `css`, `scss`, `sass` stylesheet engine
@@ -9,6 +11,8 @@
 
 **Bug fixes**
 - Make `content_for` work in component
+- Fix issue with wrong stylesheet extension being used when
+imported in JavaScript files
 
 **Deprecation**
 - `render_partial` is deprecated in favor of default `render`
