@@ -13,6 +13,10 @@ Feature: Component generator - Stylesheet engine
     And I run `rails generate component AwesomeButton`
     And I cd to "frontend/components/awesome_button"
     Then a file named "awesome_button.scss" should exist
+    And the file named "awesome_button.js" should contain:
+    """
+    import "./awesome_button.scss";
+    """
 
   Scenario: Component with `sass` stylesheet engine set in `generators.stylesheet_engine`
     Given I run `rails new my_app --skip-spring`
@@ -31,6 +35,10 @@ Feature: Component generator - Stylesheet engine
     And I run `rails generate component AwesomeButton`
     And I cd to "frontend/components/awesome_button"
     Then a file named "awesome_button.scss" should exist
+    And the file named "awesome_button.js" should contain:
+    """
+    import "./awesome_button.scss";
+    """
 
   Scenario: Component with `sass` stylesheet engine set in `sass.preferred syntax`
     Given I run `rails new my_app --skip-spring`
@@ -49,6 +57,10 @@ Feature: Component generator - Stylesheet engine
     And I run `rails generate component AwesomeButton`
     And I cd to "frontend/components/awesome_button"
     Then a file named "awesome_button.sass" should exist
+    And the file named "awesome_button.js" should contain:
+    """
+    import "./awesome_button.sass";
+    """
 
   Scenario: Component with `css` stylesheet engine
     Given I run `rails new my_app --skip-spring`
@@ -64,3 +76,7 @@ Feature: Component generator - Stylesheet engine
     And I run `rails generate component AwesomeButton`
     And I cd to "frontend/components/awesome_button"
     Then a file named "awesome_button.css" should exist
+    And the file named "awesome_button.js" should contain:
+    """
+    import "./awesome_button.css";
+    """
