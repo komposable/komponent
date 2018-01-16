@@ -27,12 +27,7 @@ module Komponent
       end
 
       def create_stimulus_file
-        template = <<-eos
-import { Application } from "stimulus";
-const application = Application.start();
-export default application;
-        eos
-        create_file(stimulus_application_path, stimulus? ? template : "")
+        create_file(stimulus_application_path, stimulus? ? stimulus_application_template : "")
       end
 
       def append_to_application_pack
@@ -49,6 +44,14 @@ export default application;
 
       private
 
+      def stimulus_application_template
+        <<~HEREDOC
+          import { Application } from "stimulus";
+          const application = Application.start();
+          export default application;
+        HEREDOC 
+      end
+      
       def stimulus_application_path
         komponent_root_directory.join("stimulus_application.js")
       end
@@ -81,8 +84,6 @@ export default application;
         return options[:stimulus] if options[:stimulus]
         komponent_configuration[:stimulus]
       end
-
-      private
 
       def komponent_configuration
         { stimulus: nil, locale: nil }.merge app_generators.komponent
