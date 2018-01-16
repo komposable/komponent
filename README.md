@@ -76,10 +76,14 @@ Make sure to include javascript pack tag and stylesheet pack tag in your applica
 ```slim
 / app/views/layouts/application.html.slim
 
-body=
-  = yield
-  = javascript_pack_tag "application"
-  = stylesheet_pack_tag "application"
+doctype html
+html
+  head
+    = stylesheet_pack_tag "application"
+
+  body
+    == yield
+    = javascript_pack_tag "application"
 ```
 
 Check Webpacker documentation for further information.
