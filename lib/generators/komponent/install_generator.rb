@@ -42,7 +42,7 @@ module Komponent
         end
       end
 
-      private
+      protected
 
       def stimulus_application_template
         <<~HEREDOC
@@ -84,6 +84,8 @@ module Komponent
         return options[:stimulus] if options[:stimulus]
         komponent_configuration[:stimulus]
       end
+
+      private
 
       def komponent_configuration
         { stimulus: nil, locale: nil }.merge app_generators.komponent
