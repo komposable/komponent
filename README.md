@@ -231,20 +231,23 @@ This will create a `yml` file for each locale (using `I18n.available_locales`). 
 
 ```slim
 / frontend/components/button/_button.html.slim
+
 = a.button(href=@href)
   = @text
   = render("suffix", text: t(".external_link")) if external_link?
 ```
 
 ```yml
-/ frontend/components/button/button.en.yml
+# frontend/components/button/button.en.yml
+
 en:
   button_component:
     external_link: "external link"
 ```
 
 ```yml
-/ frontend/components/button/button.fr.yml
+# frontend/components/button/button.fr.yml
+
 fr:
   button_component:
     external_link: "lien externe"
