@@ -49,9 +49,9 @@ module Komponent
           import { Application } from "stimulus";
           const application = Application.start();
           export default application;
-        HEREDOC 
+        HEREDOC
       end
-      
+
       def stimulus_application_path
         komponent_root_directory.join("stimulus_application.js")
       end
