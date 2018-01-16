@@ -82,7 +82,7 @@ html
     = stylesheet_pack_tag "application"
 
   body
-    == yield
+    = yield
     = javascript_pack_tag "application"
 ```
 
