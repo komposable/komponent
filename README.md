@@ -71,12 +71,15 @@ Then, render it in your views with the `component` helper (or its alias `c`).
 = c "button"
 ```
 
-Make sure to include javascript pack tag in your application layout file, for instance:
+Make sure to include javascript pack tag and stylesheet pack tag in your application layout file, for instance:
 
 ```slim
-/ app/views/layouts/application.html.erb
+/ app/views/layouts/application.html.slim
 
-= javascript_pack_tag "application"
+body=
+  = yield
+  = javascript_pack_tag "application"
+  = stylesheet_pack_tag "application"
 ```
 
 Check Webpacker documentation for further information.
