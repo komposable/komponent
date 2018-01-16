@@ -86,7 +86,7 @@ html
     = javascript_pack_tag "application"
 ```
 
-Check Webpacker documentation for further information.
+Check [Webpacker documentation](https://github.com/rails/webpacker) for further information.
 
 ### Passing variables
 
