@@ -275,24 +275,24 @@ From a gem:
 module MyGem
   class Railtie < Rails::Railtie
     config.after_initialize do |app|
-      app.config.komponent.component_paths.append(self.root.join("frontend/components"))
+      app.config.komponent.component_paths.append(MyGem.root.join("frontend/components"))
     end
 
     initializer "my_gem.action_dispatch" do |app|
       ActiveSupport.on_load :action_controller do
-        ActionController::Base.prepend_view_path self.root.join("frontend")
+        ActionController::Base.prepend_view_path MyGem.root.join("frontend")
       end
     end
 
     initializer 'my_gem.autoload', before: :set_autoload_paths do |app|
-      app.config.autoload_paths << self.root.join("frontend")
+      app.config.autoload_paths << MyGem.root.join("frontend")
     end
+  end
+  
+  private
 
-    private
-
-    def self.root
-      Pathname.new(File.dirname(__dir__))
-    end
+  def self.root
+    Pathname.new(File.dirname(__dir__))
   end
 end
 ```
