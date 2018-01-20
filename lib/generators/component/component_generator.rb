@@ -33,7 +33,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   def import_to_packs
-    root_path = Pathname.new("frontend")
+    root_path = default_path
     base_path = root_path + "components"
 
     imports = []
@@ -77,7 +77,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   def component_path
-    path_parts = ["frontend", "components", *split_name]
+    path_parts = [default_path, "components", *split_name]
 
     Pathname.new(path_parts.join("/"))
   end
@@ -106,6 +106,10 @@ class ComponentGenerator < Rails::Generators::NamedBase
     end
   end
 
+  def default_path
+    rails_configuration.komponent.root
+  end
+
   def locale?
     return options[:locale] if options[:locale]
     komponent_configuration[:locale]
@@ -119,7 +123,10 @@ class ComponentGenerator < Rails::Generators::NamedBase
   private
 
   def komponent_configuration
-    { stimulus: nil, locale: nil }.merge app_generators.komponent
+    {
+      stimulus: nil,
+      locale: nil,
+    }.merge(app_generators.komponent)
   end
 
   def rails_configuration

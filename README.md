@@ -28,6 +28,7 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
   - [Stimulus integration](#stimulus-integration)
   - [Internationalization](#internationalization)
   - [Configuration](#configuration)
+    - [Change default root path](#change-default-root-path)
     - [Default options for the generators](#default-options-for-the-generators)
     - [Additional paths](#additional-paths)
 - [Contributing](#contributing)
@@ -263,6 +264,14 @@ You can configure the generators in an initializer or in `application.rb`, so yo
 config.generators do |g|
   g.komponent stimulus: true, locale: true # both are false by default
 end
+```
+
+#### Change default root path
+
+You can change the default root path ("frontend") to another path where Komponent should be installed and components generated. You need to change `komponent.root` in an initializer.
+
+```rb
+Rails.application.config.komponent.root = Rails.root.join("app/frontend")
 ```
 
 #### Additional paths

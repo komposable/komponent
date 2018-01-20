@@ -2,6 +2,9 @@
 
 ## Upcoming release
 
+**Enhancements:**
+- Add an option to change default root path where Komponent is installed, and components are generated
+
 ## v1.1.0 (2018-01-12)
 
 **Enhancements:**

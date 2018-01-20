@@ -14,7 +14,7 @@ module Komponent
       end
 
       def modify_webpacker_configuration
-        gsub_file(webpacker_configuration_file, /source_path: app\/javascript$/, "source_path: frontend")
+        gsub_file(webpacker_configuration_file, /source_path: app\/javascript$/, "source_path: #{relative_path_from_rails}")
       end
 
       def move_webpacker_default_structure
@@ -61,7 +61,7 @@ module Komponent
       end
 
       def komponent_root_directory
-        Rails.root.join("frontend")
+        default_path
       end
 
       def components_directory
@@ -85,10 +85,21 @@ module Komponent
         komponent_configuration[:stimulus]
       end
 
+      def default_path
+        rails_configuration.komponent.root
+      end
+
+      def relative_path_from_rails
+        default_path.relative_path_from(Rails.root)
+      end
+
       private
 
       def komponent_configuration
-        { stimulus: nil, locale: nil }.merge app_generators.komponent
+        {
+          stimulus: nil,
+          locale: nil,
+        }.merge(app_generators.komponent)
       end
 
       def rails_configuration
