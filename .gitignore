@@ -7,3 +7,6 @@
 /pkg/
 /spec/reports/
 /tmp/
+/spec/dummy/node_modules/
+/spec/dummy/log/
+/spec/dummy/tmp/
