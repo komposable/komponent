@@ -268,7 +268,7 @@ end
 
 #### Change default root path
 
-You can change the default root path ("frontend") to another path where Komponent should be installed and components generated. You need to change `komponent.root` in an initializer.
+You can change the default root path (`frontend`) to another path where Komponent should be installed and components generated. You need to change `komponent.root` in an initializer.
 
 ```rb
 Rails.application.config.komponent.root = Rails.root.join("app/frontend")
