@@ -2,6 +2,9 @@
 
 ## Upcoming release
 
+**Enhancements:**
+- Support for Stimulus 1.0
+
 ## v1.1.1 (2018-01-20)
 
 **Enhancements:**

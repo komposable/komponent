@@ -206,7 +206,9 @@ This will create the component in an `admin` folder, and name its Ruby module `A
 
 ### Stimulus integration
 
-You can pass `--stimulus` to both generators to use [stimulus](https://github.com/stimulusjs/stimulus) in your components.
+Komponent supports [stimulus](https://github.com/stimulusjs/stimulus) 1.0.
+
+You can pass `--stimulus` to both generators to use Stimulus in your components.
 
 ```sh
 rails generate komponent:install --stimulus
@@ -297,7 +299,7 @@ module MyGem
       app.config.autoload_paths << MyGem.root.join("frontend")
     end
   end
-  
+
   private
 
   def self.root
