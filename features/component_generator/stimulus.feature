@@ -22,7 +22,7 @@ Feature: Component generator - Stimulus
       | awesome_button/awesome_button_component.rb  |
     And the file named "awesome_button/awesome_button_controller.js" should contain:
     """
-    import "./awesome_button.scss";
+    import { Controller } from "stimulus";
     """
 
   Scenario: Component with namespaces and stimulus
@@ -48,5 +48,5 @@ Feature: Component generator - Stimulus
       | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button_component.rb  |
     And the file named "admin/sub_admin/awesome_button/admin_sub_admin_awesome_button_controller.js" should contain:
     """
-    import "./admin_sub_admin_awesome_button.scss";
+    import { Controller } from "stimulus";
     """
