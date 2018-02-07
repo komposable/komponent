@@ -39,6 +39,8 @@ module KomponentHelper
       locals.each do |name, value|
         instance_variable_set(:"@#{name}", locals[name] || options[:default])
       end
+
+      instance_variable_set(:"@block_given_to_component", block)
     end
 
     begin
