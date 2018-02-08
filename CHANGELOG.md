@@ -4,6 +4,7 @@
 
 **Enhancements:**
 - Support for Stimulus 1.0
+- Added the `block_given_to_component?` helper to components
 
 ## v1.1.1 (2018-01-20)
 
