@@ -124,6 +124,8 @@ The component also accepts a `block`. To render the block, just use the standard
   = yield
 ```
 
+You can check if the component has been called with a block using the `block_given_to_component?` helper from within the component.
+
 ### Properties
 
 Each component comes with a Ruby `module`. You can use it to set properties:
