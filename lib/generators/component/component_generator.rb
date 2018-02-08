@@ -140,20 +140,13 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   def sort_lines_alphabetically!(path)
-    import_regexp = Regexp.new(/^import "(.*)";$/)
-    lines = []
-
-    File.readlines(path).each do |line|
-      if line =~ import_regexp
-        lines << line
-      end
-    end
+    lines = File.readlines(path).map do |line|
+      line if line =~ /^import "(.*)";$/
+    end.compact
 
     return if lines.empty?
 
-    lines = lines.sort_by do |line|
-      line.match(import_regexp)[1]
-    end
+    lines = lines.sort
 
     File.open(path, "w") do |f|
       lines.each do |line|
