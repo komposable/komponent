@@ -30,6 +30,7 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
   - [Configuration](#configuration)
     - [Change default root path](#change-default-root-path)
     - [Default options for the generators](#default-options-for-the-generators)
+    - [Force default templating engine](#force-default-templating-engine)
     - [Additional paths](#additional-paths)
 - [Contributing](#contributing)
 - [License](#license)
@@ -274,6 +275,14 @@ You can change the default root path (`frontend`) to another path where Komponen
 
 ```rb
 Rails.application.config.komponent.root = Rails.root.join("app/frontend")
+```
+
+#### Force default templating engine
+
+If for some reason your preferred templating engine is not detected by Komponent, you can force it by manually defining it in your config:
+
+```rb
+Rails.application.config.generators.template_engine = :haml
 ```
 
 #### Additional paths
