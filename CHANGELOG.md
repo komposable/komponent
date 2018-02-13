@@ -2,6 +2,8 @@
 
 ## Upcoming release
 
+## v1.1.2 (2018-02-13)
+
 **Enhancements:**
 - Support for Stimulus 1.0
 - `import`s are now sorted alphabetically every time you run the component generator
