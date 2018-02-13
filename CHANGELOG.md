@@ -5,6 +5,7 @@
 **Enhancements:**
 - Support for Stimulus 1.0
 - `import`s are now sorted alphabetically every time you run the component generator
+- Added the `block_given_to_component?` helper to components
 
 ## v1.1.1 (2018-01-20)
 
