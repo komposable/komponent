@@ -52,14 +52,16 @@ class ComponentGenerator < Rails::Generators::NamedBase
       import = imports.shift
       if import
         append_to_file(root_path_dup + "index.js") do
-          "import \"#{import}\";\n"
+          "\nimport \"#{import}\";\n"
         end
+        sort_lines_alphabetically!(root_path_dup + "index.js")
       end
     end
 
     append_to_file(base_path + "index.js") do
-      "import \"#{base_path.relative_path_from(root_path)}/#{component_name}/#{name_with_namespace.underscore}\";\n"
+      "\nimport \"#{base_path.relative_path_from(root_path)}/#{component_name}/#{name_with_namespace.underscore}\";\n"
     end
+    sort_lines_alphabetically!(base_path + "index.js")
   end
 
   protected
@@ -135,5 +137,21 @@ class ComponentGenerator < Rails::Generators::NamedBase
 
   def app_generators
     rails_configuration.app_generators
+  end
+
+  def sort_lines_alphabetically!(path)
+    lines = File.readlines(path).map do |line|
+      line if line =~ /^import "(.*)";$/
+    end.compact
+
+    return if lines.empty?
+
+    lines = lines.sort
+
+    File.open(path, "w") do |f|
+      lines.each do |line|
+        f.write(line)
+      end
+    end
   end
 end
