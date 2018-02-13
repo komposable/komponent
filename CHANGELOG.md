@@ -2,6 +2,12 @@
 
 ## Upcoming release
 
+**Enhancements:**
+
+- Removed useless `autoload_paths` config definition (it was not taken into account)
+- Install generator can be ran several times in order to enable features
+- Autoloading is now appended to `config/application.rb` when you run `rails g komponent:install`
+
 ## v1.1.3 (2018-02-22)
 
 **Enhancements:**

@@ -11,9 +11,17 @@ Feature: Install generator
     """
     Rails.application.config.komponent.root = Rails.root.join("app/frontend")
     """
-    And I run `bundle install`
+    And I run `bundle install --jobs=3 --retry=3`
     And I run `rails webpacker:install`
     And I run `rails generate komponent:install`
+    And the file named "config/application.rb" should contain:
+    """
+    config.i18n.load_path += Dir[config.root.join('app/frontend/components/**/*.yml')]
+    """
+    And the file named "config/application.rb" should contain:
+    """
+    config.autoload_paths << config.root.join('app/frontend/components')
+    """
     And I run `rails generate component AwesomeButton`
     And I cd to "app/frontend/components"
     Then the following files should exist:
@@ -25,3 +33,7 @@ Feature: Install generator
     """
     import "components/awesome_button/awesome_button";
     """
+    When I run `rails generate komponent:install --stimulus`
+    And I cd to "../.."
+    Then the file named "frontend/stimulus_application.js" should exist
+

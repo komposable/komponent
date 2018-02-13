@@ -2,7 +2,10 @@ Feature: Component generator
 
   Background:
     Given I use a fixture named "my_app"
-    When I run `bundle install`
+    And I set the environment variables to:
+     | variable       | value         |
+     | BUNDLE_GEMFILE | Gemfile-rails |
+    When I successfully run `bundle install --jobs=3 --retry=3` for up to 60 seconds
 
   Scenario: Generate component
     When I run `rails generate component AwesomeButton`
@@ -67,7 +70,7 @@ Feature: Component generator
     Then a file named "_awesome_button.html.erb" should exist
 
   Scenario: Generate component with custom template engine defined to `haml`
-    When I append to "Gemfile" with:
+    When I append to "Gemfile-rails" with:
     """
 
     gem 'haml-rails'
@@ -78,7 +81,7 @@ Feature: Component generator
     Then a file named "_awesome_button.html.haml" should exist
 
   Scenario: Generate component with custom template engine defined to `slim`
-    When I append to "Gemfile" with:
+    When I append to "Gemfile-rails" with:
     """
 
     gem 'slim-rails'
