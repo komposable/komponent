@@ -260,11 +260,19 @@ fr:
     external_link: "lien externe"
 ```
 
+<<<<<<< HEAD
 #### Available locales configuration
 
 You can whitelist the locales you use by setting this into an initializer, as explained in the ["official guide"](http://guides.rubyonrails.org/i18n.html#configure-the-i18n-module):
 ```ruby
 I18n.available_locales = [:en, :fr]
+=======
+#### Configuration
+
+You can whitelist locale you use by setting this into an initializer like explain in the ["official guide"](http://guides.rubyonrails.org/i18n.html#configure-the-i18n-module):
+```ruby
+I18n.available_locales = [:en, :pt]
+>>>>>>> add Internationalization configuration into the readme
 ```
 
 ### Configuration
