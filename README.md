@@ -27,7 +27,7 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
   - [Namespacing components](#namespacing-components)
   - [Stimulus integration](#stimulus-integration)
   - [Internationalization](#internationalization)
-    - [Internationalization Configuration](#internationalization-configuration)
+    - [Available locales configuration](#available-locales-configuration)
   - [Configuration](#configuration)
     - [Change default root path](#change-default-root-path)
     - [Default options for the generators](#default-options-for-the-generators)
@@ -260,7 +260,7 @@ fr:
     external_link: "lien externe"
 ```
 
-#### Internationalization Configuration
+#### Available locales configuration
 
 You can whitelist locale you use by setting this into an initializer like explain in the ["official guide"](http://guides.rubyonrails.org/i18n.html#configure-the-i18n-module):
 ```ruby
