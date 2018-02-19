@@ -262,7 +262,7 @@ fr:
 
 #### Available locales configuration
 
-You can whitelist locale you use by setting this into an initializer like explain in the ["official guide"](http://guides.rubyonrails.org/i18n.html#configure-the-i18n-module):
+You can whitelist locale you use by setting this into an initializer, as explained in the ["official guide"](http://guides.rubyonrails.org/i18n.html#configure-the-i18n-module):
 ```ruby
 I18n.available_locales = [:en, :fr]
 ```
