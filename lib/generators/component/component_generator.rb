@@ -64,6 +64,37 @@ class ComponentGenerator < Rails::Generators::NamedBase
     sort_lines_alphabetically!(base_path + "index.js")
   end
 
+  def clear_component
+    return unless destroying?
+
+    base_path = default_path + "components"
+    base_path_dup = base_path.dup
+
+    paths = split_name[0..-2].map do |split|
+      base_path_dup += split
+      [base_path_dup, split]
+    end
+
+    paths.reverse.each do |(path, split)|
+      FileUtils.rm_rf(component_path)
+
+      Dir.chdir(path)
+      directories = Dir.glob("*").select do |entry|
+        File.directory?(entry)
+      end
+
+      if directories.size == 0
+        FileUtils.rm_rf(path)
+        remove_line!(base_path + "index.js", split)
+      else
+        remove_line!(path + "index.js", component_name)
+      end
+    end
+
+    FileUtils.rm_rf(component_path)
+    remove_line!(base_path + "index.js", component_name)
+  end
+
   protected
 
   def template_prefix
@@ -153,5 +184,21 @@ class ComponentGenerator < Rails::Generators::NamedBase
         f.write(line)
       end
     end
+  end
+
+  def remove_line!(path, component_name)
+    lines = File.readlines(path).map do |line|
+      line unless line =~ /#{component_name}/
+    end.compact
+
+    File.open(path, "w") do |f|
+      lines.each do |line|
+        f.write(line)
+      end
+    end
+  end
+
+  def destroying?
+    self.behavior == :revoke
   end
 end
