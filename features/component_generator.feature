@@ -1,7 +1,10 @@
 Feature: Component generator
 
-  Scenario: Generate component
+  Background:
     Given I use a fixture named "my_app"
+    When I run `bundle install`
+
+  Scenario: Generate component
     When I run `rails generate component AwesomeButton`
     And I cd to "frontend/components"
     Then the following files should exist:
@@ -15,7 +18,6 @@ Feature: Component generator
     """
 
   Scenario: Generate namespaced component
-    Given I use a fixture named "my_app"
     When I run `rails generate component admin/sub_admin/AwesomeButton`
     And I cd to "frontend/components"
     Then the following files should exist:
@@ -39,8 +41,7 @@ Feature: Component generator
     """
 
   Scenario: `imports` in JavaScript files are sorted alphabetically when generating component
-    Given I use a fixture named "my_app"
-    And I cd to "frontend/components"
+    When I cd to "frontend/components"
     And a file named "index.js" with:
     """
     console.log("HELLO WORLD");
@@ -61,38 +62,34 @@ Feature: Component generator
     import "components/button/button";
     """
   Scenario: Generate component with `erb` template engine
-    Given I use a fixture named "my_app"
-    And I run `rails generate component AwesomeButton`
+    When I run `rails generate component AwesomeButton`
     And I cd to "frontend/components/awesome_button"
     Then a file named "_awesome_button.html.erb" should exist
 
   Scenario: Generate component with custom template engine defined to `haml`
-    Given I use a fixture named "my_app"
-    And I append to "Gemfile" with:
+    When I append to "Gemfile" with:
     """
 
     gem 'haml-rails'
     """
-    When I run `bundle install`
+    And I run `bundle install`
     And I run `rails generate component AwesomeButton`
     And I cd to "frontend/components/awesome_button"
     Then a file named "_awesome_button.html.haml" should exist
 
   Scenario: Generate component with custom template engine defined to `slim`
-    Given I use a fixture named "my_app"
-    And I append to "Gemfile" with:
+    When I append to "Gemfile" with:
     """
 
     gem 'slim-rails'
     """
-    When I run `bundle install`
+    And I run `bundle install`
     And I run `rails generate component AwesomeButton`
     And I cd to "frontend/components/awesome_button"
     Then a file named "_awesome_button.html.slim" should exist
 
   Scenario: Generate component with `scss` stylesheet engine
-    Given I use a fixture named "my_app"
-    And I run `rails generate component AwesomeButton`
+    When I run `rails generate component AwesomeButton`
     And I cd to "frontend/components/awesome_button"
     Then a file named "awesome_button.scss" should exist
     And the file named "awesome_button.js" should contain:
@@ -101,12 +98,11 @@ Feature: Component generator
     """
 
   Scenario: Generate component with custom stylesheet engine defined to `scss`
-    Given I use a fixture named "my_app"
-    And a file named "config/initializers/custom_configuration.rb" with:
+    Given a file named "config/initializers/custom_configuration.rb" with:
     """
     Rails.application.config.generators.stylesheet_engine = :sass
     """
-    And I run `rails generate component AwesomeButton`
+    When I run `rails generate component AwesomeButton`
     And I cd to "frontend/components/awesome_button"
     Then a file named "awesome_button.scss" should exist
     And the file named "awesome_button.js" should contain:
@@ -115,12 +111,11 @@ Feature: Component generator
     """
 
   Scenario: Generate component with custom stylesheet engine defined to `sass`
-    Given I use a fixture named "my_app"
-    And a file named "config/initializers/custom_configuration.rb" with:
+    Given a file named "config/initializers/custom_configuration.rb" with:
     """
     Rails.application.config.sass.preferred_syntax = :sass
     """
-    And I run `rails generate component AwesomeButton`
+    When I run `rails generate component AwesomeButton`
     And I cd to "frontend/components/awesome_button"
     Then a file named "awesome_button.sass" should exist
     And the file named "awesome_button.js" should contain:
@@ -129,8 +124,7 @@ Feature: Component generator
     """
 
   Scenario: Generate component with custom stylesheet engine defined to `css`
-    Given I use a fixture named "my_app"
-    And I remove "sass-rails" gem
+    Given I remove "sass-rails" gem
     When I run `bundle install`
     And I run `rails generate component AwesomeButton`
     And I cd to "frontend/components/awesome_button"
@@ -141,26 +135,23 @@ Feature: Component generator
     """
 
   Scenario: Generate component with `--locale` option
-    Given I use a fixture named "my_app"
-    And I run `rails generate component AwesomeButton --locale`
+    When I run `rails generate component AwesomeButton --locale`
     And I cd to "frontend/components"
     Then a file named "awesome_button/awesome_button.en.yml" should exist
 
   Scenario: Generate component with `--locale` option and additional `fr` locale
-    Given I use a fixture named "my_app"
-    And a file named "config/initializers/custom_configuration.rb" with:
+    Given a file named "config/initializers/custom_configuration.rb" with:
     """
     Rails.application.config.i18n.available_locales = [:en, :fr]
     """
-    And I run `rails generate component AwesomeButton --locale`
+    When I run `rails generate component AwesomeButton --locale`
     And I cd to "frontend/components/awesome_button"
     Then the following files should exist:
       | awesome_button.en.yml |
       | awesome_button.fr.yml |
 
   Scenario: Generate component with `--stimulus` option
-    Given I use a fixture named "my_app"
-    And I run `rails generate komponent:install --stimulus`
+    When I run `rails generate komponent:install --stimulus`
     And I cd to "frontend"
     Then the following files should exist:
       | stimulus_application.js |
@@ -178,8 +169,7 @@ Feature: Component generator
     """
 
   Scenario: Component with namespaces and stimulus
-    Given I use a fixture named "my_app"
-    And I run `rails generate komponent:install --stimulus`
+    When I run `rails generate komponent:install --stimulus`
     And I cd to "frontend"
     Then the following files should exist:
       | stimulus_application.js |
@@ -197,9 +187,8 @@ Feature: Component generator
     """
 
   Scenario: Destroy component
-    Given I use a fixture named "my_app"
-    And I cd to "frontend/components"
-    When I run `rails generate component button`
+    When I cd to "frontend/components"
+    And I run `rails generate component button`
     Then the file named "index.js" should contain:
     """
     import "components/button/button";
@@ -211,9 +200,8 @@ Feature: Component generator
     """
 
   Scenario: Destroy namespaced component
-    Given I use a fixture named "my_app"
-    And I cd to "frontend/components"
-    When I run `rails generate component admin/button`
+    When I cd to "frontend/components"
+    And I run `rails generate component admin/button`
     Then the file named "index.js" should contain:
     """
     import "components/admin";
@@ -231,9 +219,8 @@ Feature: Component generator
     And a file named "admin/index.js" should not exist
 
   Scenario: Destroy namespaced components
-    Given I use a fixture named "my_app"
-    And I cd to "frontend/components"
-    When I run `rails generate component admin/button`
+    When I cd to "frontend/components"
+    And I run `rails generate component admin/button`
     Then the file named "index.js" should contain:
     """
     import "components/admin";
@@ -270,9 +257,8 @@ Feature: Component generator
     """
 
   Scenario: Destroy complex namespaced components
-    Given I use a fixture named "my_app"
-    And I cd to "frontend/components"
-    When I run `rails generate component admin/super/button`
+    When I cd to "frontend/components"
+    And I run `rails generate component admin/super/button`
     Then the file named "index.js" should contain:
     """
     import "components/admin";

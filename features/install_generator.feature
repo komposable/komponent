@@ -2,7 +2,7 @@ Feature: Install generator
 
   Scenario: Configure a default root path in komponent's configuration before installing component
     Given I run `rails new my_app --skip-spring`
-    And I cd to "my_app"
+    When I cd to "my_app"
     And I append to "Gemfile" with:
     """
     gem 'komponent', path: '../../..'
@@ -11,7 +11,7 @@ Feature: Install generator
     """
     Rails.application.config.komponent.root = Rails.root.join("app/frontend")
     """
-    When I run `bundle install`
+    And I run `bundle install`
     And I run `rails webpacker:install`
     And I run `rails generate komponent:install`
     And I run `rails generate component AwesomeButton`
