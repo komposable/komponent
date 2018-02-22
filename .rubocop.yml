@@ -5,6 +5,7 @@ AllCops:
     - 'node_modules/**/*'
     - 'vendor/**/*'
     - 'tmp/**/*'
+    - 'fixtures/**/*'
 
 Gemspec/OrderedDependencies:
   Enabled: true
