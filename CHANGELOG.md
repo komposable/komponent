@@ -2,6 +2,9 @@
 
 ## Upcoming release
 
+**Enhancements:**
+- Custom destroy for the component generator: you can now safely run `rails d component button`
+
 ## v1.1.2 (2018-02-13)
 
 **Enhancements:**
