@@ -16,3 +16,11 @@ Given("I remove {string} gem") do |gem_name|
   FileUtils.mv(tmp.path, file_name)
   tmp.unlink
 end
+
+When("I visit root url") do
+  visit "/"
+end
+
+Then("I should see {string}") do |string|
+  expect(page).to have_content(string)
+end
