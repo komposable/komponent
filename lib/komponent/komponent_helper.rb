@@ -40,7 +40,8 @@ module KomponentHelper
         instance_variable_set(:"@#{name}", locals[name])
       end
 
-      instance_variable_set(:@properties, locals)
+      define_singleton_method(:properties) { locals }
+
       instance_variable_set(:"@block_given_to_component", block)
     end
 
