@@ -22,7 +22,7 @@ module Komponent
       end
 
       def move_webpacker_default_structure
-        return unless File.directory?(webpacker_default_structure)
+        return if File.directory?(komponent_root_directory)
 
         run("mv #{webpacker_default_structure}/* #{komponent_root_directory}")
       end
@@ -60,10 +60,10 @@ module Komponent
       protected
 
       def stimulus_application_template
-        <<~HEREDOC
-          import { Application } from "stimulus";
-          const application = Application.start();
-          export default application;
+        <<-HEREDOC
+import { Application } from "stimulus";
+const application = Application.start();
+export default application;
         HEREDOC
       end
 

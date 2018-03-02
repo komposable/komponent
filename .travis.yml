@@ -1,7 +1,33 @@
-sudo: false
 language: ruby
+sudo: false
+
+before_install:
+  - gem update --system
+
 rvm:
+  - 2.2
+  - 2.3
   - 2.4
+  - 2.5
+  - ruby-head
+
+gemfile:
+  - Gemfile-rails.4.2.x
+  - Gemfile-rails.5.0.x
+  - Gemfile-rails.5.1.x
+  - Gemfile-rails.5.2.x
+
+cache:
+  bundler: true
+  yarn: true
+
+install:
+  - bundle install
+  - nvm install node
+  - node -v
+  - npm i -g yarn
+  - yarn
+
 script:
   - bundle exec rubocop
   - bundle exec rake test

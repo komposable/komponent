@@ -2,17 +2,13 @@ Feature: Component generator
 
   Background:
     Given I use a fixture named "my_app"
-    And I set the environment variables to:
-     | variable       | value         |
-     | BUNDLE_GEMFILE | Gemfile-rails |
-    When I successfully run `bundle install --jobs=3 --retry=3` for up to 60 seconds
 
   Scenario: Generate component
     When I run `rails generate component AwesomeButton`
     And I cd to "frontend/components"
     Then the following files should exist:
       | awesome_button/_awesome_button.html.erb     |
-      | awesome_button/awesome_button.scss          |
+      | awesome_button/awesome_button.css           |
       | awesome_button/awesome_button.js            |
       | awesome_button/awesome_button_component.rb  |
     And the file named "index.js" should contain:
@@ -27,7 +23,7 @@ Feature: Component generator
       | admin/index.js                                                             |
       | admin/sub_admin/index.js                                                   |
       | admin/sub_admin/awesome_button/_admin_sub_admin_awesome_button.html.erb    |
-      | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button.scss         |
+      | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button.css          |
       | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button.js           |
       | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button_component.rb |
     And the file named "index.js" should contain:
@@ -70,72 +66,22 @@ Feature: Component generator
     Then a file named "_awesome_button.html.erb" should exist
 
   Scenario: Generate component with custom template engine defined to `haml`
-    When I append to "Gemfile-rails" with:
+    Given a file named "config/initializers/custom_configuration.rb" with:
     """
-
-    gem 'haml-rails'
+      Rails.application.config.generators.template_engine = :haml
     """
-    And I run `bundle install`
-    And I run `rails generate component AwesomeButton`
+    When I run `rails generate component AwesomeButton`
     And I cd to "frontend/components/awesome_button"
     Then a file named "_awesome_button.html.haml" should exist
 
   Scenario: Generate component with custom template engine defined to `slim`
-    When I append to "Gemfile-rails" with:
+    Given a file named "config/initializers/custom_configuration.rb" with:
     """
-
-    gem 'slim-rails'
+      Rails.application.config.generators.template_engine = :slim
     """
-    And I run `bundle install`
-    And I run `rails generate component AwesomeButton`
+    When I run `rails generate component AwesomeButton`
     And I cd to "frontend/components/awesome_button"
     Then a file named "_awesome_button.html.slim" should exist
-
-  Scenario: Generate component with `scss` stylesheet engine
-    When I run `rails generate component AwesomeButton`
-    And I cd to "frontend/components/awesome_button"
-    Then a file named "awesome_button.scss" should exist
-    And the file named "awesome_button.js" should contain:
-    """
-    import "./awesome_button.scss";
-    """
-
-  Scenario: Generate component with custom stylesheet engine defined to `scss`
-    Given a file named "config/initializers/custom_configuration.rb" with:
-    """
-    Rails.application.config.generators.stylesheet_engine = :sass
-    """
-    When I run `rails generate component AwesomeButton`
-    And I cd to "frontend/components/awesome_button"
-    Then a file named "awesome_button.scss" should exist
-    And the file named "awesome_button.js" should contain:
-    """
-    import "./awesome_button.scss";
-    """
-
-  Scenario: Generate component with custom stylesheet engine defined to `sass`
-    Given a file named "config/initializers/custom_configuration.rb" with:
-    """
-    Rails.application.config.sass.preferred_syntax = :sass
-    """
-    When I run `rails generate component AwesomeButton`
-    And I cd to "frontend/components/awesome_button"
-    Then a file named "awesome_button.sass" should exist
-    And the file named "awesome_button.js" should contain:
-    """
-    import "./awesome_button.sass";
-    """
-
-  Scenario: Generate component with custom stylesheet engine defined to `css`
-    Given I remove "sass-rails" gem
-    When I run `bundle install`
-    And I run `rails generate component AwesomeButton`
-    And I cd to "frontend/components/awesome_button"
-    Then a file named "awesome_button.css" should exist
-    And the file named "awesome_button.js" should contain:
-    """
-    import "./awesome_button.css";
-    """
 
   Scenario: Generate component with `--locale` option
     When I run `rails generate component AwesomeButton --locale`
@@ -162,7 +108,7 @@ Feature: Component generator
     And I cd to "components"
     Then the following files should exist:
       | awesome_button/_awesome_button.html.erb     |
-      | awesome_button/awesome_button.scss          |
+      | awesome_button/awesome_button.css           |
       | awesome_button/awesome_button.js            |
       | awesome_button/awesome_button_controller.js |
       | awesome_button/awesome_button_component.rb  |
@@ -180,7 +126,7 @@ Feature: Component generator
     And I cd to "components"
     Then the following files should exist:
       | admin/sub_admin/awesome_button/_admin_sub_admin_awesome_button.html.erb     |
-      | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button.scss          |
+      | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button.css           |
       | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button.js            |
       | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button_controller.js |
       | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button_component.rb  |
