@@ -7,6 +7,7 @@
 - Removed useless `autoload_paths` config definition (it was not taken into account)
 - Install generator can be ran several times in order to enable features
 - Autoloading is now appended to `config/application.rb` when you run `rails g komponent:install`
+- Make all locals passed to `component` helper available through `properties` helper method
 
 ## v1.1.3 (2018-02-22)
 

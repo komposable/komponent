@@ -93,7 +93,7 @@ Check [Webpacker documentation](https://github.com/rails/webpacker) for further 
 
 ### Passing variables
 
-You can pass `locals` to the helper. They are accessible within the component partial, as instance variables.
+You can pass `locals` to the helper. They are accessible within the component partial, as instance variables. Additionally, the entire `locals` hash is made available through a `properties` helper method.
 
 ```slim
 / app/views/pages/home.html.slim
