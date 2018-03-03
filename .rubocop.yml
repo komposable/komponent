@@ -33,6 +33,9 @@ Style/MethodCallWithoutArgsParentheses:
 Style/MethodDefParentheses:
   Enabled: true
 
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
 Naming/ConstantName:
   Enabled: true
 
