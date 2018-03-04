@@ -27,7 +27,15 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
   - [Namespacing components](#namespacing-components)
   - [Stimulus integration](#stimulus-integration)
   - [Internationalization](#internationalization)
+<<<<<<< HEAD
+<<<<<<< HEAD
     - [Available locales configuration](#available-locales-configuration)
+=======
+    - [Internationalization Configuration](#internationalization-configuration)
+>>>>>>> add section into the table of contents
+=======
+    - [Available locales configuration](#available-locales-configuration)
+>>>>>>> rename to available locales configuration
   - [Configuration](#configuration)
     - [Change default root path](#change-default-root-path)
     - [Default options for the generators](#default-options-for-the-generators)
@@ -260,11 +268,31 @@ fr:
     external_link: "lien externe"
 ```
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 #### Available locales configuration
 
 You can whitelist the locales you use by setting this into an initializer, as explained in the ["official guide"](http://guides.rubyonrails.org/i18n.html#configure-the-i18n-module):
 ```ruby
 I18n.available_locales = [:en, :fr]
+=======
+#### Configuration
+
+You can whitelist locale you use by setting this into an initializer like explain in the ["official guide"](http://guides.rubyonrails.org/i18n.html#configure-the-i18n-module):
+```ruby
+I18n.available_locales = [:en, :pt]
+>>>>>>> add Internationalization configuration into the readme
+=======
+#### Internationalization Configuration
+=======
+#### Available locales configuration
+>>>>>>> rename to available locales configuration
+
+You can whitelist the locales you use by setting this into an initializer, as explained in the ["official guide"](http://guides.rubyonrails.org/i18n.html#configure-the-i18n-module):
+```ruby
+I18n.available_locales = [:en, :fr]
+>>>>>>> add section into the table of contents
 ```
 
 ### Configuration

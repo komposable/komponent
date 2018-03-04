@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Komponent
   class ComponentPathResolver
     def resolve(component_name)
