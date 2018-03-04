@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ComponentHelper
   def property(name, options = {})
     @properties[name] = options

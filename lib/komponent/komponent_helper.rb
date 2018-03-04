@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module KomponentHelper
   def component(component, locals = {}, &block)
     component_path = Komponent::ComponentPathResolver.new.resolve(component)
