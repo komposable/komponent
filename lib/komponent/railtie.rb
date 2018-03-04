@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'webpacker'
 require 'komponent/core/component_helper'
 require 'komponent/core/translation'
