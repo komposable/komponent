@@ -60,6 +60,18 @@ Feature: Component generator
     import "components/awesome_button/awesome_button";
     import "components/button/button";
     """
+
+  Scenario: `imports` in JavaScript files are sorted and without duplicates
+    When I cd to "frontend/components"
+    When I run `rails generate component some_example`
+    When I run `rails generate component some_example`
+    Then the file named "index.js" should contain:
+    """
+    import "components/all/all";
+    import "components/some_example/some_example";
+    import "components/world/world";
+    """
+
   Scenario: Generate component with `erb` template engine
     When I run `rails generate component AwesomeButton`
     And I cd to "frontend/components/awesome_button"
