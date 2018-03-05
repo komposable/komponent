@@ -17,6 +17,7 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
 
 ## Table of contents
 
+- [Compatibility](#compatibility)
 - [Getting started](#getting-started)
 - [Usage](#usage)
   - [Passing variables](#passing-variables)
@@ -35,6 +36,12 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
     - [Additional paths](#additional-paths)
 - [Contributing](#contributing)
 - [License](#license)
+
+## Compatibility
+
+- Ruby 2.2+
+- Rails 4.2+
+- Webpacker 3.0.0+
 
 ## Getting started
 
