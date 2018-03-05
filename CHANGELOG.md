@@ -2,6 +2,8 @@
 
 ## Upcoming release
 
+## v1.1.4 (2018-03-05)
+
 **Enhancements:**
 
 - Added `frozen_string_literal` option to optimize performance
