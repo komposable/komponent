@@ -179,7 +179,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
 
     return if lines.empty?
 
-    lines = lines.sort
+    lines = lines.uniq.sort
 
     File.open(path, "w") do |f|
       lines.each do |line|
