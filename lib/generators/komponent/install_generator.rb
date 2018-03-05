@@ -62,13 +62,13 @@ module Komponent
       protected
 
       def stimulus_application_template
-        <<-HEREDOC
+        <<-JAVASCRIPT
 import { Application } from "stimulus";
 
 const application = Application.start();
 
 export default application;
-        HEREDOC
+        JAVASCRIPT
       end
 
       def stimulus_application_path
