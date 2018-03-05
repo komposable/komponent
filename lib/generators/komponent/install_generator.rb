@@ -64,7 +64,9 @@ module Komponent
       def stimulus_application_template
         <<-HEREDOC
 import { Application } from "stimulus";
+
 const application = Application.start();
+
 export default application;
         HEREDOC
       end
