@@ -194,7 +194,7 @@ You can also choose to split your component into partials. In this case, we can 
 ```slim
 / frontend/components/button/_button.html.slim
 
-= a.button(href=@href)
+a.button(href=@href)
   = @text
   = render("suffix", text: "external link") if external_link?
 ```
