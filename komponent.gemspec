@@ -14,6 +14,13 @@ Gem::Specification.new do |spec|
   spec.description   = "An opinionated way of organizing front-end code in Ruby on Rails, based on components"
   spec.homepage      = "http://komponent.io"
   spec.license       = "MIT"
+  
+  spec.metadata      = {
+    homepage_uri: "http://komponent.io",
+    changelog_uri: "https://github.com/komposable/komponent/blob/master/CHANGELOG.md",
+    source_code_uri: "https://github.com/komposable/komponent",
+    bug_tracker_uri: "https://github.com/komposable/komponent/issues",
+  }
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features|fixtures)/})
