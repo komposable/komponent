@@ -29,5 +29,4 @@ install:
   - yarn
 
 script:
-  - bundle exec rubocop
-  - bundle exec rake test
+  - bundle exec rake test:all_with_coverage
