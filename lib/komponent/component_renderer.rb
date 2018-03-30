@@ -2,9 +2,9 @@
 
 module Komponent
   class ComponentRenderer
-    include ActionView::Context
     include ActionView::Helpers::CaptureHelper
 
+    attr_accessor :output_buffer
     attr_reader :context
 
     def initialize(controller)
@@ -27,8 +27,6 @@ module Komponent
 
       @lookup_context.prefixes = ["components/#{component}"]
 
-      capture_block = proc { capture(&block) } if block
-
       @context.instance_eval do
         if component_module.respond_to?(:properties)
           locals = locals.dup
@@ -47,17 +45,16 @@ module Komponent
           instance_variable_set(:"@#{name}", locals[name])
         end
 
-        instance_variable_set(:"@block_given_to_component", capture_block)
-
         define_singleton_method(:properties) { locals }
-        define_singleton_method(:block_given_to_component?) { !!block }
+        define_singleton_method(:block_given_to_component?) { block_given? }
+        define_singleton_method(:block_given_to_component) { block }
       end
 
       begin
-        @context.render("components/#{component}/#{parts.join('_')}", &capture_block)
+        @context.render("components/#{component}/#{parts.join('_')}", &block)
       rescue ActionView::MissingTemplate
         warn "[DEPRECATION WARNING] `#{parts.last}` filename in namespace is deprecated in favor of `#{parts.join('_')}`."
-        @context.render("components/#{component}/#{parts.last}", &capture_block)
+        @context.render("components/#{component}/#{parts.last}", &block)
       end
     end
 

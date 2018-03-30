@@ -24,8 +24,8 @@ class ComponentRendererTest < ActionController::TestCase
     assert_respond_to @context, :block_given_to_component?
     assert_respond_to @context, :properties
     assert_respond_to @context, :translate
+
     assert_equal @context.instance_variable_get(:'@text'), 'hello world'
-    assert_nil @context.instance_variable_get(:'@block_given_to_component')
   end
 
   def test_block
@@ -38,6 +38,19 @@ class ComponentRendererTest < ActionController::TestCase
     @context = renderer.context
 
     assert_equal @context.block_given_to_component?, true
-    assert_not_nil @context.instance_variable_get(:'@block_given_to_component')
+
+    assert_equal @context.block_given_to_component.class, Proc
+    assert_equal @context.block_given_to_component.call, "<p>HELLO</p>"
+  end
+
+  def test_without_block
+    @controller = FakeController.new
+
+    renderer = Komponent::ComponentRenderer.new(@controller)
+    renderer.render('all')
+    @context = renderer.context
+
+    assert_equal @context.block_given_to_component?, false
+    assert_nil @context.block_given_to_component
   end
 end

@@ -2,6 +2,8 @@
 
 ## Upcoming release
 
+- Change `@block_given_to_component` from instance variable to a method `block_given_to_component` available on view context
+
 ## v1.1.4 (2018-03-05)
 
 **Enhancements:**

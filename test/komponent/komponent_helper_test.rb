@@ -39,7 +39,7 @@ class KomponentHelperTest < ActionView::TestCase
       component('foo').chomp
   end
 
-  def test_helper_renders_with_block_given
+  def test_helper_renders_with_block
     assert_equal \
       %(<div class="bar">Bar</div>),
       component('bar') { "Bar" }.chomp
