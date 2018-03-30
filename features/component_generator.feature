@@ -68,6 +68,7 @@ Feature: Component generator
     Then the file named "index.js" should contain:
     """
     import "components/all/all";
+    import "components/bar/bar";
     import "components/some_example/some_example";
     import "components/world/world";
     """
