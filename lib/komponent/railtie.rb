@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 require 'webpacker'
-require 'komponent/component_helper'
-require 'komponent/component_path_resolver'
-require 'komponent/component_renderer'
-require 'komponent/translation'
+require 'komponent/core/component_helper'
+require 'komponent/core/translation'
+require 'komponent/core/component_path_resolver'
 
 module Komponent
   class Railtie < Rails::Railtie
