@@ -1,0 +1,8 @@
+- content = capture do
+  .button-text= @text
+- if link?
+  = link_to @href, title: @title, class: "button #{@modifiers}", target: @target do
+    = content
+- else
+  button.button(type=@type class=@modifiers)
+    = content
