@@ -24,7 +24,6 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.2.0'
 
-  spec.add_dependency "actionview", ">= 4.2"
   spec.add_dependency "activesupport", ">= 4.2"
   spec.add_dependency "railties", ">= 4.2"
   spec.add_dependency "webpacker", ">= 3.0.0"

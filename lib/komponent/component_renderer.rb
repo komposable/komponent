@@ -2,9 +2,6 @@
 
 module Komponent
   class ComponentRenderer
-    include ActionView::Context
-    include ActionView::Helpers::CaptureHelper
-
     attr_reader :context
 
     def initialize(controller)
