@@ -277,6 +277,9 @@ You can whitelist the locales you use by setting this into an initializer, as ex
 I18n.available_locales = [:en, :fr]
 ```
 
+> If you have `rails-i18n` gem installed in your `Gemfile`, you should need to whitelist locales, to prevent generating a lot of
+> locale files when you generate new component.
+
 ### Configuration
 
 #### Change default root path
