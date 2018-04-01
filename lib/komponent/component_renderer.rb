@@ -50,12 +50,7 @@ module Komponent
         define_singleton_method(:block_given_to_component) { block }
       end
 
-      begin
-        @context.render("components/#{component}/#{parts.join('_')}", &block)
-      rescue ActionView::MissingTemplate
-        warn "[DEPRECATION WARNING] `#{parts.last}` filename in namespace is deprecated in favor of `#{parts.join('_')}`."
-        @context.render("components/#{component}/#{parts.last}", &block)
-      end
+      @context.render("components/#{component}/#{parts.join('_')}", &block)
     end
 
     private
