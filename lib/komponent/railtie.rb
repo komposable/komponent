@@ -11,6 +11,7 @@ module Komponent
     config.komponent = ActiveSupport::OrderedOptions.new
     config.komponent.root = nil
     config.komponent.component_paths = []
+    config.komponent.stylesheet_engine = :css
 
     config.before_configuration do |app|
       app.config.komponent = config.komponent

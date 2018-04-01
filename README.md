@@ -34,6 +34,7 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
   - [Configuration](#configuration)
     - [Change default root path](#change-default-root-path)
     - [Default options for the generators](#default-options-for-the-generators)
+    - [Change default stylesheet engine](#change-default-stylesheet-engine)
     - [Force default templating engine](#force-default-templating-engine)
     - [Additional paths](#additional-paths)
 - [Contributing](#contributing)
@@ -288,12 +289,12 @@ config.generators do |g|
 end
 ```
 
-#### Change default root path
+#### Change default stylesheet engine
 
-You can change the default root path (`frontend`) to another path where Komponent should be installed and components generated. You need to change `komponent.root` in an initializer.
+You can configure the stylesheet engine used for generate stylesheet file, values allowed are ':css', ':scss', ':sass'.
 
 ```rb
-Rails.application.config.komponent.root = Rails.root.join("app/frontend")
+Rails.application.config.komponent.stylesheet_engine = :css # default value is :css
 ```
 
 #### Force default templating engine

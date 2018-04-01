@@ -102,6 +102,24 @@ Feature: Component generator
     And I cd to "frontend/components/awesome_button"
     Then a file named "_awesome_button.html.slim" should exist
 
+  Scenario: Generate component with custom stylesheet engine defined to `scss`
+    Given a file named "config/initializers/custom_configuration.rb" with:
+    """
+      Rails.application.config.komponent.stylesheet_engine = :scss
+    """
+    When I run `rails generate component AwesomeButton`
+    And I cd to "frontend/components/awesome_button"
+    Then a file named "awesome_button.scss" should exist
+
+  Scenario: Generate component with custom template engine defined to `sass`
+    Given a file named "config/initializers/custom_configuration.rb" with:
+    """
+      Rails.application.config.komponent.stylesheet_engine = :sass
+    """
+    When I run `rails generate component AwesomeButton`
+    And I cd to "frontend/components/awesome_button"
+    Then a file named "awesome_button.sass" should exist
+
   Scenario: Generate component with `--locale` option
     When I run `rails generate component AwesomeButton --locale`
     And I cd to "frontend/components"
