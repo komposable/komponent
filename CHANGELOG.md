@@ -2,6 +2,8 @@
 
 ## Upcoming release
 
+## v2.0.0.pre.1 (2018-04-01)
+
 - Change `@block_given_to_component` from instance variable to a method `block_given_to_component` available on view context
 - Remove deprecated `render_partial` method
 - Remove rendering of namespaced component with old naming convention
