@@ -279,6 +279,14 @@ I18n.available_locales = [:en, :fr]
 
 ### Configuration
 
+#### Change default root path
+
+You can change the default root path (`frontend`) to another path where Komponent should be installed and components generated. You need to change `komponent.root` in an initializer.
+
+```rb
+Rails.application.config.komponent.root = Rails.root.join("app/frontend")
+```
+
 #### Default options for the generators
 
 You can configure the generators in an initializer or in `application.rb`, so you don't have to add `--locale` and/or `--stimulus` flags every time you generate a fresh component.
