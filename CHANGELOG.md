@@ -7,6 +7,9 @@
 - Change `@block_given_to_component` from instance variable to a method `block_given_to_component` available on view context
 - Remove deprecated `render_partial` method
 - Remove rendering of namespaced component with old naming convention
+- Implement component caching with `cached: true` option
+- Add `stylesheet_engine` option to komponent configuration
+- When generate new component, ruby files are `frozen_string_literal: true` comment appended
 
 ## v1.1.4 (2018-03-05)
 
