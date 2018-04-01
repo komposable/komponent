@@ -15,6 +15,10 @@ Feature: Component generator
     """
     import "components/awesome_button/awesome_button";
     """
+    And the file named "awesome_button/awesome_button_component.rb" should contain:
+    """
+    # frozen_string_literal: true
+    """
 
   Scenario: Generate namespaced component
     When I run `rails generate component admin/sub_admin/AwesomeButton`
