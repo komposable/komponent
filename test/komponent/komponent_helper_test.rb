@@ -9,6 +9,12 @@ class KomponentHelperTest < ActionView::TestCase
     end
   end
 
+  def test_helper_renders_namespaced_component
+    assert_equal \
+      %(<div class="namespaced-button">namespaced_button_component</div>),
+      component('namespaced/button').chomp
+  end
+
   def test_helper_renders_makes_locals_available_as_instance_variables
     assert_equal \
       %(<div class="world">🌎</div>),
@@ -37,6 +43,12 @@ class KomponentHelperTest < ActionView::TestCase
     assert_equal \
       %(<div class="foo">Foobar</div>),
       component('foo').chomp
+  end
+
+  def test_helper_raises_error_with_property_required_not_provided
+    assert_raise 'Missing required component parameter: required' do
+      component('required')
+    end
   end
 
   def test_helper_renders_with_block

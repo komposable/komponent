@@ -69,6 +69,8 @@ Feature: Component generator
     """
     import "components/all/all";
     import "components/bar/bar";
+    import "components/namespaced";
+    import "components/required/required";
     import "components/some_example/some_example";
     import "components/world/world";
     """

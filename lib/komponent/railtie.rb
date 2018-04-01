@@ -13,8 +13,8 @@ module Komponent
     config.komponent.component_paths = []
 
     config.before_configuration do |app|
-      app.config.komponent.root = app.config.root.join("frontend")
       app.config.komponent = config.komponent
+      app.config.komponent.root = app.config.root.join("frontend")
     end
 
     config.after_initialize do |app|
