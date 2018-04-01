@@ -13,7 +13,24 @@ module Komponent
       @lookup_context = @view_renderer.lookup_context = @view_renderer.lookup_context.dup
     end
 
-    def render(component, locals = {}, &block)
+    def render(component, locals = {}, options = {}, &block)
+      cached = options.delete(:cached)
+      cached_block = block ? block.call : nil
+      key = [component, locals, options, cached_block].to_s
+      cache_key = Digest::SHA1.hexdigest(key)
+
+      if cached
+        Rails.cache.fetch(cache_key) do
+          _render(component, locals, options, &block)
+        end
+      else
+        _render(component, locals, options, &block)
+      end
+    end
+
+    private
+
+    def _render(component, locals = {}, options = {}, &block)
       parts = component.split("/")
       component_name = parts.join("_")
 
@@ -52,8 +69,6 @@ module Komponent
 
       @context.render("components/#{component}/#{parts.join('_')}", &block)
     end
-
-    private
 
     def resolved_component_path(component)
       Komponent::ComponentPathResolver.new.resolve(component)

@@ -3,6 +3,8 @@
 require 'test_helper'
 
 class ComponentRendererTest < ActionController::TestCase
+  include CachingHelper
+
   def setup
     controller = FakeController.new
     @renderer = Komponent::ComponentRenderer.new(controller)
@@ -42,5 +44,19 @@ class ComponentRendererTest < ActionController::TestCase
     @context = @renderer.context
     assert_equal @context.block_given_to_component?, false
     assert_nil @context.block_given_to_component
+  end
+
+  def test_rendering_with_cache_enabled
+    with_caching do
+      @renderer.render('all', {}, cached: true)
+
+      key = ['all', {}, {}, nil].to_s
+      cache_key = Digest::SHA1.hexdigest(key)
+
+      @context = @renderer.context
+      assert_equal \
+        %(<div class="all"></div>),
+        Rails.cache.fetch(cache_key).chomp
+    end
   end
 end

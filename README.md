@@ -25,6 +25,8 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
   - [Passing variables](#passing-variables)
   - [Passing a block](#passing-a-block)
   - [Properties](#properties)
+  - [Options](#options)
+    - [Enable component caching](#enable-component-caching)
   - [Helpers](#helpers)
   - [Component partials](#component-partials)
   - [Namespacing components](#namespacing-components)
@@ -156,6 +158,18 @@ end
 
 a.button(href=@href)
   = @text
+```
+
+### Options
+
+#### Enable component caching
+
+You can cache component with `cached: true` option. Cache will expired when locals, options or block changes.
+In order to keep control on component cache expiration, you can provide a custom `cache_key` to clear cache without
+change `locals` or `block`.
+
+```rb
+= component "button", text: "Click here", cached: true
 ```
 
 ### Helpers

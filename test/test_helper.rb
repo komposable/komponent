@@ -5,6 +5,7 @@ require 'simplecov'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../fixtures/my_app/config/environment', __FILE__)
 require 'rails/test_help'
+require 'caching_helper'
 
 class FakeController < ApplicationController
   def initialize(method_name = nil, &method_body)
