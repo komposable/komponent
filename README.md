@@ -23,10 +23,10 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
 - [Getting started](#getting-started)
 - [Usage](#usage)
   - [Passing variables](#passing-variables)
+  - [Passing options](#passing-options)
+    - [Component caching](#component-caching)
   - [Passing a block](#passing-a-block)
   - [Properties](#properties)
-  - [Options](#options)
-    - [Enable component caching](#enable-component-caching)
   - [Helpers](#helpers)
   - [Component partials](#component-partials)
   - [Namespacing components](#namespacing-components)
@@ -120,6 +120,25 @@ You can pass `locals` to the helper. They are accessible within the component pa
   = @text
 ```
 
+### Passing options
+
+#### Component caching
+
+Komponent relies on [Rails Low-level caching](http://guides.rubyonrails.org/caching_with_rails.html#low-level-caching).
+
+You can cache the component by passing the `cached: true` option. The cache will expire when the locals, options or block change.
+If you want better control of the cache expiration, you can provide a custom `cache_key`. When the `cache_key` changes, the cache will be cleared.
+
+```slim
+/ app/views/pages/home.html.slim
+
+/ Cache the component based on its locals
+= component "button", { text: "Click here" }, cached: true
+
+/ or cache the component with a specific key, such as the last update of a model
+= component "button", { text: "Click here" }, cached: true, cache_key: @product.updated_at
+```
+
 ### Passing a block
 
 The component also accepts a `block`. To render the block, just use the standard `yield`.
@@ -158,18 +177,6 @@ end
 
 a.button(href=@href)
   = @text
-```
-
-### Options
-
-#### Enable component caching
-
-You can cache component with `cached: true` option. Cache will expired when locals, options or block changes.
-In order to keep control on component cache expiration, you can provide a custom `cache_key` to clear cache without
-change `locals` or `block`.
-
-```rb
-= component "button", text: "Click here", cached: true
 ```
 
 ### Helpers
@@ -212,7 +219,8 @@ You can also choose to split your component into partials. In this case, we can 
 
 a.button(href=@href)
   = @text
-  = render("suffix", text: "external link") if external_link?
+  - if external_link?
+    = render "suffix", text: "external link"
 ```
 
 ```slim
@@ -230,7 +238,6 @@ rails generate component admin/header
 ```
 
 This will create the component in an `admin` folder, and name its Ruby module `AdminHeaderComponent`.
-
 
 ### Stimulus integration
 
