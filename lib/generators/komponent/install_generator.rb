@@ -38,8 +38,9 @@ module Komponent
 
       def create_stimulus_file
         return if File.exist?(stimulus_application_path)
+        return unless stimulus?
 
-        create_file(stimulus_application_path, stimulus? ? stimulus_application_template : "")
+        create_file(stimulus_application_path, stimulus_application_template)
       end
 
       def append_to_application_configuration
