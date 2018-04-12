@@ -1,6 +1,6 @@
 # <img alt="Komponent" src="https://raw.github.com/ouvrages/komponent/master/logo.svg?sanitize=true" width="200" height="40" />
 [![Build Status](https://travis-ci.org/komposable/komponent.svg?branch=master)](https://travis-ci.org/komposable/komponent)
-[![GitHub release](https://img.shields.io/github/release/komposable/komponent.svg)]
+![GitHub release](https://img.shields.io/github/release/komposable/komponent.svg)
 [![Dependency Status](https://beta.gemnasium.com/badges/github.com/komposable/komponent.svg)](https://beta.gemnasium.com/projects/github.com/komposable/komponent)
 [![Maintainability](https://api.codeclimate.com/v1/badges/36d6dcf883df8f63893a/maintainability)](https://codeclimate.com/github/komposable/komponent/maintainability)
 [![Coverage Status](https://coveralls.io/repos/github/komposable/komponent/badge.svg?branch=master)](https://coveralls.io/github/komposable/komponent?branch=master)
