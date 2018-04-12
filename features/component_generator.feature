@@ -15,6 +15,10 @@ Feature: Component generator
     """
     import "components/awesome_button/awesome_button";
     """
+    And the file named "awesome_button/awesome_button_component.rb" should contain:
+    """
+    # frozen_string_literal: true
+    """
 
   Scenario: Generate namespaced component
     When I run `rails generate component admin/sub_admin/AwesomeButton`
@@ -68,6 +72,9 @@ Feature: Component generator
     Then the file named "index.js" should contain:
     """
     import "components/all/all";
+    import "components/bar/bar";
+    import "components/namespaced";
+    import "components/required/required";
     import "components/some_example/some_example";
     import "components/world/world";
     """
@@ -94,6 +101,24 @@ Feature: Component generator
     When I run `rails generate component AwesomeButton`
     And I cd to "frontend/components/awesome_button"
     Then a file named "_awesome_button.html.slim" should exist
+
+  Scenario: Generate component with custom stylesheet engine defined to `scss`
+    Given a file named "config/initializers/custom_configuration.rb" with:
+    """
+      Rails.application.config.komponent.stylesheet_engine = :scss
+    """
+    When I run `rails generate component AwesomeButton`
+    And I cd to "frontend/components/awesome_button"
+    Then a file named "awesome_button.scss" should exist
+
+  Scenario: Generate component with custom template engine defined to `sass`
+    Given a file named "config/initializers/custom_configuration.rb" with:
+    """
+      Rails.application.config.komponent.stylesheet_engine = :sass
+    """
+    When I run `rails generate component AwesomeButton`
+    And I cd to "frontend/components/awesome_button"
+    Then a file named "awesome_button.sass" should exist
 
   Scenario: Generate component with `--locale` option
     When I run `rails generate component AwesomeButton --locale`

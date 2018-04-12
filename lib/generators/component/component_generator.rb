@@ -134,11 +134,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   def stylesheet_engine
-    if sass = rails_configuration.try(:sass)
-      sass[:preferred_syntax]
-    else
-      :css
-    end
+    rails_configuration.komponent.stylesheet_engine
   end
 
   def default_path

@@ -2,10 +2,21 @@
 
 ## Upcoming release
 
+## v2.0.0.pre.1 (2018-04-12)
+
+**Breaking changes:**
+- Removed deprecated `render_partial` method
+- Removed rendering of namespaced component with the old naming convention
+
+**Enhancements:**
+- Changed `@block_given_to_component` from an instance variable to a method `block_given_to_component` available in the view context
+- Implemented component caching with the `cached: true` option
+- Added a `stylesheet_engine` option to Komponent configuration
+- When generating a new component, the `frozen_string_literal: true` magic comment is prepended to Ruby files
+
 ## v1.1.4 (2018-03-05)
 
 **Enhancements:**
-
 - Added `frozen_string_literal` option to optimize performance
 - Removed useless `autoload_paths` config definition (it was not taken into account)
 - Install generator can be ran several times in order to enable features
