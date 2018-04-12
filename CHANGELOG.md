@@ -2,7 +2,7 @@
 
 ## Upcoming release
 
-## v2.0.0.pre.1 (2018-04-01)
+## v2.0.0.pre.1 (2018-04-12)
 
 **Breaking changes:**
 - Removed deprecated `render_partial` method

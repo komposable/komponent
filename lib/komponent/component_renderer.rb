@@ -15,11 +15,12 @@ module Komponent
 
     def render(component, locals = {}, options = {}, &block)
       cached = options.delete(:cached)
-      cached_block = block ? block.call : nil
-      key = [component, locals, options, cached_block].to_s
-      cache_key = Digest::SHA1.hexdigest(key)
-
       if cached
+
+        cached_block = block ? block.call : nil
+        key = [component, locals, options, cached_block].to_s
+        cache_key = Digest::SHA1.hexdigest(key)
+
         Rails.cache.fetch(cache_key) do
           _render(component, locals, options, &block)
         end
