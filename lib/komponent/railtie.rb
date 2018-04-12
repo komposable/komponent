@@ -1,19 +1,21 @@
 # frozen_string_literal: true
 
 require 'webpacker'
-require 'komponent/core/component_helper'
-require 'komponent/core/translation'
-require 'komponent/core/component_path_resolver'
+require 'komponent/component_helper'
+require 'komponent/component_path_resolver'
+require 'komponent/component_renderer'
+require 'komponent/translation'
 
 module Komponent
   class Railtie < Rails::Railtie
     config.komponent = ActiveSupport::OrderedOptions.new
     config.komponent.root = nil
     config.komponent.component_paths = []
+    config.komponent.stylesheet_engine = :css
 
     config.before_configuration do |app|
-      app.config.komponent.root = app.config.root.join("frontend")
       app.config.komponent = config.komponent
+      app.config.komponent.root = app.config.root.join("frontend")
     end
 
     config.after_initialize do |app|

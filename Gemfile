@@ -14,4 +14,6 @@ gem "rubocop", require: false
 group :test do
   gem "aruba"
   gem "cucumber"
+  gem "simplecov", require: false
+  gem "coveralls", require: false
 end

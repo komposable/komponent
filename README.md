@@ -1,7 +1,9 @@
 # <img alt="Komponent" src="https://raw.github.com/ouvrages/komponent/master/logo.svg?sanitize=true" width="200" height="40" />
 [![Build Status](https://travis-ci.org/komposable/komponent.svg?branch=master)](https://travis-ci.org/komposable/komponent)
 [![Gem](https://img.shields.io/gem/v/komponent.svg)](https://github.com/komposable/komponent)
-[![Dependency Status](https://beta.gemnasium.com/badges/github.com/komposable/komponent.svg)](https://beta.gemnasium.com/projects/github.com/komposable/komponent) [![Maintainability](https://api.codeclimate.com/v1/badges/36d6dcf883df8f63893a/maintainability)](https://codeclimate.com/github/komposable/komponent/maintainability)
+[![Dependency Status](https://beta.gemnasium.com/badges/github.com/komposable/komponent.svg)](https://beta.gemnasium.com/projects/github.com/komposable/komponent)
+[![Maintainability](https://api.codeclimate.com/v1/badges/36d6dcf883df8f63893a/maintainability)](https://codeclimate.com/gi    thub/komposable/komponent/maintainability)
+[![Coverage Status](https://coveralls.io/repos/github/komposable/komponent/badge.svg?branch=master)](https://coveralls.io/github/komposable/komponent?branch=master)
 
 **Komponent** implements an opinionated way of organizing front-end code in Ruby on Rails, based on _components_.
 
@@ -22,6 +24,8 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
 - [Getting started](#getting-started)
 - [Usage](#usage)
   - [Passing variables](#passing-variables)
+  - [Passing options](#passing-options)
+    - [Component caching](#component-caching)
   - [Passing a block](#passing-a-block)
   - [Properties](#properties)
   - [Helpers](#helpers)
@@ -33,6 +37,7 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
   - [Configuration](#configuration)
     - [Change default root path](#change-default-root-path)
     - [Default options for the generators](#default-options-for-the-generators)
+    - [Change default stylesheet engine](#change-default-stylesheet-engine)
     - [Force default templating engine](#force-default-templating-engine)
     - [Additional paths](#additional-paths)
 - [Contributing](#contributing)
@@ -116,6 +121,25 @@ You can pass `locals` to the helper. They are accessible within the component pa
   = @text
 ```
 
+### Passing options
+
+#### Component caching
+
+Komponent relies on [Rails Low-level caching](http://guides.rubyonrails.org/caching_with_rails.html#low-level-caching).
+
+You can cache the component by passing the `cached: true` option. The cache will expire when the locals, options or block change.
+If you want better control of the cache expiration, you can provide a custom `cache_key`. When the `cache_key` changes, the cache will be cleared.
+
+```slim
+/ app/views/pages/home.html.slim
+
+/ Cache the component based on its locals
+= component "button", { text: "Click here" }, cached: true
+
+/ or cache the component with a specific key, such as the last update of a model
+= component "button", { text: "Click here" }, cached: true, cache_key: @product.updated_at
+```
+
 ### Passing a block
 
 The component also accepts a `block`. To render the block, just use the standard `yield`.
@@ -196,7 +220,8 @@ You can also choose to split your component into partials. In this case, we can 
 
 a.button(href=@href)
   = @text
-  = render("suffix", text: "external link") if external_link?
+  - if external_link?
+    = render "suffix", text: "external link"
 ```
 
 ```slim
@@ -214,7 +239,6 @@ rails generate component admin/header
 ```
 
 This will create the component in an `admin` folder, and name its Ruby module `AdminHeaderComponent`.
-
 
 ### Stimulus integration
 
@@ -275,7 +299,18 @@ You can whitelist the locales you use by setting this into an initializer, as ex
 I18n.available_locales = [:en, :fr]
 ```
 
+> If you have the `rails-i18n` gem in your `Gemfile`, you should whitelist locales to prevent creating a lot of
+> locale files when you generate a new component.
+
 ### Configuration
+
+#### Change default root path
+
+You can change the default root path (`frontend`) to another path where Komponent should be installed and components generated. You need to change `komponent.root` in an initializer.
+
+```rb
+Rails.application.config.komponent.root = Rails.root.join("app/frontend")
+```
 
 #### Default options for the generators
 
@@ -287,12 +322,12 @@ config.generators do |g|
 end
 ```
 
-#### Change default root path
+#### Change default stylesheet engine
 
-You can change the default root path (`frontend`) to another path where Komponent should be installed and components generated. You need to change `komponent.root` in an initializer.
+You can configure the stylesheet engine used for generate stylesheet file, values allowed are ':css', ':scss', ':sass'.
 
 ```rb
-Rails.application.config.komponent.root = Rails.root.join("app/frontend")
+Rails.application.config.komponent.stylesheet_engine = :css # default value is :css
 ```
 
 #### Force default templating engine
