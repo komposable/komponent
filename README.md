@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/komposable/komponent.svg?branch=master)](https://travis-ci.org/komposable/komponent)
 [![Gem](https://img.shields.io/gem/v/komponent.svg)](https://github.com/komposable/komponent)
 [![Dependency Status](https://beta.gemnasium.com/badges/github.com/komposable/komponent.svg)](https://beta.gemnasium.com/projects/github.com/komposable/komponent)
+[![Maintainability](https://api.codeclimate.com/v1/badges/36d6dcf883df8f63893a/maintainability)](https://codeclimate.com/gi    thub/komposable/komponent/maintainability)
 [![Coverage Status](https://coveralls.io/repos/github/komposable/komponent/badge.svg?branch=master)](https://coveralls.io/github/komposable/komponent?branch=master)
 
 **Komponent** implements an opinionated way of organizing front-end code in Ruby on Rails, based on _components_.
