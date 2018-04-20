@@ -2,6 +2,9 @@
 
 ## Upcoming release
 
+**Enhancements:**
+- Use lazy lookup for translations in all generator templates
+
 ## v2.0.0.pre.1 (2018-04-12)
 
 **Breaking changes:**
