@@ -87,6 +87,16 @@ Then, render it in your views with the `component` helper (or its alias `c`).
 = c "button"
 ```
 
+Or, directly from your controllers:
+
+```ruby
+# app/controllers/pages_controller.rb
+
+def home
+  render html: helpers.component("home")
+end
+```
+
 Make sure to include javascript pack tag and stylesheet pack tag in your application layout file, for instance:
 
 ```slim
