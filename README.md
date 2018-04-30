@@ -18,7 +18,8 @@ This README examples are written in Slim, but Komponent is compatible with:
 
 This gem has been inspired by our Rails development practices at [Ouvrages](https://ouvrages-web.fr) and [Etamin Studio](https://etaminstudio.com), and the (excellent) [_Modern Front-end in Rails_](https://evilmartians.com/chronicles/evil-front-part-1) article from Evil Martians.
 
-## Table of contents
+<details>
+  <summary>Table of Contents</summary>
 
 - [Compatibility](#compatibility)
 - [Getting started](#getting-started)
@@ -42,6 +43,7 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
     - [Additional paths](#additional-paths)
 - [Contributing](#contributing)
 - [License](#license)
+</details>
 
 ## Compatibility
 
