@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Styleguide</title>
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">STYLEGUIDE</div>
+  </div>
+  <div class="wrapper">
+    <div class="sidebar">
+      <h3>COMPONENTS</h3>
+      <ul>
+        <%- @components.each do |_k, component| %>
+          <li>
+            <%= link_to_unless_current component.title, styleguide_path(id: component.id) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="main">
+      <%= yield %>
+    </div>
+  </div>
+</body>
+</html>

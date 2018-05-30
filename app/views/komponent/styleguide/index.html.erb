@@ -1,0 +1,15 @@
+<div class="header">
+  <h1>Styleguide</h1>
+</div>
+
+<% if @components.any? %>
+  <div class="description">
+    Select one of the components from the side to view its examples and documentation.
+  </div>
+<% else %>
+  <div class="hint">
+    <h2><span>Hint:</span>You haven't created any components yet</h2>
+    <p>You can generate your first component by running:</p>
+    <pre>rails generate component component-name</pre>
+  </div>
+<% end %>
