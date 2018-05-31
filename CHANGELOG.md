@@ -2,6 +2,10 @@
 
 ## Upcoming release
 
+## v2.1.0 (2018-05-31)
+
+**Enhancements:**
+
 - Block given to component now pass return values
 
 ## v2.0.0 (2018-04-22)
