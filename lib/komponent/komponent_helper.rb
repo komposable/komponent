@@ -2,7 +2,7 @@
 
 module KomponentHelper
   def component(component_name, locals = {}, options = {}, &block)
-    captured_block = proc { capture(&block) } if block_given?
+    captured_block = proc { |args| capture(args, &block) } if block_given?
     Komponent::ComponentRenderer.new(
       controller,
     ).render(
