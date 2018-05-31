@@ -56,4 +56,10 @@ class KomponentHelperTest < ActionView::TestCase
       %(<div class="bar">Bar</div>),
       component('bar') { "Bar" }.chomp
   end
+
+  def test_helper_renders_yield_args
+    assert_equal \
+      %(<div class="foo-bar">Foo Bar</div>),
+      component('foo_bar') { |x| x }.chomp
+  end
 end
