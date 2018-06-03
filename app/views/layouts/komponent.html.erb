@@ -7,27 +7,49 @@
   <%#= stylesheet_pack_tag "komponent/styleguide", media: "all" %>
 
   <%= csrf_meta_tags %>
+
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.0/normalize.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Fira+Mono|Fira+Sans');
+
+    body {
+      font-family: 'Fira Sans', sans-serif;
+    }
+
+    pre {
+      font-family: 'Fira Mono', monospace;
+    }
+
+    .header {
+      background-color: blue;
+      color: white;
+      width: 100%;
+      height: 40px;
+    }
+
+    .sidebar {
+      float: left;
+      width: 160px;
+      background-color: black;
+      color: white;
+    }
+    .sidebar a {
+      color: white;
+    }
+
+    .container {
+      padding-left: 20px;
+      background-color: green;
+    }
+  </style>
 </head>
 <body>
-  <%#=c 'komponent/styleguide/header' %>
-  <div class="header">
-    <div class="logo">STYLEGUIDE</div>
-  </div>
-  <div class="wrapper">
-    <div class="sidebar">
-      <h3>COMPONENTS</h3>
-      <ul>
-        <%- komponent_components.each do |_k, component| %>
-          <li>
-            <%= link_to_unless_current component.title, styleguide_path(id: component.id) %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-  <%#=c 'komponent/styleguide/container' do %>
+  <%=c 'komponent/styleguide/header' %>
+
+  <%=c 'komponent/styleguide/container' do %>
     <%= yield %>
-  <%# end %>
-  <%#=c 'komponent/styleguide/footer' %>
+  <% end %>
+
+  <%=c 'komponent/styleguide/footer' %>
 </body>
 </html>

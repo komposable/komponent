@@ -7,6 +7,7 @@ module Komponent
         components = {}
 
         # TODO: list only components directories
+        # use ComponentPathResolver?
         Dir.glob(component_dirs).sort.each do |component_dir|
           component_path = Pathname.new(component_dir).relative_path_from(components_root).to_s
 
