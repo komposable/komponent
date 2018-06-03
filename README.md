@@ -313,6 +313,17 @@ I18n.available_locales = [:en, :fr]
 > If you have the `rails-i18n` gem in your `Gemfile`, you should whitelist locales to prevent creating a lot of
 > locale files when you generate a new component.
 
+### Styleguide
+
+```ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  mount Komponent::Engine => "komponent" if Rails.env.development?
+
+  ...
+end
+```
+
 ### Configuration
 
 #### Change default root path
