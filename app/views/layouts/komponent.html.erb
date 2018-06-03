@@ -3,9 +3,13 @@
 <head>
   <title>Styleguide</title>
 
+  <%#= javascript_pack_tag "komponent/styleguide" %>
+  <%#= stylesheet_pack_tag "komponent/styleguide", media: "all" %>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%#=c 'komponent/styleguide/header' %>
   <div class="header">
     <div class="logo">STYLEGUIDE</div>
   </div>
@@ -13,16 +17,17 @@
     <div class="sidebar">
       <h3>COMPONENTS</h3>
       <ul>
-        <%- @components.each do |_k, component| %>
+        <%- komponent_components.each do |_k, component| %>
           <li>
             <%= link_to_unless_current component.title, styleguide_path(id: component.id) %>
           </li>
         <% end %>
       </ul>
     </div>
-    <div class="main">
-      <%= yield %>
-    </div>
   </div>
+  <%#=c 'komponent/styleguide/container' do %>
+    <%= yield %>
+  <%# end %>
+  <%#=c 'komponent/styleguide/footer' %>
 </body>
 </html>

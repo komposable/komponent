@@ -13,4 +13,8 @@ module KomponentHelper
     )
   end
   alias :c :component
+
+  def komponent_components
+    Komponent::Component.all
+  end
 end

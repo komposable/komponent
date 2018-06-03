@@ -2,6 +2,10 @@
 
 ## Upcoming release
 
+**Enhancements:**
+
+- Implement a styleguide view
+
 **Breaking changes:**
 - Dropped support for Rails 4.2
 
