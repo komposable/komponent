@@ -3,6 +3,12 @@ Feature: Install generator
   Scenario: Default root path
     Given I use a fixture named "my_app"
     When I run `rails generate komponent:install`
+    Then the following files should exist:
+    | frontend/packs/application.js     |
+    And the file named "frontend/packs/application.js" should contain:
+    """
+    Hello World from Webpacker
+    """
     And the file named "config/application.rb" should contain:
     """
     config.i18n.load_path += Dir[config.root.join('frontend/components/**/*.yml')]
@@ -25,4 +31,3 @@ Feature: Install generator
     When I run `rails generate komponent:install --stimulus`
     And I cd to "../.."
     Then the file named "frontend/stimulus_application.js" should exist
-
