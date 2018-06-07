@@ -1,7 +1,7 @@
 Feature: Component generator
 
   Background:
-    Given I use a fixture named "my_app"
+    Given I use a fixture named "app_with_komponent"
 
   Scenario: Generate component
     When I run `rails generate component AwesomeButton`

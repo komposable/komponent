@@ -8,5 +8,7 @@
 /spec/reports/
 /tmp/
 
-/fixtures/my_app/tmp
-/fixtures/my_app/log
+/fixtures/app_with_komponent/tmp
+/fixtures/app_with_komponent/log
+/fixtures/app_with_webpacker/tmp
+/fixtures/app_with_webpacker/log

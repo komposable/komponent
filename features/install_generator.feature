@@ -1,7 +1,7 @@
 Feature: Install generator
 
   Scenario: Default root path
-    Given I use a fixture named "my_app"
+    Given I use a fixture named "app_with_webpacker"
     When I run `rails generate komponent:install`
     Then the following files should exist:
     | frontend/packs/application.js     |
