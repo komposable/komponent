@@ -44,6 +44,10 @@ module Komponent
       id.titleize
     end
 
+    def path
+      Komponent::ComponentPathResolver.new.resolve(@id)
+    end
+
     def example_view
       "components/#{id}/example"
     end

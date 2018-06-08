@@ -315,6 +315,8 @@ I18n.available_locales = [:en, :fr]
 
 ### Styleguide
 
+Update your routes to mount the Komponent engine.
+
 ```ruby
 # config/routes.rb
 Rails.application.routes.draw do
@@ -323,6 +325,10 @@ Rails.application.routes.draw do
   ...
 end
 ```
+
+Then you need to update the `_example.html.slim` file you have inside your components. This file is use to render the examples.
+
+Finally just visit to `http://localhost:3000/komponent/styleguide`.
 
 ### Configuration
 

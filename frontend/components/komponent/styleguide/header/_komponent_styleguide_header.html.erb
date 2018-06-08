@@ -1,15 +1,13 @@
-<div class="header">
-  <div class="logo">STYLEGUIDE</div>
+<div class="komponent__header">
+  <div class="logo">Komponent — Styleguide</div>
 </div>
-<div class="wrapper">
-  <div class="sidebar">
-    <h3>COMPONENTS</h3>
-    <ul>
-      <%- komponent_components.each do |_k, component| %>
-        <li>
-          <%= link_to_unless_current component.title, styleguide_path(id: component.id) %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+<div class="komponent__sidebar">
+  <h3>COMPONENTS</h3>
+  <ul>
+    <%- komponent_components.each do |_k, component| %>
+      <li>
+        <%= link_to_unless_current component.title, styleguide_path(id: component.id) %>
+      </li>
+    <% end %>
+  </ul>
 </div>
