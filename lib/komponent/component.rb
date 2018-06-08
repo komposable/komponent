@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Komponent
   class Component
     class << self
@@ -11,7 +13,7 @@ module Komponent
         Dir.glob(component_dirs).sort.each do |component_dir|
           component_path = Pathname.new(component_dir).relative_path_from(components_root).to_s
 
-          next unless File.exists?(components_root.join(component_path)
+          next unless File.exist?(components_root.join(component_path)
             .join("#{File.basename(component_path)}_component.rb"))
 
           components[component_path] = Component.new(component_path)
