@@ -2,6 +2,12 @@
 
 ## Upcoming release
 
+**Enhancements:**
+
+- Component generator: use `component_name` instead of `module_name` in templates,
+  so when we create a `button` component, by default it contains `button` instead
+  of `button_component`
+
 ## v2.1.0 (2018-05-31)
 
 **Enhancements:**
