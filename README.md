@@ -335,7 +335,7 @@ end
 
 #### Change default stylesheet engine
 
-You can configure the stylesheet engine used for generate stylesheet file, values allowed are ':css', ':scss', ':sass'.
+You can configure the stylesheet engine used for generate stylesheet file, allowed values are `:css`, `:scss`, `:sass`.
 
 ```rb
 Rails.application.config.komponent.stylesheet_engine = :css # default value is :css
