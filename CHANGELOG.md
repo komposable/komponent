@@ -5,6 +5,8 @@
 **Enhancements:**
 
 - Implement a styleguide view
+- New generator: `rails g komponent:examples` to generate
+  an example file for each existing component
 
 **Breaking changes:**
 - Dropped support for Rails 4.2

@@ -330,6 +330,8 @@ Then you need to update the `_example.html.slim` file you have inside your compo
 
 Finally just visit to `http://localhost:3000/styleguide`.
 
+If you have existing components, you can generate all their example files at once with `rails g komponent:examples`
+
 ### Configuration
 
 #### Change default root path
