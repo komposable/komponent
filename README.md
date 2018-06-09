@@ -320,15 +320,15 @@ Update your routes to mount the Komponent engine.
 ```ruby
 # config/routes.rb
 Rails.application.routes.draw do
-  mount Komponent::Engine => "komponent" if Rails.env.development?
+  mount Komponent::Engine => "/" if Rails.env.development?
 
-  ...
+  # ...
 end
 ```
 
-Then you need to update the `_example.html.slim` file you have inside your components. This file is use to render the examples.
+Then you need to update the `_example.html.slim` file you have inside your components. This file is used to render the examples.
 
-Finally just visit to `http://localhost:3000/komponent/styleguide`.
+Finally just visit to `http://localhost:3000/styleguide`.
 
 ### Configuration
 
