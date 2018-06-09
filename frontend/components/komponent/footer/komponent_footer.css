@@ -1,1 +1,21 @@
-.komponent-footer {}
+.komponent-footer {
+  font-size: 1.4rem;
+  position: absolute;
+  bottom: 4rem;
+  right: 4rem;
+  text-align: center;
+
+  &,
+  a {
+    color: #999;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      color: #0038ea;
+    }
+  }
+}

@@ -1,8 +1,8 @@
 <div class="komponent-sidebar">
-  <h3>COMPONENTS</h3>
-  <ul>
+  <div class="komponent-sidebar-title">Components</div>
+  <ul class="komponent-sidebar-items">
     <%- komponent_components.each do |_k, component| %>
-      <li>
+      <li class="komponent-sidebar-item">
         <%= link_to_unless_current component.title, styleguide_path(id: component.id) %>
       </li>
     <% end %>
