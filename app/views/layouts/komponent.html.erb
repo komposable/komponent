@@ -2,56 +2,16 @@
 <html>
 <head>
   <title>Styleguide</title>
-
-  <%#= javascript_pack_tag "komponent/styleguide" %>
-  <%#= stylesheet_pack_tag "komponent/styleguide", media: "all" %>
-
+  <%= javascript_pack_tag "komponent" %>
+  <%= stylesheet_pack_tag "komponent", media: "all" %>
   <%= csrf_meta_tags %>
-
-  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.0/normalize.css">
-  <style>
-    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
-    @import url('https://fonts.googleapis.com/css?family=Fira+Mono');
-
-    body {
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    pre, code {
-      font-family: 'Fira Mono', monospace;
-    }
-
-    .komponent__header {
-      background-color: blue;
-      color: white;
-      width: 100%;
-      height: 40px;
-    }
-
-    .komponent__sidebar {
-      float: left;
-      width: 160px;
-      background-color: black;
-      color: white;
-    }
-    .komponent__sidebar a {
-      color: white;
-    }
-
-    .komponent__container {
-      margin-left: 160px;
-      padding-left: 20px;
-      background-color: green;
-    }
-  </style>
 </head>
 <body>
-  <%=c 'komponent/styleguide/header' %>
-
-  <%=c 'komponent/styleguide/container' do %>
+  <%=c 'komponent/header' %>
+  <%=c 'komponent/sidebar' %>
+  <%=c 'komponent/container' do %>
     <%= yield %>
   <% end %>
-
-  <%=c 'komponent/styleguide/footer' %>
+  <%=c 'komponent/footer' %>
 </body>
 </html>

@@ -1,0 +1,10 @@
+.komponent-sidebar {
+  float: left;
+  width: 160px;
+  background-color: black;
+  color: white;
+
+  a {
+    color: white;
+  }
+}

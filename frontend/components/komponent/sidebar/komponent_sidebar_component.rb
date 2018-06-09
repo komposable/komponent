@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-module KomponentStyleguideFooterComponent
+module KomponentSidebarComponent
   extend ComponentHelper
 end

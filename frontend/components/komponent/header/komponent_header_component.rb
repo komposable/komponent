@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-module KomponentStyleguideHeaderComponent
+module KomponentHeaderComponent
   extend ComponentHelper
 end
