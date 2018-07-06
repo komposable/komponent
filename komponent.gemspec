@@ -34,5 +34,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "railties", ">= 4.2"
   spec.add_dependency "webpacker", ">= 3.0.0"
 
+  spec.add_development_dependency "appraisal"
   spec.add_development_dependency "bundler", "~> 1.15"
 end

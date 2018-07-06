@@ -2,10 +2,12 @@ AllCops:
   TargetRubyVersion: 2.2
   DisabledByDefault: true
   Exclude:
-    - 'node_modules/**/*'
-    - 'vendor/**/*'
-    - 'tmp/**/*'
-    - 'fixtures/**/*'
+    - node_modules/**/*
+    - vendor/**/*
+    - tmp/**/*
+    - fixtures/**/*
+    - Appraisals
+    - gemfiles/**/*
 
 Gemspec/OrderedDependencies:
   Enabled: true
