@@ -47,7 +47,7 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
 ## Compatibility
 
 - Ruby 2.2+
-- Rails 4.2+
+- Rails 5.0+
 - Webpacker 3.0.0+
 
 ## Getting started
