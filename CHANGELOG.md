@@ -2,6 +2,10 @@
 
 ## Upcoming release
 
+**Breaking changes:**
+
+- Dropped support for Rails 4.2
+
 ## v2.2.0 (2018-07-03)
 
 **Enhancements:**
