@@ -4,6 +4,7 @@ require 'webpacker'
 require 'komponent/component_helper'
 require 'komponent/component_path_resolver'
 require 'komponent/component_renderer'
+require 'komponent/component'
 require 'komponent/translation'
 
 module Komponent

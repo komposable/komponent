@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "komponent/component"
-
 module Komponent
   class StyleguideController < ::ApplicationController
     layout 'komponent'
