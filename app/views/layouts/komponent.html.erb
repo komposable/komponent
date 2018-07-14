@@ -7,11 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%=c 'komponent/header' %>
-  <%=c 'komponent/sidebar' %>
-  <%=c 'komponent/container' do %>
+  <%= c 'komponent/header' %>
+  <%= c 'komponent/sidebar' %>
+  <%= c 'komponent/container' do %>
     <%= yield %>
   <% end %>
-  <%=c 'komponent/footer' %>
+  <%= c 'komponent/footer' %>
 </body>
 </html>
