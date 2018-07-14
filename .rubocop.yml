@@ -54,15 +54,8 @@ Naming/PredicateName:
 Naming/VariableName:
   Enabled: true
 
-Lint/DeprecatedClassMethods:
-  Enabled: true
-
 Layout/AlignParameters:
   Enabled: true
-
-Layout/BlockAlignment:
-  Enabled: true
-  EnforcedStyleAlignWith: start_of_block
 
 Layout/BlockEndNewline:
   Enabled: true
@@ -71,12 +64,6 @@ Layout/CaseIndentation:
   Enabled: true
 
 Layout/ClosingParenthesisIndentation:
-  Enabled: true
-
-Layout/ConditionPosition:
-  Enabled: true
-
-Layout/DefEndAlignment:
   Enabled: true
 
 Layout/DotPosition:
@@ -116,4 +103,17 @@ Layout/SpaceInsideParens:
   Enabled: true
 
 Layout/TrailingWhitespace:
+  Enabled: true
+
+Lint/BlockAlignment:
+  Enabled: true
+  EnforcedStyleAlignWith: start_of_block
+
+Lint/ConditionPosition:
+  Enabled: true
+
+Lint/DefEndAlignment:
+  Enabled: true
+
+Lint/DeprecatedClassMethods:
   Enabled: true
