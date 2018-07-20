@@ -3,8 +3,10 @@
 ## Upcoming release
 
 **Breaking changes:**
-
 - Dropped support for Rails 4.2
+
+**Bug fixes:**
+- Removed redundant `class` attribute in HAML templates
 
 ## v2.2.0 (2018-07-03)
 
@@ -12,7 +14,7 @@
 - Component generator: use `component_name` instead of `module_name` in templates,
   so when we create a `button` component, by default it contains `button` instead
   of `button_component`
-  
+
 **Bug fixes:**
 - Component generator: fix error when the single-quotes are used in `import`s
 
