@@ -32,8 +32,8 @@ module Komponent
     private
 
     def _render(component, locals = {}, options = {}, &block)
-      parts = component.split("/")
-      component_name = parts.join("_")
+      parts = component.split('/')
+      component_name = parts.join('_')
 
       component_module_path = resolved_component_path(component)
         .join("#{component_name}_component")

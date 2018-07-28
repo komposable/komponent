@@ -16,7 +16,7 @@ module Komponent
       def create_root_directory
         return if File.directory?(komponent_root_directory)
 
-        empty_directory(komponent_root_directory)
+        empty_directory komponent_root_directory
       end
 
       def modify_webpacker_configuration
@@ -26,21 +26,21 @@ module Komponent
       def move_webpacker_default_structure
         return if File.directory?(komponent_root_directory)
 
-        run("mv #{webpacker_default_structure}/* #{komponent_root_directory}")
+        run "mv #{webpacker_default_structure}/* #{komponent_root_directory}"
       end
 
       def create_komponent_default_structure
-        return if File.exist?(components_directory.join("index.js"))
+        return if File.exist?(components_directory.join('index.js'))
 
-        empty_directory(components_directory)
-        create_file(components_directory.join("index.js"))
+        empty_directory components_directory
+        create_file components_directory.join('index.js')
       end
 
       def create_stimulus_file
         return if File.exist?(stimulus_application_path)
         return unless stimulus?
 
-        create_file(stimulus_application_path, stimulus_application_template)
+        create_file stimulus_application_path, stimulus_application_template
       end
 
       def append_to_application_configuration
@@ -49,13 +49,13 @@ module Komponent
       end
 
       def append_to_application_pack
-        append_to_file(application_pack_path, "import 'components';")
+        append_to_file application_pack_path, 'import "components";'
       end
 
       def install_stimulus
         if stimulus?
           in_root do
-            run("yarn add stimulus")
+            run 'yarn add stimulus'
           end
         end
       end
@@ -73,11 +73,11 @@ export default application;
       end
 
       def stimulus_application_path
-        komponent_root_directory.join("stimulus_application.js")
+        komponent_root_directory.join('stimulus_application.js')
       end
 
       def application_pack_path
-        komponent_root_directory.join("packs", "application.js")
+        komponent_root_directory.join('packs', 'application.js')
       end
 
       def komponent_root_directory
@@ -85,15 +85,15 @@ export default application;
       end
 
       def components_directory
-        Rails.root.join(komponent_root_directory, "components")
+        Rails.root.join(komponent_root_directory, 'components')
       end
 
       def webpacker_configuration_file
-        Rails.root.join("config", "webpacker.yml")
+        Rails.root.join('config', 'webpacker.yml')
       end
 
       def webpacker_default_structure
-        Rails.root.join("app", "javascript")
+        Rails.root.join('app', 'javascript')
       end
 
       def komponent_already_installed?

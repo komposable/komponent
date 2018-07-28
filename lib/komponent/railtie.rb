@@ -15,12 +15,12 @@ module Komponent
 
     config.before_configuration do |app|
       app.config.komponent = config.komponent
-      app.config.komponent.root = app.config.root.join("frontend")
+      app.config.komponent.root = app.config.root.join('frontend')
     end
 
     config.after_initialize do |app|
       app.config.komponent.component_paths.prepend(
-        app.config.komponent.root.join("components")
+        app.config.komponent.root.join('components')
       )
 
       ActiveSupport.on_load :action_view do

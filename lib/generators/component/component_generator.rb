@@ -15,14 +15,14 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   def create_js_file
-    template "js.erb", component_path + "#{name_with_namespace}.js"
+    template 'js.erb', component_path + "#{name_with_namespace}.js"
     if stimulus?
-      template "stimulus_controller_js.erb", component_path + "#{name_with_namespace}_controller.js"
+      template 'stimulus_controller_js.erb', component_path + "#{name_with_namespace}_controller.js"
     end
   end
 
   def create_rb_file
-    template "rb.erb", component_path + "#{module_name.underscore}.rb"
+    template 'rb.erb', component_path + "#{module_name.underscore}.rb"
   end
 
   def create_locale_files
@@ -30,46 +30,46 @@ class ComponentGenerator < Rails::Generators::NamedBase
 
     I18n.available_locales.each do |locale|
       @locale = locale
-      template "locale.erb", component_path + "#{name_with_namespace}.#{locale}.yml"
+      template 'locale.erb', component_path + "#{name_with_namespace}.#{locale}.yml"
     end
   end
 
   def import_to_packs
     root_path = default_path
-    base_path = root_path + "components"
+    base_path = root_path + 'components'
 
     imports = []
 
     split_name[0..-2].each do |split|
       base_path += split
-      file_path = base_path + "index.js"
+      file_path = base_path + 'index.js'
       create_file(file_path) unless File.exist?(file_path)
       imports << base_path.relative_path_from(root_path)
     end
 
     root_path_dup = root_path.dup
 
-    [Pathname.new("components"), *split_name[0..-2]].each do |split|
+    [Pathname.new('components'), *split_name[0..-2]].each do |split|
       root_path_dup += split
       import = imports.shift
       if import
-        append_to_file(root_path_dup + "index.js") do
+        append_to_file(root_path_dup + 'index.js') do
           "\nimport \"#{import}\";\n"
         end
-        sort_lines_alphabetically!(root_path_dup + "index.js")
+        sort_lines_alphabetically!(root_path_dup + 'index.js')
       end
     end
 
-    append_to_file(base_path + "index.js") do
+    append_to_file(base_path + 'index.js') do
       "\nimport \"#{base_path.relative_path_from(root_path)}/#{component_name}/#{name_with_namespace.underscore}\";\n"
     end
-    sort_lines_alphabetically!(base_path + "index.js")
+    sort_lines_alphabetically!(base_path + 'index.js')
   end
 
   def clear_component
     return unless destroying?
 
-    base_path = default_path + "components"
+    base_path = default_path + 'components'
     base_path_dup = base_path.dup
 
     paths = split_name[0..-2].map do |split|
@@ -81,26 +81,26 @@ class ComponentGenerator < Rails::Generators::NamedBase
       FileUtils.rm_rf(component_path)
 
       Dir.chdir(path)
-      directories = Dir.glob("*").select do |entry|
+      directories = Dir.glob('*').select do |entry|
         File.directory?(entry)
       end
 
       if directories.size == 0
         FileUtils.rm_rf(path)
-        remove_line!(base_path + "index.js", split)
+        remove_line!(base_path + 'index.js', split)
       else
-        remove_line!(path + "index.js", component_name)
+        remove_line!(path + 'index.js', component_name)
       end
     end
 
     FileUtils.rm_rf(component_path)
-    remove_line!(base_path + "index.js", component_name)
+    remove_line!(base_path + 'index.js', component_name)
   end
 
   protected
 
   def template_prefix
-    stimulus? ? "stimulus_" : ""
+    stimulus? ? 'stimulus_' : ''
   end
 
   def split_name
@@ -108,13 +108,13 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   def name_with_namespace
-    split_name.join("_")
+    split_name.join('_')
   end
 
   def component_path
-    path_parts = [default_path, "components", *split_name]
+    path_parts = [default_path, 'components', *split_name]
 
-    Pathname.new(path_parts.join("/"))
+    Pathname.new(path_parts.join('/'))
   end
 
   def module_name
@@ -177,7 +177,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
 
     lines = lines.uniq.sort
 
-    File.open(path, "w") do |f|
+    File.open(path, 'w') do |f|
       lines.each do |line|
         f.write(line)
       end
@@ -189,7 +189,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
       line unless line =~ /#{component_name}/
     end.compact
 
-    File.open(path, "w") do |f|
+    File.open(path, 'w') do |f|
       lines.each do |line|
         f.write(line)
       end

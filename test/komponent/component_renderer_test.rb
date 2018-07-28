@@ -29,13 +29,13 @@ class ComponentRendererTest < ActionController::TestCase
 
   def test_rendering_component_with_block_given
     @renderer.render('all') do
-      "<p>HELLO</p>"
+      '<p>HELLO</p>'
     end
 
     @context = @renderer.context
     assert_equal @context.block_given_to_component?, true
     assert_equal @context.block_given_to_component.class, Proc
-    assert_equal @context.block_given_to_component.call, "<p>HELLO</p>"
+    assert_equal @context.block_given_to_component.call, '<p>HELLO</p>'
   end
 
   def test_rendering_component_without_block_given

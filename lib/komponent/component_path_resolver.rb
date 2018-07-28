@@ -22,7 +22,7 @@ module Komponent
     def path_has_component?(path, component_name)
       file_name = path.join(*[
         component_name,
-        "#{component_name.split("/").join("_")}_component.rb",
+        "#{component_name.split('/').join('_')}_component.rb",
       ])
       File.exist?(file_name)
     end
