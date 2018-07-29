@@ -8,6 +8,10 @@ require 'komponent/translation'
 
 module Komponent
   class Railtie < Rails::Railtie
+    rake_tasks do
+      load 'komponent/rails/tasks/komponent.rake'
+    end
+
     config.komponent = ActiveSupport::OrderedOptions.new
     config.komponent.root = nil
     config.komponent.component_paths = []
