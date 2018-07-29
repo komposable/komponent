@@ -1,8 +1,11 @@
 # frozen_string_literal: true
+require File.expand_path('../utils', __FILE__)
 
 module Komponent
   module Generators
     class InstallGenerator < Rails::Generators::Base
+      include Utils
+
       class_option :stimulus, type: :boolean, default: false
 
       def check_webpacker_dependency
@@ -80,24 +83,12 @@ export default application;
         komponent_root_directory.join("packs", "application.js")
       end
 
-      def komponent_root_directory
-        default_path
-      end
-
-      def components_directory
-        Rails.root.join(komponent_root_directory, "components")
-      end
-
       def webpacker_configuration_file
         Rails.root.join("config", "webpacker.yml")
       end
 
       def webpacker_default_structure
         Rails.root.join("app", "javascript")
-      end
-
-      def komponent_already_installed?
-        File.directory?(relative_path_from_rails)
       end
 
       def dependencies_not_met_error_message
@@ -107,31 +98,6 @@ export default application;
       def stimulus?
         return options[:stimulus] if options[:stimulus]
         komponent_configuration[:stimulus]
-      end
-
-      def default_path
-        rails_configuration.komponent.root
-      end
-
-      def relative_path_from_rails
-        default_path.relative_path_from(Rails.root)
-      end
-
-      private
-
-      def komponent_configuration
-        {
-          stimulus: nil,
-          locale: nil,
-        }.merge(app_generators.komponent)
-      end
-
-      def rails_configuration
-        Rails.application.config
-      end
-
-      def app_generators
-        rails_configuration.app_generators
       end
     end
   end
