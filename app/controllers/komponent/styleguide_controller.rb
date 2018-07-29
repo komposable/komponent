@@ -14,7 +14,7 @@ module Komponent
     private
 
     def missing_template
-      render "komponent/styleguide/missing_template"
+      render 'komponent/styleguide/missing_template', status: :not_found
     end
   end
 end

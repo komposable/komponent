@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'komponent/component'
+
 module KomponentHelper
   def component(component_name, locals = {}, options = {}, &block)
     captured_block = proc { |args| capture(args, &block) } if block_given?

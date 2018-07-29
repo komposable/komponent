@@ -29,6 +29,10 @@ module Komponent
         components.fetch(id)
       end
 
+      def resolved_component_path(component)
+        Komponent::ComponentPathResolver.new.resolve(component)
+      end
+
       def components_root
         @components_root ||= Rails.application.config.komponent.root.join('components')
       end
