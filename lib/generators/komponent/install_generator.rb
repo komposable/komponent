@@ -45,7 +45,7 @@ module Komponent
 
       def append_to_application_configuration
         application "config.autoload_paths << config.root.join('#{relative_path_from_rails}/components')"
-        application "config.i18n.load_path += Dir[config.root.join('#{relative_path_from_rails}/components/**/*.yml')]"
+        application "config.i18n.load_path += Dir[config.root.join('#{relative_path_from_rails}/components/**/*.*.yml')]"
       end
 
       def append_to_application_pack
