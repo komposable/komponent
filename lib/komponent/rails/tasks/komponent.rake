@@ -3,8 +3,10 @@
 task stats: 'komponent:statsetup'
 
 namespace :komponent do
-  task :statsetup do
+  task :statsetup => :environment do
     require 'rails/code_statistics'
-    ::STATS_DIRECTORIES << ['Components', './frontend/components']
+    Rails.application.config.komponent.component_paths.each do |path|
+      ::STATS_DIRECTORIES << ['Components', path]
+    end
   end
 end
