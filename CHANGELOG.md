@@ -2,6 +2,9 @@
 
 ## Upcoming release
 
+**Enhancements:**
+- Cleanup code by following some ruby conventions
+
 **Breaking changes:**
 - Dropped support for Rails 4.2
 
