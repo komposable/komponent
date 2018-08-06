@@ -64,10 +64,10 @@ class KomponentHelperTest < ActionView::TestCase
   end
 
   def test_helper_supports_content_for_across_components
-    component('ping', ping: 'Ping')
+    component('ping', pong: 'Greetings from Ping')
 
     assert_equal \
-      %(<div class="pong">Ping Pong</div>),
-      component('pong', pong: 'Pong').chomp
+      %(<div class="pong">Greetings from Ping</div>),
+      component('pong').chomp
   end
 end
