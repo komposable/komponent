@@ -5,6 +5,7 @@ module KomponentHelper
     captured_block = proc { |args| capture(args, &block) } if block_given?
     Komponent::ComponentRenderer.new(
       controller,
+      view_flow,
     ).render(
       component_name,
       locals,

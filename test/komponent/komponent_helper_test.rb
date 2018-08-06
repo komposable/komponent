@@ -62,4 +62,12 @@ class KomponentHelperTest < ActionView::TestCase
       %(<div class="foo-bar">Foo Bar</div>),
       component('foo_bar') { |x| x }.chomp
   end
+
+  def test_helper_supports_content_for_across_components
+    component('ping', ping: 'Ping')
+
+    assert_equal \
+      %(<div class="pong">Ping Pong</div>),
+      component('pong', pong: 'Pong').chomp
+  end
 end
