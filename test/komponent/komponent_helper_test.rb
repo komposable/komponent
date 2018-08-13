@@ -62,4 +62,14 @@ class KomponentHelperTest < ActionView::TestCase
       %(<div class="foo-bar">Foo Bar</div>),
       component('foo_bar') { |x| x }.chomp
   end
+
+  def test_helper_renders_with_doc
+    assert_equal \
+      %(<div class="all">🌎 😎</div>
+<pre class="komponent-code"><code>= component &quot;all&quot;, {
+  world: &quot;🌎&quot;,
+  sunglasses: &quot;😎&quot;
+}</code></pre>),
+      component_with_doc('all', world: "🌎", sunglasses: "😎").chomp
+  end
 end
