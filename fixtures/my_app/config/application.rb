@@ -12,6 +12,6 @@ Bundler.require(*Rails.groups)
 
 module MyApp
   class Application < Rails::Application
-    config.i18n.load_path += Dir[config.root.join('frontend/components/**/*.yml')]
+    config.i18n.load_path += Dir[config.root.join('frontend/components/**/*.*.yml')]
   end
 end

@@ -55,7 +55,7 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
 ```ruby
 # Gemfile
 
-gem "komponent"
+gem 'komponent'
 ```
 
 Run the following command to set up your project instantly:
@@ -84,8 +84,8 @@ Then, render it in your views with the `component` helper (or its alias `c`).
 ```slim
 / app/views/pages/home.html.slim
 
-= component "button"
-= c "button"
+= component 'button'
+= c 'button'
 ```
 
 Or, directly from your controllers:
@@ -94,7 +94,7 @@ Or, directly from your controllers:
 # app/controllers/pages_controller.rb
 
 def home
-  render html: helpers.component("home")
+  render html: helpers.component('home')
 end
 ```
 
@@ -106,11 +106,11 @@ Make sure to include javascript pack tag and stylesheet pack tag in your applica
 doctype html
 html
   head
-    = stylesheet_pack_tag "application"
+    = stylesheet_pack_tag 'application'
 
   body
     = yield
-    = javascript_pack_tag "application"
+    = javascript_pack_tag 'application'
 ```
 
 Check [Webpacker documentation](https://github.com/rails/webpacker) for further information.
@@ -122,7 +122,7 @@ You can pass `locals` to the helper. They are accessible within the component pa
 ```slim
 / app/views/pages/home.html.slim
 
-= component "button", text: "My button"
+= component 'button', text: 'My button'
 ```
 
 ```slim
@@ -145,10 +145,10 @@ If you want better control of the cache expiration, you can provide a custom `ca
 / app/views/pages/home.html.slim
 
 / Cache the component based on its locals
-= component "button", { text: "Click here" }, cached: true
+= component "button", { text: 'Click here' }, cached: true
 
 / or cache the component with a specific key, such as the last update of a model
-= component "button", { text: "Click here" }, cached: true, cache_key: @product.updated_at
+= component "button", { text: 'Click here' }, cached: true, cache_key: @product.updated_at
 ```
 
 ### Passing a block
@@ -158,8 +158,8 @@ The component also accepts a `block`. To render the block, just use the standard
 ```slim
 / app/views/pages/home.html.slim
 
-= component "button"
-  span= "My button"
+= component 'button'
+  span= 'My button'
 ```
 
 ```slim
@@ -180,7 +180,7 @@ Each component comes with a Ruby `module`. You can use it to set properties:
 
 module ButtonComponent
   property :href, required: true
-  property :text, default: "My button"
+  property :text, default: 'My button'
 end
 ```
 
@@ -200,10 +200,10 @@ If your partial becomes too complex and you want to extract logic from it, you m
 
 module ButtonComponent
   property :href, required: true
-  property :text, default: "My button"
+  property :text, default: 'My button'
 
   def external_link?
-    @href.starts_with? "http"
+    @href.starts_with? 'http'
   end
 end
 ```
@@ -213,7 +213,7 @@ end
 
 a.button(href=@href)
   = @text
-  = " (external link)" if external_link?
+  = ' (external link)' if external_link?
 ```
 
 ```slim
@@ -232,7 +232,7 @@ You can also choose to split your component into partials. In this case, we can 
 a.button(href=@href)
   = @text
   - if external_link?
-    = render "suffix", text: "external link"
+    = render 'suffix', text: 'external link'
 ```
 
 ```slim
@@ -284,7 +284,7 @@ This will create a `yml` file for each locale (using `I18n.available_locales`). 
 
 = a.button(href=@href)
   = @text
-  = render("suffix", text: t(".external_link")) if external_link?
+  = render('suffix', text: t(".external_link")) if external_link?
 ```
 
 ```yml
@@ -292,7 +292,7 @@ This will create a `yml` file for each locale (using `I18n.available_locales`). 
 
 en:
   button_component:
-    external_link: "external link"
+    external_link: external link
 ```
 
 ```yml
@@ -300,7 +300,7 @@ en:
 
 fr:
   button_component:
-    external_link: "lien externe"
+    external_link: lien externe
 ```
 
 #### Available locales configuration
@@ -339,7 +339,7 @@ If you have existing components, you can generate all their example files at onc
 You can change the default root path (`frontend`) to another path where Komponent should be installed and components generated. You need to change `komponent.root` in an initializer.
 
 ```rb
-Rails.application.config.komponent.root = Rails.root.join("app/frontend")
+Rails.application.config.komponent.root = Rails.root.join('app/frontend')
 ```
 
 #### Default options for the generators
@@ -412,14 +412,14 @@ module MyEngine
       app.config.komponent.component_paths.append(MyEngine::Engine.root.join("frontend/components"))
     end
 
-    initializer "my_engine.action_dispatch" do |app|
+    initializer 'my_engine.action_dispatch' do |app|
       ActiveSupport.on_load :action_controller do
         ActionController::Base.prepend_view_path MyEngine::Engine.root.join("frontend")
       end
     end
 
     initializer 'my_engine.autoload', before: :set_autoload_paths do |app|
-      app.config.autoload_paths << MyEngine::Engine.root.join("frontend")
+      app.config.autoload_paths << MyEngine::Engine.root.join('frontend')
     end
   end
 end
