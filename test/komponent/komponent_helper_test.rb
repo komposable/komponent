@@ -63,6 +63,21 @@ class KomponentHelperTest < ActionView::TestCase
       component('foo_bar') { |x| x }.chomp
   end
 
+  def test_helper_lists_components
+    assert_equal(
+      [
+        'all',
+        'bar',
+        'foo',
+        'foo_bar',
+        'hello',
+        'required',
+        'world',
+      ],
+      komponent_components.keys
+    )
+  end
+
   def test_helper_renders_with_doc
     assert_equal \
       %(<div class="all">🌎 😎</div>
