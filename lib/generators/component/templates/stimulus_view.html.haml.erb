@@ -1,4 +1,4 @@
-.<%= component_class_name %>{'data-controller': "<%= component_class_name %>", class: "<%= component_class_name %>"}
+.<%= component_class_name %>{ data: { controller: '<%= component_class_name %>' } }
   <%- if locale? -%>
   = t ".component_name"
   <%- else -%>

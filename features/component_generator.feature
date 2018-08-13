@@ -65,6 +65,38 @@ Feature: Component generator
     import "components/button/button";
     """
 
+  Scenario: `imports` in JavaScript files support single quotes
+    When I cd to "frontend/components"
+    And a file named "index.js" with:
+    """
+    import 'components/all/all';
+    import 'components/bar/bar';
+    import 'components/foo_bar/foo_bar';
+    import 'components/namespaced';
+    import 'components/required/required';
+    import 'components/world/world';
+    """
+    Then the file named "index.js" should contain:
+    """
+    import 'components/all/all';
+    import 'components/bar/bar';
+    import 'components/foo_bar/foo_bar';
+    import 'components/namespaced';
+    import 'components/required/required';
+    import 'components/world/world';
+    """
+    When I run `rails generate component button`
+    Then the file named "index.js" should contain:
+    """
+    import "components/button/button";
+    import 'components/all/all';
+    import 'components/bar/bar';
+    import 'components/foo_bar/foo_bar';
+    import 'components/namespaced';
+    import 'components/required/required';
+    import 'components/world/world';
+    """
+
   Scenario: `imports` in JavaScript files are sorted and without duplicates
     When I cd to "frontend/components"
     When I run `rails generate component some_example`

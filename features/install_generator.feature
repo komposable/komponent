@@ -11,7 +11,7 @@ Feature: Install generator
     """
     And the file named "config/application.rb" should contain:
     """
-    config.i18n.load_path += Dir[config.root.join('frontend/components/**/*.yml')]
+    config.i18n.load_path += Dir[config.root.join('frontend/components/**/*.*.yml')]
     """
     And the file named "config/application.rb" should contain:
     """

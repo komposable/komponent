@@ -170,7 +170,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
 
   def sort_lines_alphabetically!(path)
     lines = File.readlines(path).map do |line|
-      line if line =~ /^import "(.*)";$/
+      line if line =~ /^import ["'](.*)["'];$/
     end.compact
 
     return if lines.empty?
