@@ -15,6 +15,7 @@
 
 **Bug fixes:**
 - Removed redundant `class` attribute in HAML templates
+- Fix `content_for` / `yield` which was no longer working across components, since `v2.0.0`
 
 ## v2.2.0 (2018-07-03)
 
