@@ -79,6 +79,8 @@ class KomponentHelperTest < ActionView::TestCase
         'foo',
         'foo_bar',
         'hello',
+        'ping',
+        'pong',
         'required',
         'world',
       ],
