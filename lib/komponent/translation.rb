@@ -10,14 +10,12 @@ module Komponent
 
       if is_component
         matches = virtual_path.match(/^components\/(?<folders>.+)\/_(?<view_name>.+)/)
-        folders = matches['folders'].split('/')
-        view_name = matches['view_name']
+        folders, view_name = matches['folders'], matches['view_name']
 
-        top_level_folder = folders.shift
+        component_name = folders.gsub('/', '_')
 
-        path = "#{top_level_folder}_component"
-        path += ".#{folders.join('.')}" if folders.any?
-        path += ".#{view_name}" if view_name != top_level_folder # partial scope
+        path = "#{component_name}_component"
+        path += ".#{view_name}" if view_name != component_name # partial scope
 
         defaults = [:"#{path}#{key}"]
         defaults << options[:default] if options[:default]

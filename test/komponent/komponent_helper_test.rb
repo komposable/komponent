@@ -42,8 +42,8 @@ class KomponentHelperTest < ActionView::TestCase
   def test_help_renders_localized_keys_in_partials
     I18n.locale = :en
     assert_equal \
-      %(<div class="partial">The answer is 42</div>),
-      component('partial').chomp
+      %(<div class="partial-universe">The answer is 42</div>),
+      component('partial/universe').chomp
   end
 
   def test_helper_renders_default_property

@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-module PartialComponent
+module PartialUniverseComponent
   extend ComponentHelper
 end
