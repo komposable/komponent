@@ -1,0 +1,4 @@
+en:
+  partial_component:
+    answer_to_universe:
+        reply: "The answer is %{answer}"
