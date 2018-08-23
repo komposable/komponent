@@ -13,9 +13,7 @@ module Komponent
         folders, view_name = matches['folders'], matches['view_name']
 
         component_name = folders.gsub('/', '_')
-
-        path = "#{component_name}_component"
-        path += ".#{view_name}" if view_name != component_name # partial scope
+        path = path(component_name, view_name)
 
         defaults = [:"#{path}#{key}"]
         defaults << options[:default] if options[:default]
@@ -26,5 +24,13 @@ module Komponent
       super(key, options)
     end
     alias :t :translate
+
+    private
+
+    def path(component_name, view_name)
+      path = "#{component_name}_component"
+      path += ".#{view_name}" if view_name != component_name # partial scope
+      path
+    end
   end
 end
