@@ -7,10 +7,11 @@ module Komponent
     attr_accessor :output_buffer
     attr_reader :context
 
-    def initialize(controller)
+    def initialize(controller, view_flow = nil)
       @context = controller.view_context.dup
       @view_renderer = @context.view_renderer = @context.view_renderer.dup
       @lookup_context = @view_renderer.lookup_context = @view_renderer.lookup_context.dup
+      @view_flow = view_flow
     end
 
     def render(component, locals = {}, options = {}, &block)
@@ -40,6 +41,7 @@ module Komponent
       require_dependency(component_module_path)
       component_module = "#{component_name}_component".camelize.constantize
 
+      @context.view_flow = @view_flow if @view_flow
       @context.class_eval { prepend component_module }
       @context.class_eval { prepend Komponent::Translation }
 

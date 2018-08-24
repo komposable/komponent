@@ -39,6 +39,13 @@ class KomponentHelperTest < ActionView::TestCase
       component('hello').chomp
   end
 
+  def test_help_renders_localized_keys_in_partials
+    I18n.locale = :en
+    assert_equal \
+      %(<div class="partial-universe">The answer is 42</div>),
+      component('partial/universe').chomp
+  end
+
   def test_helper_renders_default_property
     assert_equal \
       %(<div class="foo">Foobar</div>),
@@ -61,5 +68,13 @@ class KomponentHelperTest < ActionView::TestCase
     assert_equal \
       %(<div class="foo-bar">Foo Bar</div>),
       component('foo_bar') { |x| x }.chomp
+  end
+
+  def test_helper_supports_content_for_across_components
+    component('ping', pong: 'Greetings from Ping')
+
+    assert_equal \
+      %(<div class="pong">Greetings from Ping</div>),
+      component('pong').chomp
   end
 end
