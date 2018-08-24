@@ -253,7 +253,7 @@ This will create the component in an `admin` folder, and name its Ruby module `A
 
 ### Stimulus integration
 
-Komponent supports [stimulus](https://github.com/stimulusjs/stimulus) 1.0.
+Komponent supports [Stimulus](https://github.com/stimulusjs/stimulus) >= 1.0.
 
 You can pass `--stimulus` to both generators to use Stimulus in your components.
 
@@ -261,7 +261,7 @@ You can pass `--stimulus` to both generators to use Stimulus in your components.
 rails generate komponent:install --stimulus
 ```
 
-This will yarn `stimulus` package, and create a `stimulus_application.js` in the `frontend` folder.
+This will `yarn add stimulus` and create a `stimulus_application.js` in the `frontend` folder.
 
 ```sh
 rails generate component button --stimulus
