@@ -327,7 +327,7 @@ rails generate komponent:styleguide
 
 This command will:
 
-* copy the styleguide components (`komponent/container`, `komponent/footer`, `komponent/header` and `komponent/sidebar`) to your components folder
+* copy the styleguide components (`komponent/container`, `komponent/footer`, `komponent/header` and `komponent/sidebar`) to your components folder, so you can customize them
 * add a new `komponent.js` pack to your packs folder
 * mount the engine in your routes
 
