@@ -7,6 +7,8 @@
 /pkg/
 /spec/reports/
 /tmp/
+/test/tmp
 
 /fixtures/my_app/tmp
 /fixtures/my_app/log
+

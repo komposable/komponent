@@ -1,51 +1,51 @@
 # frozen_string_literal: true
 
+require 'rails/generators'
+
 module Komponent
   module Generators
     class InstallGenerator < Rails::Generators::Base
       class_option :stimulus, type: :boolean, default: false
+      source_root File.join(File.dirname(__FILE__), "templates")
 
-      def check_webpacker_dependency
-        return if komponent_already_installed?
-
-        unless File.exist?(webpacker_configuration_file) and File.directory?(webpacker_default_structure)
-          raise Thor::Error, dependencies_not_met_error_message
-        end
+      def check_webpacker_installed
+        return if File.directory?(komponent_directory)
+        installed = File.exist?(webpacker_configuration_file)
+        raise Thor::Error, dependencies_not_met_error_message unless installed
       end
 
-      def create_root_directory
-        return if File.directory?(komponent_root_directory)
-
-        empty_directory(komponent_root_directory)
+      def create_komponent_directory
+        empty_directory(komponent_directory)
+        directory(
+          javascript_directory,
+          komponent_directory,
+          recursive: true,
+        )
       end
 
-      def modify_webpacker_configuration
-        gsub_file(webpacker_configuration_file, /source_path: app\/javascript$/, "source_path: #{relative_path_from_rails}")
-      end
-
-      def move_webpacker_default_structure
-        return if File.directory?(komponent_root_directory)
-
-        run("mv #{webpacker_default_structure}/* #{komponent_root_directory}")
+      def alter_webpacker_configuration
+        gsub_file(
+          webpacker_configuration_file,
+          /source_path: app\/javascript$/,
+          "source_path: #{komponent_directory}",
+        )
       end
 
       def create_komponent_default_structure
-        return if File.exist?(components_directory.join("index.js"))
-
+        return if File.exist?(join(components_directory, "index.js"))
         empty_directory(components_directory)
-        create_file(components_directory.join("index.js"))
+        create_file(join(components_directory, "index.js"))
       end
 
       def create_stimulus_file
         return if File.exist?(stimulus_application_path)
         return unless stimulus?
-
         create_file(stimulus_application_path, stimulus_application_template)
       end
 
       def append_to_application_configuration
-        application "config.autoload_paths << config.root.join('#{relative_path_from_rails}/components')"
-        application "config.i18n.load_path += Dir[config.root.join('#{relative_path_from_rails}/components/**/*.*.yml')]"
+        application "config.autoload_paths << config.root.join('#{komponent_directory}/components')"
+        application "config.i18n.load_path += Dir[config.root.join('#{komponent_directory}/components/**/*.*.yml')]"
       end
 
       def append_to_application_pack
@@ -73,31 +73,27 @@ export default application;
       end
 
       def stimulus_application_path
-        komponent_root_directory.join("stimulus_application.js")
+        join(komponent_directory, "stimulus_application.js")
       end
 
       def application_pack_path
-        komponent_root_directory.join("packs", "application.js")
-      end
-
-      def komponent_root_directory
-        default_path
+        join(komponent_directory, "packs", "application.js")
       end
 
       def components_directory
-        Rails.root.join(komponent_root_directory, "components")
+        join(komponent_directory, "components")
+      end
+
+      def komponent_directory
+        default_path
       end
 
       def webpacker_configuration_file
-        Rails.root.join("config", "webpacker.yml")
+        join("config", "webpacker.yml")
       end
 
-      def webpacker_default_structure
-        Rails.root.join("app", "javascript")
-      end
-
-      def komponent_already_installed?
-        File.directory?(relative_path_from_rails)
+      def javascript_directory
+        join("app", "javascript")
       end
 
       def dependencies_not_met_error_message
@@ -111,10 +107,6 @@ export default application;
 
       def default_path
         rails_configuration.komponent.root
-      end
-
-      def relative_path_from_rails
-        default_path.relative_path_from(Rails.root)
       end
 
       private
@@ -132,6 +124,10 @@ export default application;
 
       def app_generators
         rails_configuration.app_generators
+      end
+
+      def join(*paths)
+        File.expand_path(File.join(*paths), destination_root)
       end
     end
   end

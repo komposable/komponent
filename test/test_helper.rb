@@ -3,9 +3,11 @@
 require 'simplecov'
 
 ENV['RAILS_ENV'] ||= 'test'
+
 require File.expand_path('../../fixtures/my_app/config/environment', __FILE__)
 require 'rails/test_help'
-require 'caching_helper'
+require 'minitest/autorun'
+require 'minitest/pride'
 
 class FakeController < ApplicationController
   def initialize(method_name = nil, &method_body)
@@ -17,3 +19,5 @@ class FakeController < ApplicationController
     end
   end
 end
+
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
