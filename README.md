@@ -454,6 +454,12 @@ resolved_paths:
   - engine/frontend
 ```
 
+## Running tests
+
+Run all Cucumber features and unit tests with `bundle exec appraisal rake test`
+
+Run the full test matrix with `bundle exec appraisal rake test`
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/komposable/komponent.
