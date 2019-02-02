@@ -317,23 +317,29 @@ I18n.available_locales = [:en, :fr]
 
 Komponent includes a basic styleguide engine that you can use in your project to document your components.
 
-First, mount it in your routes:
+![Komponent styleguide UI](https://user-images.githubusercontent.com/38524/41193700-45909330-6c10-11e8-87b7-59e628529200.png)
 
-```ruby
-# config/routes.rb
-Rails.application.routes.draw do
-  mount Komponent::Engine => "/" if Rails.env.development?
+To set it up, you can use the generator:
 
-  # ...
-end
+```sh
+rails generate komponent:styleguide
 ```
 
-For each component, the engine will render the `_example.html.slim` file from the component folder.
-It this partial, you can describe the component and render examples for each state.
+This command will:
 
-If you have existing components, you can generate all their example files at once with `rails g komponent:examples`
+* copy the styleguide components (`komponent/container`, `komponent/footer`, `komponent/header` and `komponent/sidebar`) to your components folder
+* add a new `komponent.js` pack to your packs folder
+* mount the engine in your routes
 
-Finally just visit to `http://localhost:3000/styleguide`.
+Then, for each component, you can describe it and render examples for each state in the `_example.html.slim` file from the component folder. The engine will then render it on the component page.
+
+If you have existing components, you can generate all their example files at once with:
+
+```sh
+rails generate komponent:examples
+```
+
+Finally, visit `http://localhost:3000/styleguide` to access your styleguide.
 
 ### Configuration
 
