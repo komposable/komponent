@@ -34,6 +34,7 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
   - [Stimulus integration](#stimulus-integration)
   - [Internationalization](#internationalization)
     - [Available locales configuration](#available-locales-configuration)
+  - [Styleguide](#styleguide)
   - [Configuration](#configuration)
     - [Change default root path](#change-default-root-path)
     - [Default options for the generators](#default-options-for-the-generators)
