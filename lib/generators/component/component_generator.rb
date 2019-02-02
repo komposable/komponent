@@ -169,9 +169,7 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   def sort_lines_alphabetically!(path)
-    lines = File.readlines(path).map do |line|
-      line if line =~ /^import ["'](.*)["'];$/
-    end.compact
+    lines = read_imports_from_path(path)
 
     return if lines.empty?
 
@@ -180,6 +178,16 @@ class ComponentGenerator < Rails::Generators::NamedBase
       a.start_with?("..") ? 1 : a <=> b
     end
 
+    write_imports_to_path(lines, path)
+  end
+
+  def read_imports_from_path(path)
+    File.readlines(path).map do |line|
+      line if line =~ /^import ["'](.*)["'];$/
+    end.compact
+  end
+
+  def write_imports_to_path(lines, path)
     File.open(path, "w") do |f|
       lines.each do |line|
         f.write(line)
