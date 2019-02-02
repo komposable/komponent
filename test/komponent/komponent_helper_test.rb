@@ -91,7 +91,7 @@ class KomponentHelperTest < ActionView::TestCase
         'required',
         'world',
       ],
-      komponent_components.keys
+      components.keys
     )
   end
 
