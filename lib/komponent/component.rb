@@ -48,8 +48,8 @@ module Komponent
       Komponent::ComponentPathResolver.new.resolve(@id)
     end
 
-    def example_view
-      "components/#{id}/example"
+    def examples_view
+      "components/#{id}/examples"
     end
   end
 end

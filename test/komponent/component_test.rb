@@ -31,10 +31,10 @@ class ComponentTest < ActionView::TestCase
       Komponent::Component.new("foo_bar").title
   end
 
-  def test_returns_example_view
+  def test_returns_examples_view
     assert_equal \
-      "components/foo/example",
-      Komponent::Component.new("foo").example_view
+      "components/foo/examples",
+      Komponent::Component.new("foo").examples_view
   end
 
   def test_returns_path

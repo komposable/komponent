@@ -33,7 +33,7 @@ module Komponent
         {
           stimulus: nil,
           locale: nil,
-          example: nil,
+          examples: nil,
         }.merge(app_generators.komponent)
       end
 

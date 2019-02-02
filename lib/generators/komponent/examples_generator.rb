@@ -10,9 +10,9 @@ module Komponent
 
       source_root File.expand_path('../../component/templates', __FILE__)
 
-      def create_example_files
+      def create_examples_files
         Komponent::Component.all.each do |name, component|
-          create_example_view_file(name)
+          create_examples_view_file(name)
         end
       end
 
@@ -30,10 +30,10 @@ module Komponent
 
       private
 
-      def create_example_view_file(component_name)
+      def create_examples_view_file(component_name)
         @component_name = split_name(component_name).last.underscore
 
-        template "example.html.#{template_engine}.erb", component_path(component_name) + "_example.html.#{template_engine}"
+        template "examples.html.#{template_engine}.erb", component_path(component_name) + "_examples.html.#{template_engine}"
       end
     end
   end
