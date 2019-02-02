@@ -169,22 +169,23 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   def sort_lines_alphabetically!(path)
-    lines = read_imports_from_path(path)
+    relative_imports, imports = read_imports_from_path(path)
 
-    return if lines.empty?
+    return if imports.empty?
 
-    lines = lines.uniq.sort do |a, b|
-      # Keep the relative imports at the end
-      a.start_with?("..") ? 1 : a <=> b
-    end
+    imports = imports.uniq.sort + relative_imports
 
-    write_imports_to_path(lines, path)
+    write_imports_to_path(imports, path)
   end
 
   def read_imports_from_path(path)
-    File.readlines(path).map do |line|
+    lines = File.readlines(path).map do |line|
       line if line =~ /^import ["'](.*)["'];$/
     end.compact
+
+    lines.partition do |l|
+      l =~ /^import ["']\.(.*)["'];$/
+    end
   end
 
   def write_imports_to_path(lines, path)
