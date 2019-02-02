@@ -175,7 +175,10 @@ class ComponentGenerator < Rails::Generators::NamedBase
 
     return if lines.empty?
 
-    lines = lines.uniq.sort
+    lines = lines.uniq.sort do |a, b|
+      # Keep the relative imports at the end
+      a.start_with?("..") ? 1 : a <=> b
+    end
 
     File.open(path, "w") do |f|
       lines.each do |line|
