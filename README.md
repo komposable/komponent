@@ -315,7 +315,9 @@ I18n.available_locales = [:en, :fr]
 
 ### Styleguide
 
-Update your routes to mount the Komponent engine.
+Komponent includes a basic styleguide engine that you can use in your project to document your components.
+
+First, mount it in your routes:
 
 ```ruby
 # config/routes.rb
@@ -326,11 +328,12 @@ Rails.application.routes.draw do
 end
 ```
 
-Then you need to update the `_example.html.slim` file you have inside your components. This file is used to render the examples.
-
-Finally just visit to `http://localhost:3000/styleguide`.
+For each component, the engine will render the `_example.html.slim` file from the component folder.
+It this partial, you can describe the component and render examples for each state.
 
 If you have existing components, you can generate all their example files at once with `rails g komponent:examples`
+
+Finally just visit to `http://localhost:3000/styleguide`.
 
 ### Configuration
 

@@ -2,16 +2,14 @@
 
 ## Upcoming release
 
-**Enhancements:**
-- Implement a styleguide view
-- New generator: `rails g komponent:examples` to generate
-  an example file for each existing component
-
 **Breaking changes:**
 - Dropped support for Rails 4.2
 
 **Enhancements:**
 - Komponent now reports component stats when you run `bin/rails stats`
+- Komponent now includes a styleguide engine that you can mount to your project
+  to document your components, and a new generator: `rails g komponent:examples`
+  to generate an example file for each existing component
 
 **Bug fixes:**
 - Removed redundant `class` attribute in HAML templates
