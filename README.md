@@ -34,6 +34,7 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
   - [Stimulus integration](#stimulus-integration)
   - [Internationalization](#internationalization)
     - [Available locales configuration](#available-locales-configuration)
+  - [Styleguide](#styleguide)
   - [Configuration](#configuration)
     - [Change default root path](#change-default-root-path)
     - [Default options for the generators](#default-options-for-the-generators)
@@ -312,6 +313,34 @@ I18n.available_locales = [:en, :fr]
 
 > If you have the `rails-i18n` gem in your `Gemfile`, you should whitelist locales to prevent creating a lot of
 > locale files when you generate a new component.
+
+### Styleguide
+
+Komponent includes a basic styleguide engine that you can use in your project to document your components.
+
+![Komponent styleguide UI](https://user-images.githubusercontent.com/38524/41193700-45909330-6c10-11e8-87b7-59e628529200.png)
+
+To set it up, you can use the generator:
+
+```sh
+rails generate komponent:styleguide
+```
+
+This command will:
+
+* copy the styleguide components (`komponent/container`, `komponent/footer`, `komponent/header` and `komponent/sidebar`) to your components folder, so you can customize them
+* add a new `komponent.js` pack to your packs folder
+* mount the engine in your routes
+
+Then, for each component, you can describe it and render examples for each state in the `_example.html.slim` file from the component folder. The engine will then render it on the component page.
+
+If you have existing components, you can generate all their example files at once with:
+
+```sh
+rails generate komponent:examples
+```
+
+Finally, visit `http://localhost:3000/styleguide` to access your styleguide.
 
 ### Configuration
 

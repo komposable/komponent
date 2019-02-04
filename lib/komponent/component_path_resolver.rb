@@ -17,6 +17,12 @@ module Komponent
       root_path.join(*component_name)
     end
 
+    def component_paths
+      komponent_configuration.component_paths.map do |path|
+        Pathname.new(path)
+      end
+    end
+
     protected
 
     def path_has_component?(path, component_name)
@@ -25,12 +31,6 @@ module Komponent
         "#{component_name.split("/").join("_")}_component.rb",
       ])
       File.exist?(file_name)
-    end
-
-    def component_paths
-      komponent_configuration.component_paths.map do |path|
-        Pathname.new(path)
-      end
     end
 
     def komponent_configuration

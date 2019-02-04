@@ -7,6 +7,10 @@
 
 **Enhancements:**
 - Komponent now reports component stats when you run `bin/rails stats`
+- Komponent now includes a styleguide engine that you can mount to your project
+  to document your components, and 2 new generators:
+  - `rails g komponent:styleguide` to set it up
+  - `rails g komponent:examples` to generate an `examples` file for each existing component
 
 **Bug fixes:**
 - Removed redundant `class` attribute in HAML templates
