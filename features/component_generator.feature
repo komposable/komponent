@@ -115,6 +115,34 @@ Feature: Component generator
     import "components/world/world";
     """
 
+  Scenario: relative `imports` in JavaScript files kept at the end when generating a component
+    When I cd to "frontend/components"
+    And a file named "index.js" with:
+    """
+    import "../a_relative_file.js";
+    import "../other_relative_file.js";
+    """
+    Then the file named "index.js" should contain:
+    """
+    import "../a_relative_file.js";
+    import "../other_relative_file.js";
+    """
+    When I run `rails generate component button`
+    Then the file named "index.js" should contain:
+    """
+    import "components/button/button";
+    import "../a_relative_file.js";
+    import "../other_relative_file.js";
+    """
+    When I run `rails generate component awesome_button`
+    Then the file named "index.js" should contain:
+    """
+    import "components/awesome_button/awesome_button";
+    import "components/button/button";
+    import "../a_relative_file.js";
+    import "../other_relative_file.js";
+    """
+
   Scenario: Generate component with `erb` template engine
     When I run `rails generate component AwesomeButton`
     And I cd to "frontend/components/awesome_button"
