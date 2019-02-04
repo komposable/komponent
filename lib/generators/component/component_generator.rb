@@ -34,6 +34,10 @@ class ComponentGenerator < Rails::Generators::NamedBase
     end
   end
 
+  def create_examples_view_file
+    template "examples.html.#{template_engine}.erb", component_path + "_examples.html.#{template_engine}"
+  end
+
   def import_to_packs
     root_path = default_path
     base_path = root_path + "components"

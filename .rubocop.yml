@@ -54,9 +54,6 @@ Naming/PredicateName:
 Naming/VariableName:
   Enabled: true
 
-Lint/DeprecatedClassMethods:
-  Enabled: true
-
 Layout/AlignParameters:
   Enabled: true
 
@@ -116,4 +113,7 @@ Layout/SpaceInsideParens:
   Enabled: true
 
 Layout/TrailingWhitespace:
+  Enabled: true
+
+Lint/DeprecatedClassMethods:
   Enabled: true

@@ -4,10 +4,13 @@ require 'webpacker'
 require 'komponent/component_helper'
 require 'komponent/component_path_resolver'
 require 'komponent/component_renderer'
+require 'komponent/component'
 require 'komponent/translation'
 
 module Komponent
-  class Railtie < Rails::Railtie
+  class Engine < Rails::Engine
+    isolate_namespace Komponent
+
     rake_tasks do
       load 'komponent/rails/tasks/komponent.rake'
     end
@@ -26,6 +29,9 @@ module Komponent
       app.config.komponent.component_paths.prepend(
         app.config.komponent.root.join("components")
       )
+      app.config.komponent.component_paths.append(
+        Komponent::Engine.root.join('frontend/components')
+      )
 
       ActiveSupport.on_load :action_view do
         require 'komponent/komponent_helper'
@@ -37,6 +43,16 @@ module Komponent
           app.config.komponent.root
         )
       end
+    end
+
+    initializer "my_engine.action_dispatch" do |app|
+      ActiveSupport.on_load :action_controller do
+        ActionController::Base.prepend_view_path Komponent::Engine.root.join("frontend")
+      end
+    end
+
+    initializer 'komponent.autoload', before: :set_autoload_paths do |app|
+      app.config.autoload_paths << Komponent::Engine.root.join('frontend')
     end
   end
 end
