@@ -1,0 +1,27 @@
+/* stylelint-disable value-list-comma-newline-after */
+
+.komponent-footer {
+  bottom: 30px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  position: fixed;
+  right: 30px;
+  text-align: center;
+
+  &,
+  a {
+    color: #999;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      color: #0038ea;
+    }
+  }
+}
+
+/* stylelint-enable */
