@@ -42,6 +42,7 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
     - [Force default templating engine](#force-default-templating-engine)
     - [Additional paths](#additional-paths)
 - [Contributing](#contributing)
+- [Releasing a new version](#releasing-a-new-version)
 - [License](#license)
 </details>
 
@@ -463,6 +464,20 @@ Run the full test matrix with `bundle exec appraisal rake test`
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/komposable/komponent.
+
+## Releasing a new version
+
+- Update the CHANGELOG (add a title and a date for the new version)
+- Update the version number in `lib/komponent/version`
+- Install the `gem-release` gem if you haven't already
+- Run `gem release --tag --push`
+- Create or update the release on Github with the same version number and copy-paste the description from the CHANGELOG
+
+Please note:
+
+If you're releasing a patch version (eg. from 2.0.1 to 2.0.2) you can run `gem bump patch --release --tag --push --sign` so you don't have to manually change the version number.
+
+If you want to release a specific version (eg. beta, RC...), you can run `gem bump 3.0.0.beta1 --release --tag --push --sign`
 
 ## License
 
