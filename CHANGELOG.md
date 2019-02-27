@@ -4,6 +4,7 @@
 
 **Breaking changes:**
 - Dropped support for Rails 4.2
+- Dropped support for Ruby 2.2
 
 **Enhancements:**
 - Komponent now reports component stats when you run `bin/rails stats`
