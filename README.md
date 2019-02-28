@@ -34,6 +34,7 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
   - [Stimulus integration](#stimulus-integration)
   - [Internationalization](#internationalization)
     - [Available locales configuration](#available-locales-configuration)
+  - [Styleguide](#styleguide)
   - [Configuration](#configuration)
     - [Change default root path](#change-default-root-path)
     - [Default options for the generators](#default-options-for-the-generators)
@@ -41,6 +42,7 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
     - [Force default templating engine](#force-default-templating-engine)
     - [Additional paths](#additional-paths)
 - [Contributing](#contributing)
+- [Releasing a new version](#releasing-a-new-version)
 - [License](#license)
 </details>
 
@@ -313,6 +315,34 @@ I18n.available_locales = [:en, :fr]
 > If you have the `rails-i18n` gem in your `Gemfile`, you should whitelist locales to prevent creating a lot of
 > locale files when you generate a new component.
 
+### Styleguide
+
+Komponent includes a basic styleguide engine that you can use in your project to document your components.
+
+![Komponent styleguide UI](https://user-images.githubusercontent.com/38524/41193700-45909330-6c10-11e8-87b7-59e628529200.png)
+
+To set it up, you can use the generator:
+
+```sh
+rails generate komponent:styleguide
+```
+
+This command will:
+
+* copy the styleguide components (`komponent/container`, `komponent/footer`, `komponent/header` and `komponent/sidebar`) to your components folder, so you can customize them
+* add a new `komponent.js` pack to your packs folder
+* mount the engine in your routes
+
+Then, for each component, you can describe it and render examples for each state in the `_example.html.slim` file from the component folder. The engine will then render it on the component page.
+
+If you have existing components, you can generate all their example files at once with:
+
+```sh
+rails generate komponent:examples
+```
+
+Finally, visit `http://localhost:3000/styleguide` to access your styleguide.
+
 ### Configuration
 
 #### Change default root path
@@ -425,9 +455,29 @@ resolved_paths:
   - engine/frontend
 ```
 
+## Running tests
+
+Run all Cucumber features and unit tests with `bundle exec appraisal rake test`
+
+Run the full test matrix with `bundle exec appraisal rake test`
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/komposable/komponent.
+
+## Releasing a new version
+
+- Update the CHANGELOG (add a title and a date for the new version)
+- Update the version number in `lib/komponent/version`
+- Install the `gem-release` gem if you haven't already
+- Run `gem release --tag --push`
+- Create or update the release on Github with the same version number and copy-paste the description from the CHANGELOG
+
+Please note:
+
+If you're releasing a patch version (eg. from 2.0.1 to 2.0.2) you can run `gem bump patch --release --tag --push --sign` so you don't have to manually change the version number.
+
+If you want to release a specific version (eg. beta, RC...), you can run `gem bump 3.0.0.beta1 --release --tag --push --sign`
 
 ## License
 

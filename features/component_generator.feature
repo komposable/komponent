@@ -11,6 +11,7 @@ Feature: Component generator
       | awesome_button/awesome_button.css           |
       | awesome_button/awesome_button.js            |
       | awesome_button/awesome_button_component.rb  |
+      | awesome_button/_examples.html.erb           |
     And the file named "index.js" should contain:
     """
     import "components/awesome_button/awesome_button";
@@ -30,6 +31,7 @@ Feature: Component generator
       | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button.css          |
       | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button.js           |
       | admin/sub_admin/awesome_button/admin_sub_admin_awesome_button_component.rb |
+      | admin/sub_admin/awesome_button/_examples.html.erb                          |
     And the file named "index.js" should contain:
     """
     import "components/admin";
@@ -113,10 +115,39 @@ Feature: Component generator
     import "components/world/world";
     """
 
+  Scenario: relative `imports` in JavaScript files kept at the end when generating a component
+    When I cd to "frontend/components"
+    And a file named "index.js" with:
+    """
+    import "../a_relative_file.js";
+    import "../other_relative_file.js";
+    """
+    Then the file named "index.js" should contain:
+    """
+    import "../a_relative_file.js";
+    import "../other_relative_file.js";
+    """
+    When I run `rails generate component button`
+    Then the file named "index.js" should contain:
+    """
+    import "components/button/button";
+    import "../a_relative_file.js";
+    import "../other_relative_file.js";
+    """
+    When I run `rails generate component awesome_button`
+    Then the file named "index.js" should contain:
+    """
+    import "components/awesome_button/awesome_button";
+    import "components/button/button";
+    import "../a_relative_file.js";
+    import "../other_relative_file.js";
+    """
+
   Scenario: Generate component with `erb` template engine
     When I run `rails generate component AwesomeButton`
     And I cd to "frontend/components/awesome_button"
     Then a file named "_awesome_button.html.erb" should exist
+    And a file named "_examples.html.erb" should exist
 
   Scenario: Generate component with custom template engine defined to `haml`
     Given a file named "config/initializers/custom_configuration.rb" with:
@@ -126,6 +157,7 @@ Feature: Component generator
     When I run `rails generate component AwesomeButton`
     And I cd to "frontend/components/awesome_button"
     Then a file named "_awesome_button.html.haml" should exist
+    And a file named "_examples.html.haml" should exist
 
   Scenario: Generate component with custom template engine defined to `slim`
     Given a file named "config/initializers/custom_configuration.rb" with:
@@ -135,6 +167,7 @@ Feature: Component generator
     When I run `rails generate component AwesomeButton`
     And I cd to "frontend/components/awesome_button"
     Then a file named "_awesome_button.html.slim" should exist
+    And a file named "_examples.html.slim" should exist
 
   Scenario: Generate component with custom stylesheet engine defined to `scss`
     Given a file named "config/initializers/custom_configuration.rb" with:

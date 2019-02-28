@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   }
 
   spec.files = `git ls-files -z`.split("\x0").reject do |f|
-    f.match(%r{^(test|spec|features|fixtures)/})
+    f.match(%r{^(test|spec|features|fixtures|gemfiles)/})
   end
 
   spec.require_paths = ["lib"]

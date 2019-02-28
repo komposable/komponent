@@ -34,6 +34,10 @@ class ComponentGenerator < Rails::Generators::NamedBase
     end
   end
 
+  def create_examples_view_file
+    template "examples.html.#{template_engine}.erb", component_path + "_examples.html.#{template_engine}"
+  end
+
   def import_to_packs
     root_path = default_path
     base_path = root_path + "components"
@@ -169,14 +173,26 @@ class ComponentGenerator < Rails::Generators::NamedBase
   end
 
   def sort_lines_alphabetically!(path)
+    relative_imports, imports = read_imports_from_path(path)
+
+    return if imports.empty?
+
+    imports = imports.uniq.sort + relative_imports
+
+    write_imports_to_path(imports, path)
+  end
+
+  def read_imports_from_path(path)
     lines = File.readlines(path).map do |line|
       line if line =~ /^import ["'](.*)["'];$/
     end.compact
 
-    return if lines.empty?
+    lines.partition do |l|
+      l =~ /^import ["']\.(.*)["'];$/
+    end
+  end
 
-    lines = lines.uniq.sort
-
+  def write_imports_to_path(lines, path)
     File.open(path, "w") do |f|
       lines.each do |line|
         f.write(line)
