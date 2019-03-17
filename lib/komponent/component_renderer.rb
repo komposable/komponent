@@ -9,8 +9,8 @@ module Komponent
 
     def initialize(controller, view_flow = nil)
       @context = controller.view_context.dup
-      @view_renderer = @context.view_renderer.dup
-      @lookup_context = @view_renderer.lookup_context.dup
+      @view_renderer = @context.view_renderer
+      @lookup_context = @view_renderer.lookup_context = @view_renderer.lookup_context.dup
       @view_flow = view_flow
     end
 
