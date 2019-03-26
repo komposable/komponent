@@ -52,7 +52,7 @@ module Komponent
     end
 
     initializer 'komponent.autoload', before: :set_autoload_paths do |app|
-      app.config.paths.add Komponent::Engine.root.join('frontend'), eager_load: true
+      app.config.paths.add app.config.komponent.root.to_s, eager_load: true
     end
   end
 end
