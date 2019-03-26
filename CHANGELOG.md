@@ -3,7 +3,9 @@
 ## Upcoming release
 
 **Breaking changes:**
-- It's now recommended to use eager loading to prevent `uninitialized component` issues.
+- It's now recommended to use eager loading to prevent `uninitialized component` issues
+  (see [#121](https://github.com/komposable/komponent/issues/121) for background).
+  
   The install generator has been updated. When upgrading, please make sure you replace:
 
       config.autoload_paths << config.root.join("app/frontend/components")
