@@ -230,7 +230,7 @@ PLATFORMS
 DEPENDENCIES
   appraisal
   aruba
-  bundler (~> 1.15)
+  bundler (~> 2.0)
   coveralls
   cucumber
   komponent!
