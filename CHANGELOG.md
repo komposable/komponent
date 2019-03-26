@@ -5,6 +5,9 @@
 **Breaking changes:**
 - Dropped support for Ruby 2.3 and 2.4
 
+**Enhancements:**
+- Support for Rails 6
+
 ## v3.0.0.beta1 (2019-02-28)
 
 **Breaking changes:**
