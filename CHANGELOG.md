@@ -2,6 +2,19 @@
 
 ## Upcoming release
 
+**Breaking changes:**
+- It's now recommended to use eager loading to prevent `uninitialized component` issues.
+  The install generator has been updated. When upgrading, please make sure you replace:
+
+    config.autoload_paths << config.root.join("app/frontend/components")
+
+  with
+
+    config.paths.add "frontend/components", eager_load: true
+
+**Enhancements:**
+- Refactoring to use `Utils` in `InstallGenerator` and prevent code duplication
+
 ## v3.0.0.beta1 (2019-02-28)
 
 **Breaking changes:**
