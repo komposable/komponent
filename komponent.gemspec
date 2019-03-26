@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   end
 
   spec.require_paths = ["lib"]
-  spec.required_ruby_version = '>= 2.3.0'
+  spec.required_ruby_version = '>= 2.5.0'
 
   spec.add_dependency "actionview", ">= 5.0"
   spec.add_dependency "activesupport", ">= 5.0"

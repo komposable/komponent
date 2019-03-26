@@ -3,24 +3,24 @@ sudo: false
 
 before_install:
   - gem update --system
+  - gem install bundler
 
 rvm:
-  - 2.3
-  - 2.4
   - 2.5
+  - 2.6
   - ruby-head
 
 gemfile:
   - gemfiles/rails_5.0.x.gemfile
   - gemfiles/rails_5.1.x.gemfile
   - gemfiles/rails_5.2.x.gemfile
+  - gemfiles/rails_6.0.x.gemfile
 
 cache:
   bundler: true
   yarn: true
 
 install:
-  - gem install bundler
   - bundle install
   - nvm install node
   - node -v
