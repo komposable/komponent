@@ -3,7 +3,7 @@
 ## Upcoming release
 
 **Breaking changes:**
-- Dropped support for Rails 4.3
+- Dropped support for Ruby 2.3 and 2.4
 
 ## v3.0.0.beta1 (2019-02-28)
 
