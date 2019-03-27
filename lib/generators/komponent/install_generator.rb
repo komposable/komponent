@@ -1,24 +1,27 @@
 # frozen_string_literal: true
 
 require 'rails/generators'
+require File.expand_path('../utils', __FILE__)
 
 module Komponent
   module Generators
     class InstallGenerator < Rails::Generators::Base
+      include Utils
+
       class_option :stimulus, type: :boolean, default: false
       source_root File.join(File.dirname(__FILE__), "templates")
 
       def check_webpacker_installed
-        return if File.directory?(komponent_directory)
+        return if komponent_already_installed?
         installed = File.exist?(webpacker_configuration_file)
         raise Thor::Error, dependencies_not_met_error_message unless installed
       end
 
       def create_komponent_directory
-        empty_directory(komponent_directory)
+        empty_directory(komponent_root_directory)
         directory(
           javascript_directory,
-          komponent_directory,
+          komponent_root_directory,
           recursive: true,
         )
       end
@@ -27,7 +30,7 @@ module Komponent
         gsub_file(
           webpacker_configuration_file,
           /source_path: app\/javascript$/,
-          "source_path: #{komponent_directory}",
+          "source_path: #{komponent_root_directory}",
         )
       end
 
@@ -44,8 +47,8 @@ module Komponent
       end
 
       def append_to_application_configuration
-        application "config.autoload_paths << config.root.join('#{komponent_directory}/components')"
-        application "config.i18n.load_path += Dir[config.root.join('#{komponent_directory}/components/**/*.*.yml')]"
+        application "config.paths.add '#{relative_path_from_rails}/components', eager_load: true"
+        application "config.i18n.load_path += Dir[config.root.join('#{komponent_root_directory}/components/**/*.*.yml')]"
       end
 
       def append_to_application_pack
@@ -73,19 +76,11 @@ export default application;
       end
 
       def stimulus_application_path
-        join(komponent_directory, "stimulus_application.js")
+        join(komponent_root_directory, "stimulus_application.js")
       end
 
       def application_pack_path
-        join(komponent_directory, "packs", "application.js")
-      end
-
-      def components_directory
-        join(komponent_directory, "components")
-      end
-
-      def komponent_directory
-        default_path
+        join(komponent_root_directory, "packs", "application.js")
       end
 
       def webpacker_configuration_file
@@ -105,26 +100,7 @@ export default application;
         komponent_configuration[:stimulus]
       end
 
-      def default_path
-        rails_configuration.komponent.root
-      end
-
       private
-
-      def komponent_configuration
-        {
-          stimulus: nil,
-          locale: nil,
-        }.merge(app_generators.komponent)
-      end
-
-      def rails_configuration
-        Rails.application.config
-      end
-
-      def app_generators
-        rails_configuration.app_generators
-      end
 
       def join(*paths)
         File.expand_path(File.join(*paths), destination_root)
