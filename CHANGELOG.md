@@ -3,6 +3,7 @@
 ## Upcoming release
 
 **Breaking changes:**
+- Dropped support for Ruby 2.3 and 2.4
 - It's now recommended to use eager loading to prevent `uninitialized component` issues
   (see [#121](https://github.com/komposable/komponent/issues/121) for background).
   
@@ -15,6 +16,7 @@
       config.paths.add "frontend/components", eager_load: true
 
 **Enhancements:**
+- Support for Rails 6
 - Refactoring to use `Utils` in `InstallGenerator` and prevent code duplication
 
 ## v3.0.0.beta1 (2019-02-28)
