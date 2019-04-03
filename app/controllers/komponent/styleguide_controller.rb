@@ -5,6 +5,8 @@ module Komponent
     layout 'komponent'
     rescue_from ActionView::MissingTemplate, with: :missing_template
 
+    include Rails.application.routes.url_helpers
+
     def index; end
 
     def show

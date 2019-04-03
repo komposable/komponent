@@ -3,7 +3,7 @@
   <ul class="komponent-sidebar-items">
     <%- components.each do |_k, component| %>
       <li class="komponent-sidebar-item">
-        <%= link_to_unless_current component.title, styleguide_path(id: component.id) %>
+        <%= link_to_unless_current component.title, komponent.styleguide_path(id: component.id) %>
       </li>
     <% end %>
   </ul>
