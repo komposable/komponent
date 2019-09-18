@@ -4,13 +4,12 @@ on: [push]
 
 jobs:
   test:
-    name: Test on Ruby ${{ matrix.ruby_version }}, node ${{ matrix.node_version }} and ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    name: Test on Ruby ${{ matrix.ruby_version }}, node ${{ matrix.node_version }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node_version: [8, 10, 12]
         ruby_version: [2.5.x, 2.6.x]
-        os: [ubuntu-latest]
 
     steps:
     - uses: actions/checkout@v1
@@ -22,7 +21,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         version: ${{ matrix.node_version }}
-    
+
     - name: Build and test with Rake
       run: |
         gem install bundler
