@@ -1,0 +1,14 @@
+name: Lint
+
+on: [push]
+
+jobs:
+  rubocop:
+    name: Rubocop
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Rubocop
+      uses: gimenete/rubocop-action@1.0
