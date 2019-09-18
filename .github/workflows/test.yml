@@ -14,13 +14,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Configure Gemfile
-      run: |
-        bundle config --global gemfile gemfiles/rails_${{ matrix.rails }}.gemfile
     - name: Set up Ruby ${{ matrix.ruby }}
       uses: actions/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
+    - name: Configure Gemfile
+      run: |
+        bundle config --global gemfile gemfiles/rails_${{ matrix.rails }}.gemfile
     - name: Use Node.js ${{ matrix.node }}
       uses: actions/setup-node@v1
       with:
