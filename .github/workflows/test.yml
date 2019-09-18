@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   test:
-    name: Ruby ${{ matrix.ruby }}, Rails ${{ matrix.rails }}, node ${{ matrix.node }}
+    name: Ruby ${{ matrix.ruby }}, Rails ${{ matrix.rails }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -20,7 +20,7 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
 
-    - name: Use Node.js
+    - name: Set up Node.js
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node }}
