@@ -26,7 +26,7 @@ jobs:
     - name: Build and test with Rake
       run: |
         gem install bundler
-        bundle install --gemfile ${{ matrix.rails_version }} --jobs 4 --retry 3
+        bundle install --gemfile gemfiles/rails_${{ matrix.rails_version }}.gemfile --jobs 4 --retry 3
         npm i -g yarn
         yarn
-        bundle exec --gemfile ${{ matrix.rails_version }} rake test:all_with_coverage
+        bundle exec --gemfile gemfiles/rails_${{ matrix.rails_version }}.gemfile rake test:all_with_coverage
