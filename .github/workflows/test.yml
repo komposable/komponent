@@ -4,27 +4,27 @@ on: [push]
 
 jobs:
   test:
-    name: Test on Ruby ${{ matrix.ruby_version }}, node ${{ matrix.node_version }}
+    name: Ruby ${{ matrix.ruby }}, Rails ${{ matrix.rails }} node ${{ matrix.node }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node_version: [8, 10, 12]
-        ruby_version: ["2.5.x", "2.6.x"]
-        rails_version: ["5.0.x", "5.1.x", "5.2.x", "6.0.x"]
+        node: [8, 10, 12]
+        ruby: ["2.5.x", "2.6.x"]
+        rails: ["5.0.x", "5.1.x", "5.2.x", "6.0.x"]
 
     steps:
     - uses: actions/checkout@v1
     - name: Configure Gemfile
       run: |
-        bundle config --global gemfile gemfiles/rails_${{ matrix.rails_version }}.gemfile
-    - name: Set up Ruby ${{ matrix.ruby_version }}
+        bundle config --global gemfile gemfiles/rails_${{ matrix.rails }}.gemfile
+    - name: Set up Ruby ${{ matrix.ruby }}
       uses: actions/setup-ruby@v1
       with:
-        ruby-version: ${{ matrix.ruby_version }}
-    - name: Use Node.js ${{ matrix.node_version }}
+        ruby-version: ${{ matrix.ruby }}
+    - name: Use Node.js ${{ matrix.node }}
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node_version }}
+        node-version: ${{ matrix.node }}
 
     - name: Build and test with Rake
       run: |
