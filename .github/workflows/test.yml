@@ -4,11 +4,11 @@ on: [push]
 
 jobs:
   test:
-    name: Ruby ${{ matrix.ruby }}, Rails ${{ matrix.rails }} node ${{ matrix.node }}
+    name: Ruby ${{ matrix.ruby }}, Rails ${{ matrix.rails }}, node ${{ matrix.node }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [8, 10, 12]
+        node: [10, 12]
         ruby: ["2.5.x", "2.6.x"]
         rails: ["5.0.x", "5.1.x", "5.2.x", "6.0.x"]
 
