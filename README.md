@@ -181,6 +181,8 @@ Each component comes with a Ruby `module`. You can use it to set properties:
 # frontend/components/button/button_component.rb
 
 module ButtonComponent
+  extend ComponentHelper
+  
   property :href, required: true
   property :text, default: 'My button'
 end
@@ -201,6 +203,8 @@ If your partial becomes too complex and you want to extract logic from it, you m
 # frontend/components/button/button_component.rb
 
 module ButtonComponent
+  extend ComponentHelper
+  
   property :href, required: true
   property :text, default: 'My button'
 
