@@ -25,11 +25,17 @@ jobs:
       with:
         node-version: ${{ matrix.node }}
 
-    - name: Build and test with Rake
+    - name: Set up bundler
       run: |
         gem install bundler
         bundle config --global gemfile gemfiles/rails_${{ matrix.rails }}.gemfile
         bundle install --jobs 4 --retry 3
+
+    - name: Set up yarn
+      run: |
         npm i -g yarn
         yarn
+
+    - name: Test with Rake
+      run: |
         bundle exec rake test:all_with_coverage
