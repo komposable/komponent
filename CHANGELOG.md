@@ -18,6 +18,7 @@
 **Enhancements:**
 - Support for Rails 6
 - Refactoring to use `Utils` in `InstallGenerator` and prevent code duplication
+- Stop isolating `Komponent` namespace to permit route usage in components ([#141](https://github.com/komposable/komponent/pull/141))
 
 **Bug fixes:**
 - Fixed empty `h1` in generated `_examples.html.*` file
