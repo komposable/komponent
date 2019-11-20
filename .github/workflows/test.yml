@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   test:
-    name: Ruby ${{ matrix.versions.ruby }}, Rails ${{ matrix.versions.rails }}, Node ${{ matrix.versions.node }}
+    name: Ruby ${{ matrix.versions.ruby }}, Rails ${{ matrix.versions.rails }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
