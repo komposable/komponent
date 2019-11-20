@@ -11,33 +11,33 @@
   position: absolute;
   top: 60px;
   width: 240px;
+}
 
-  &-title {
-    color: #0038ea;
-    font-size: 14px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    margin: 0 0 20px;
-    text-transform: uppercase;
-  }
+.komponent-sidebar-title {
+  color: #0038ea;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin: 0 0 20px;
+  text-transform: uppercase;
+}
 
-  &-items {
-    font-size: 14px;
-    letter-spacing: 0;
-    line-height: 1.25;
-    list-style: none;
-    margin: 0 0 30px;
-    padding: 0;
-  }
+.komponent-sidebar-items {
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 1.25;
+  list-style: none;
+  margin: 0 0 30px;
+  padding: 0;
+}
 
-  &-item {
-    margin: 0 0 5px;
-  }
+.komponent-sidebar-item {
+  margin: 0 0 5px;
+}
 
-  a {
-    color: #333;
-    text-decoration: none;
-  }
+.komponent-sidebar a {
+  color: #333;
+  text-decoration: none;
 }
 
 /* stylelint-enable */
