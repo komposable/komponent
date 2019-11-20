@@ -23,6 +23,7 @@ module Komponent
     config.before_configuration do |app|
       app.config.komponent = config.komponent
       app.config.komponent.root = app.config.root.join("frontend")
+      app.config.komponent.static_root = "komponent/static"
     end
 
     config.after_initialize do |app|

@@ -5,7 +5,9 @@ module Komponent
     rescue_from ActionView::MissingTemplate, with: :missing_page
 
     def show
-      render template: "komponent/static/#{params[:id]}"
+      @static_page_path = "#{static_page_root}/#{params[:id]}"
+
+      render template: @static_page_path
     end
 
     private
