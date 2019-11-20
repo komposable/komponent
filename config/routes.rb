@@ -2,4 +2,5 @@
 
 Komponent::Engine.routes.draw do
   resources :styleguide, only: %i[index show]
+  resources :page, only: :show
 end
