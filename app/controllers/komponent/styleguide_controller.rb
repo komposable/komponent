@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Komponent
-  class StyleguideController < ::ApplicationController
+  class StyleguideController < ActionController::Base
     layout 'komponent'
     rescue_from ActionView::MissingTemplate, with: :missing_template
 
