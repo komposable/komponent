@@ -4,32 +4,49 @@ on: [push, pull_request]
 
 jobs:
   test:
-    name: Ruby ${{ matrix.ruby }}, Rails ${{ matrix.rails }}
+    name: Ruby ${{ matrix.versions.ruby }}, Rails ${{ matrix.versions.rails }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [12]
-        ruby: ["2.5.x", "2.6.x"]
-        rails: ["5.0.x", "5.1.x", "5.2.x", "6.0.x"]
+        versions:
+          - { ruby: "2.5.x", rails: "5.0.x", node: "12" }
+          - { ruby: "2.6.x", rails: "5.0.x", node: "12" }
+          - { ruby: "2.5.x", rails: "5.1.x", node: "12" }
+          - { ruby: "2.6.x", rails: "5.1.x", node: "12" }
+          - { ruby: "2.5.x", rails: "5.2.x", node: "12" }
+          - { ruby: "2.6.x", rails: "5.2.x", node: "12" }
+          - { ruby: "2.5.x", rails: "6.0.x", node: "12" }
+          - { ruby: "2.6.x", rails: "6.0.x", node: "12" }
 
     steps:
     - uses: actions/checkout@v1
 
+    - uses: actions/cache@v1
+      id: cache
+      with:
+        path: gemfiles/vendor/bundle
+        key: ruby-${{ matrix.versions.ruby }}-rails-${{ matrix.versions.rails }}-node-${{ matrix.versions.node }}
+
     - name: Set up Ruby
       uses: actions/setup-ruby@v1
       with:
-        ruby-version: ${{ matrix.ruby }}
+        ruby-version: ${{ matrix.versions.ruby }}
 
     - name: Set up Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node }}
+        node-version: ${{ matrix.versions.node }}
 
     - name: Set up bundler
       run: |
+        echo 'gem: --no-document' >> ~/.gemrc
         gem install bundler
-        bundle config --global gemfile gemfiles/rails_${{ matrix.rails }}.gemfile
-        bundle install --jobs 4 --retry 3
+        bundle config --global gemfile gemfiles/rails_${{ matrix.versions.rails }}.gemfile
+        bundle config --global path vendor/bundle
+
+    - name: Install gems
+      run: |
+        bundle install --jobs $(nproc) --retry 3
 
     - name: Set up yarn
       run: |
