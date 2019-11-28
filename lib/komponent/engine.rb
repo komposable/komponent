@@ -30,9 +30,6 @@ module Komponent
       app.config.komponent.component_paths.prepend(
         app.config.komponent.root.join("components")
       )
-      app.config.komponent.component_paths.append(
-        Komponent::Engine.root.join('frontend/components')
-      )
 
       ActiveSupport.on_load :action_view do
         require 'komponent/komponent_helper'
