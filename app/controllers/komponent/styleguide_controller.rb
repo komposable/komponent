@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 module Komponent
-  class StyleguideController < ::ApplicationController
-    layout 'komponent'
+  class StyleguideController < Komponent::ApplicationController
     rescue_from ActionView::MissingTemplate, with: :missing_template
 
     def index; end
 
     def show
       @component = Komponent::Component.find(params[:id])
+
+      render template: @component.examples_view
     end
 
     private

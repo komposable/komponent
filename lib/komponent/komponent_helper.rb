@@ -17,10 +17,6 @@ module KomponentHelper
   end
   alias :c :component
 
-  def components
-    Komponent::Component.all
-  end
-
   def component_with_doc(component_name, locals = {}, options = {}, &block)
     captured_output = component(component_name, locals, options, &block)
 
