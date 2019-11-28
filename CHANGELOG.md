@@ -18,8 +18,8 @@
 **Enhancements:**
 - Support for Rails 6
 - Refactoring to use `Utils` in `InstallGenerator` and prevent code duplication
-- Stop isolating `Komponent` namespace to permit route usage in components ([#141](https://github.com/komposable/komponent/pull/141))
-  Generated styleguide needs to replace `styleguide_path` by `komponent.styleguide_path` in `styleguide/components/sidebar`
+- Stop isolating `Komponent` namespace to allow using routes from main application in components ([#141](https://github.com/komposable/komponent/pull/141))
+  NB: If you already generated a styleguide in your app, you need to replace `styleguide_path` by `komponent.styleguide_path` in `styleguide/components/sidebar`
 
 **Bug fixes:**
 - Fixed empty `h1` in generated `_examples.html.*` file
