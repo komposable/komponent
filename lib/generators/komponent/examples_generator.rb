@@ -31,6 +31,7 @@ module Komponent
       private
 
       def create_examples_view_file(component_name)
+        @component_name = component_name
         template "examples.html.#{template_engine}.erb", component_path(component_name) + "_examples.html.#{template_engine}"
       end
     end
