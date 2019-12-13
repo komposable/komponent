@@ -7,7 +7,7 @@ class ComponentTest < ActionView::TestCase
     all = Komponent::Component.all
 
     assert all.is_a?(Hash)
-    assert_equal all.count, 9
+    assert_equal all.count, 11
     assert all["foo"].is_a?(Komponent::Component)
   end
 

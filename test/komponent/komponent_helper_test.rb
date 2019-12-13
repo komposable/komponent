@@ -86,6 +86,8 @@ class KomponentHelperTest < ActionView::TestCase
         'foo',
         'foo_bar',
         'hello',
+        'namespaced/button',
+        'partial/universe',
         'ping',
         'pong',
         'required',
