@@ -88,6 +88,7 @@ class KomponentHelperTest < ActionView::TestCase
         'genius_button',
         'hello',
         'namespaced/button',
+        'no_template',
         'partial/universe',
         'partial/universe_button',
         'ping',
@@ -107,5 +108,11 @@ class KomponentHelperTest < ActionView::TestCase
   sunglasses: &quot;😎&quot;
 }</code></pre>),
       component_with_doc('all', world: "🌎", sunglasses: "😎").chomp
+  end
+
+  def test_helper_renders_without_template
+    assert_equal \
+      %(<div class="no-template classy">🌎</div>),
+      component('no_template', additional_class: "classy") { "🌎" }.chomp
   end
 end

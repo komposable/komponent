@@ -10,4 +10,10 @@ module ComponentHelper
   def self.extended(component)
     component.properties = {}
   end
+
+  def render(&block)
+    @render_block = block
+  end
+
+  attr_reader :render_block
 end
