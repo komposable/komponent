@@ -55,9 +55,6 @@ Naming/PredicateName:
 Naming/VariableName:
   Enabled: true
 
-Layout/AlignParameters:
-  Enabled: true
-
 Layout/BlockAlignment:
   Enabled: true
   EnforcedStyleAlignWith: start_of_block
@@ -87,6 +84,9 @@ Layout/EmptyLines:
   Enabled: true
 
 Layout/EmptyLinesAroundAccessModifier:
+  Enabled: true
+
+Layout/ParameterAlignment:
   Enabled: true
 
 Layout/SpaceAroundBlockParameters:

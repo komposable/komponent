@@ -9,6 +9,18 @@ class KomponentHelperTest < ActionView::TestCase
     end
   end
 
+  def test_inject_custom_renderer
+    custom_renderer_klass = Class.new(Komponent::ComponentRenderer) do
+      def render(*args)
+        'custom_render_method'
+      end
+    end
+
+    assert_equal \
+      'custom_render_method',
+      component('world', {}, renderer: custom_renderer_klass)
+  end
+
   def test_helper_renders_namespaced_component
     assert_equal \
       %(<div class="namespaced-button">namespaced_button_component</div>),
