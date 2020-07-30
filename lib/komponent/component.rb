@@ -13,10 +13,7 @@ module Komponent
         Dir.glob(component_dirs).sort.each do |component_dir|
           component_path = Pathname.new(component_dir).relative_path_from(components_root).to_s
 
-          next if component_path.starts_with?('komponent/')
-
-          next unless File.exist?(components_root.join(component_path)
-            .join("#{component_path.underscore.gsub('/', '_')}_component.rb"))
+          next unless list_this_component_path?(component_path)
 
           components[component_path] = Component.new(component_path)
         end
@@ -33,6 +30,15 @@ module Komponent
 
       def components_root
         @components_root ||= Rails.application.config.komponent.root.join('components')
+      end
+
+      private
+
+      def list_this_component_path?(component_path)
+        return false if component_path.starts_with?('komponent/')
+
+        File.exist?(components_root.join(component_path)
+            .join("#{component_path.underscore.gsub('/', '_')}_component.rb"))
       end
     end
 
