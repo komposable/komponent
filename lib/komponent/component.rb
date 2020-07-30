@@ -13,6 +13,8 @@ module Komponent
         Dir.glob(component_dirs).sort.each do |component_dir|
           component_path = Pathname.new(component_dir).relative_path_from(components_root).to_s
 
+          next if component_path.starts_with?('komponent/')
+
           next unless File.exist?(components_root.join(component_path)
             .join("#{component_path.underscore.gsub('/', '_')}_component.rb"))
 

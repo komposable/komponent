@@ -182,7 +182,7 @@ Each component comes with a Ruby `module`. You can use it to set properties:
 
 module ButtonComponent
   extend ComponentHelper
-  
+
   property :href, required: true
   property :text, default: 'My button'
 end
@@ -204,7 +204,7 @@ If your partial becomes too complex and you want to extract logic from it, you m
 
 module ButtonComponent
   extend ComponentHelper
-  
+
   property :href, required: true
   property :text, default: 'My button'
 
@@ -461,9 +461,9 @@ resolved_paths:
 
 ## Running tests
 
-Run all Cucumber features and unit tests with `bundle exec appraisal rake test`
+Install all the gems `bundle exec appraisal install`
 
-Run the full test matrix with `bundle exec appraisal rake test`
+then run the full test matrix with `bundle exec appraisal rake test`
 
 ## Contributing
 

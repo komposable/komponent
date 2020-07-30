@@ -1,0 +1,43 @@
+/* stylelint-disable value-list-comma-newline-after */
+
+.komponent-sidebar {
+  background-color: #dbe1f3;
+  bottom: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  left: 0;
+  overflow: auto;
+  padding: 20px;
+  position: absolute;
+  top: 60px;
+  width: 240px;
+
+  &-title {
+    color: #0038ea;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 0 0 20px;
+    text-transform: uppercase;
+  }
+
+  &-items {
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 1.25;
+    list-style: none;
+    margin: 0 0 30px;
+    padding: 0;
+  }
+
+  &-item {
+    margin: 0 0 5px;
+  }
+
+  a {
+    color: #333;
+    text-decoration: none;
+  }
+}
+
+/* stylelint-enable */
