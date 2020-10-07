@@ -260,7 +260,9 @@ This will create the component in an `admin` folder, and name its Ruby module `A
 
 ### Custom renderer
 
-Komponents supports using a custom renderer to customize renderering behaviour.
+Komponent supports using a custom renderer if you want to customize rendering behaviour.
+
+For instance, you can use this to add I18n to your properties:
 
 ```rb
 # frontend/components/button/button_component.rb
@@ -268,16 +270,16 @@ Komponents supports using a custom renderer to customize renderering behaviour.
 module ButtonComponent
   extend ComponentHelper
 
-  property :text, default: 'My button', my_custom_option: true
+  property :text, default: 'My button', custom_localize: true
 end
 ```
 
 ```rb
-# somwhere inside your app, e.g. app/models/my_custom_renderer.rb
+# somwhere inside your app, e.g. app/models/localized_component_renderer.rb
 
-class MyCustomRenderer < Komponent::ComponentRenderer
+class LocalizedComponentRenderer < Komponent::ComponentRenderer
   def assign_property_value(property_name, property_options, locals)
-    if property_options[:my_custom_option]
+    if property_options[:custom_localize]
       original_value = locals[property_name]
       locals[property_name] = I18n.t(property_name, default: original_value)
     else
@@ -291,7 +293,7 @@ end
 / app/views/pages/home.html.slim
 
 / Use custom renderer class
-= component "button", { text: 'Click here' }, renderer: MyCustomRenderer
+= component "button", { text: 'Click here' }, renderer: LocalizedComponentRenderer
 ```
 
 
