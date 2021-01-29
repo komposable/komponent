@@ -6,6 +6,12 @@
 
 **Komponent** implements an opinionated way of organizing front-end code in Ruby on Rails, based on _components_.
 
+----
+
+:wave: **HEADS UP!** The future of this gem is currently [being discussed](https://github.com/komposable/komponent/issues/169). Please have your say!
+
+----
+
 Each component has its own folder, containing a Ruby module, a partial, a stylesheet and a JavaScript file.
 
 Komponent relies heavily on webpacker to manage dependencies and generate the production JS and CSS files.
