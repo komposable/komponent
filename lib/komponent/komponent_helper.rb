@@ -5,7 +5,8 @@ require 'komponent/component'
 module KomponentHelper
   def component(component_name, locals = {}, options = {}, &block)
     captured_block = proc { |args| capture(args, &block) } if block_given?
-    Komponent::ComponentRenderer.new(
+    renderer_klass = options.delete(:renderer) || Komponent::ComponentRenderer
+    renderer_klass.new(
       controller,
       view_flow || (view && view.view_flow),
     ).render(

@@ -36,6 +36,16 @@ module Komponent
       end
     end
 
+    def assign_property_value(property_name, property_options, locals)
+      return if locals.has_key?(property_name)
+
+      if property_options.has_key?(:default)
+        locals[property_name] = property_options[:default]
+      elsif property_options[:required]
+        raise "Missing required component parameter: #{property_name}"
+      end
+    end
+
     private
 
     def _render(component, locals = {}, options = {}, &block)
@@ -53,20 +63,14 @@ module Komponent
 
       @lookup_context.prefixes = ["components/#{component}"]
 
-      @context.instance_eval do
-        if component_module.respond_to?(:properties)
-          locals = locals.dup
-          component_module.properties.each do |name, options|
-            unless locals.has_key?(name)
-              if options.has_key?(:default)
-                locals[name] = options[:default]
-              elsif options[:required]
-                raise "Missing required component parameter: #{name}"
-              end
-            end
-          end
+      if component_module.respond_to?(:properties)
+        locals = locals.dup
+        component_module.properties.each do |name, options|
+          assign_property_value(name, options, locals)
         end
+      end
 
+      @context.instance_eval do
         locals.each do |name, value|
           instance_variable_set(:"@#{name}", locals[name])
         end

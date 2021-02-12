@@ -37,6 +37,7 @@ This gem has been inspired by our Rails development practices at [Ouvrages](http
   - [Helpers](#helpers)
   - [Component partials](#component-partials)
   - [Namespacing components](#namespacing-components)
+  - [Custom Renderer](#custom-renderer)
   - [Stimulus integration](#stimulus-integration)
   - [Internationalization](#internationalization)
     - [Available locales configuration](#available-locales-configuration)
@@ -188,7 +189,7 @@ Each component comes with a Ruby `module`. You can use it to set properties:
 
 module ButtonComponent
   extend ComponentHelper
-  
+
   property :href, required: true
   property :text, default: 'My button'
 end
@@ -210,7 +211,7 @@ If your partial becomes too complex and you want to extract logic from it, you m
 
 module ButtonComponent
   extend ComponentHelper
-  
+
   property :href, required: true
   property :text, default: 'My button'
 
@@ -262,6 +263,45 @@ rails generate component admin/header
 ```
 
 This will create the component in an `admin` folder, and name its Ruby module `AdminHeaderComponent`.
+
+### Custom renderer
+
+Komponent supports using a custom renderer if you want to customize rendering behaviour.
+
+For instance, you can use this to add I18n to your properties:
+
+```rb
+# frontend/components/button/button_component.rb
+
+module ButtonComponent
+  extend ComponentHelper
+
+  property :text, default: 'My button', custom_localize: true
+end
+```
+
+```rb
+# somwhere inside your app, e.g. app/models/localized_component_renderer.rb
+
+class LocalizedComponentRenderer < Komponent::ComponentRenderer
+  def assign_property_value(property_name, property_options, locals)
+    if property_options[:custom_localize]
+      original_value = locals[property_name]
+      locals[property_name] = I18n.t(property_name, default: original_value)
+    else
+      super
+    end
+  end
+end
+```
+
+```slim
+/ app/views/pages/home.html.slim
+
+/ Use custom renderer class
+= component "button", { text: 'Click here' }, renderer: LocalizedComponentRenderer
+```
+
 
 ### Stimulus integration
 
