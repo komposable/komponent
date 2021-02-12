@@ -8,20 +8,20 @@
   position: fixed;
   right: 30px;
   text-align: center;
+}
 
-  &,
-  a {
-    color: #999;
-  }
+.komponent-footer,
+.komponent-footer a {
+  color: #999;
+}
 
-  a {
-    text-decoration: none;
+.komponent-footer a {
+  text-decoration: none;
+}
 
-    &:hover,
-    &:focus {
-      color: #0038ea;
-    }
-  }
+.komponent-footer a:hover,
+.komponent-footer a:focus {
+  color: #0038ea;
 }
 
 /* stylelint-enable */

@@ -12,4 +12,9 @@
   padding: 0 20px;
 }
 
+.komponent-header .logo a {
+  color: white;
+  text-decoration: none;
+}
+
 /* stylelint-enable */
