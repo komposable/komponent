@@ -343,7 +343,7 @@ This command will:
 * add a new `komponent.js` pack to your packs folder
 * mount the engine in your routes
 
-Then, for each component, you can describe it and render examples for each state in the `_example.html.slim` file from the component folder. The engine will then render it on the component page.
+Then, for each component, you can describe it and render examples for each state in the `_examples.html.slim` file from the component folder. The engine will then render it on the component page.
 
 If you have existing components, you can generate all their example files at once with:
 

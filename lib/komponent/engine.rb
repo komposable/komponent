@@ -9,7 +9,7 @@ require 'komponent/translation'
 
 module Komponent
   class Engine < Rails::Engine
-    isolate_namespace Komponent
+    engine_name "komponent"
 
     rake_tasks do
       load 'komponent/rails/tasks/komponent.rake'
