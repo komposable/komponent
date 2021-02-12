@@ -1,0 +1,10 @@
+<div class="komponent-sidebar">
+  <div class="komponent-sidebar-title">Components</div>
+  <ul class="komponent-sidebar-items">
+    <%- components.each do |_k, component| %>
+      <li class="komponent-sidebar-item">
+        <%= link_to_unless_current component.title, styleguide_path(id: component.id) %>
+      </li>
+    <% end %>
+  </ul>
+</div>
