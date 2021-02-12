@@ -76,7 +76,11 @@ module Komponent
         define_singleton_method(:block_given_to_component) { block }
       end
 
-      @context.render("components/#{component}/#{parts.join('_')}", &block)
+      if component_module.respond_to?(:render_block) && component_module.render_block
+        @context.instance_exec(block, &component_module.render_block)
+      else
+        @context.render("components/#{component}/#{parts.join('_')}", &block)
+      end
     end
 
     def resolved_component_path(component)
