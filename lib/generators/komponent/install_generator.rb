@@ -11,26 +11,12 @@ module Komponent
       class_option :stimulus, type: :boolean, default: false
       source_root File.join(File.dirname(__FILE__), "templates")
 
-      def check_webpacker_installed
-        return if komponent_already_installed?
-        installed = File.exist?(webpacker_configuration_file)
-        raise Thor::Error, dependencies_not_met_error_message unless installed
-      end
-
       def create_komponent_directory
         empty_directory(komponent_root_directory)
         directory(
           javascript_directory,
           komponent_root_directory,
           recursive: true,
-        )
-      end
-
-      def alter_webpacker_configuration
-        gsub_file(
-          webpacker_configuration_file,
-          /source_path: app\/javascript$/,
-          "source_path: #{komponent_root_directory}",
         )
       end
 
@@ -83,16 +69,8 @@ export default application;
         join(komponent_root_directory, "packs", "application.js")
       end
 
-      def webpacker_configuration_file
-        join("config", "webpacker.yml")
-      end
-
       def javascript_directory
         join("app", "javascript")
-      end
-
-      def dependencies_not_met_error_message
-        "Seems you don't have webpacker installed in your project. Please install webpacker, and follow instructions at https://github.com/rails/webpacker"
       end
 
       def stimulus?

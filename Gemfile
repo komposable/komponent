@@ -10,7 +10,6 @@ gemspec
 gem "rails"
 gem "rake", ">= 11.1"
 gem "rubocop", require: false
-gem "webpacker"
 
 group :test do
   gem "aruba"

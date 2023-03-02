@@ -32,8 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "actionview", ">= 5.0"
   spec.add_dependency "activesupport", ">= 5.0"
   spec.add_dependency "railties", ">= 5.0"
-  spec.add_dependency "webpacker", ">= 3.0.0"
 
   spec.add_development_dependency "appraisal"
-  spec.add_development_dependency "bundler", ">= 2.0.0", "< 2.3.0"
+  spec.add_development_dependency "bundler", ">= 2.0.0", "< 2.5.0"
 end
