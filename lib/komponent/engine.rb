@@ -29,9 +29,6 @@ module Komponent
       app.config.komponent.component_paths.prepend(
         app.config.komponent.root.join("components")
       )
-      app.config.komponent.component_paths.append(
-        Komponent::Engine.root.join('frontend/components')
-      )
 
       ActiveSupport.on_load :action_view do
         require 'komponent/komponent_helper'
@@ -52,7 +49,7 @@ module Komponent
     end
 
     initializer 'komponent.autoload', before: :set_autoload_paths do |app|
-      app.config.autoload_paths << Komponent::Engine.root.join('frontend')
+      app.config.paths.add app.config.komponent.root.to_s, eager_load: true
     end
   end
 end

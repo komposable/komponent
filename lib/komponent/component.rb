@@ -14,7 +14,7 @@ module Komponent
           component_path = Pathname.new(component_dir).relative_path_from(components_root).to_s
 
           next unless File.exist?(components_root.join(component_path)
-            .join("#{File.basename(component_path)}_component.rb"))
+            .join("#{component_path.underscore.gsub('/', '_')}_component.rb"))
 
           components[component_path] = Component.new(component_path)
         end

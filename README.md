@@ -1,10 +1,16 @@
 # <img alt="Komponent" src="https://raw.github.com/ouvrages/komponent/master/logo.svg?sanitize=true" width="200" height="40" />
-[![Build Status](https://travis-ci.org/komposable/komponent.svg?branch=master)](https://travis-ci.org/komposable/komponent)
+[![Tests](https://github.com/komposable/komponent/workflows/Tests/badge.svg)](https://github.com/komposable/komponent/actions)
 ![GitHub release](https://img.shields.io/github/release/komposable/komponent.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/36d6dcf883df8f63893a/maintainability)](https://codeclimate.com/github/komposable/komponent/maintainability)
 ![Coveralls github](https://img.shields.io/coveralls/github/komposable/komponent.svg)
 
 **Komponent** implements an opinionated way of organizing front-end code in Ruby on Rails, based on _components_.
+
+----
+
+:wave: **HEADS UP!** The future of this gem is currently [being discussed](https://github.com/komposable/komponent/issues/169). Please have your say!
+
+----
 
 Each component has its own folder, containing a Ruby module, a partial, a stylesheet and a JavaScript file.
 
@@ -181,6 +187,8 @@ Each component comes with a Ruby `module`. You can use it to set properties:
 # frontend/components/button/button_component.rb
 
 module ButtonComponent
+  extend ComponentHelper
+  
   property :href, required: true
   property :text, default: 'My button'
 end
@@ -201,6 +209,8 @@ If your partial becomes too complex and you want to extract logic from it, you m
 # frontend/components/button/button_component.rb
 
 module ButtonComponent
+  extend ComponentHelper
+  
   property :href, required: true
   property :text, default: 'My button'
 

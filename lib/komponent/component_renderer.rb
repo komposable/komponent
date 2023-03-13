@@ -9,7 +9,13 @@ module Komponent
 
     def initialize(controller, view_flow = nil)
       @context = controller.view_context.dup
-      @__k_view_renderer = @context.view_renderer = @context.view_renderer.dup
+
+      if Rails::VERSION::MAJOR >= 6
+        @__k_view_renderer = @context.view_renderer
+      else
+        @__k_view_renderer = @context.view_renderer = @context.view_renderer.dup
+      end
+
       @lookup_context = @__k_view_renderer.lookup_context = @__k_view_renderer.lookup_context.dup
       @view_flow = view_flow
     end
