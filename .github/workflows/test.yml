@@ -28,9 +28,10 @@ jobs:
         key: ruby-${{ matrix.versions.ruby }}-rails-${{ matrix.versions.rails }}-node-${{ matrix.versions.node }}
 
     - name: Set up Ruby
-      uses: actions/setup-ruby@v1
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.versions.ruby }}
+        bundler-cache: true
 
     - name: Set up Node.js
       uses: actions/setup-node@v1
