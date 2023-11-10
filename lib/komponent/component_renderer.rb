@@ -42,10 +42,7 @@ module Komponent
       parts = component.split("/")
       component_name = parts.join("_")
 
-      component_module_path = resolved_component_path(component)
-        .join("#{component_name}_component")
-      require_dependency(component_module_path)
-      component_module = "#{component_name}_component".camelize.constantize
+      component_module = "#{component}/#{component_name}_component".classify.constantize
 
       @context.view_flow = @view_flow if @view_flow
       @context.class_eval { prepend component_module }
