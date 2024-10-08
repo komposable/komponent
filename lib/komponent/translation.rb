@@ -2,7 +2,7 @@
 
 module Komponent
   module Translation
-    def translate(key, options = {})
+    def translate(key, **options)
       virtual_path = @virtual_path
 
       is_component = key.to_s.first == "." &&
@@ -21,7 +21,7 @@ module Komponent
         key = "#{path}.#{key}"
       end
 
-      super(key, options)
+      super(key, **options)
     end
     alias :t :translate
 
